@@ -43,7 +43,90 @@ class MainActivity : AppCompatActivity() {
         //Log.d("test8",test8("12345")?.length.toString())
         //Log.d("test8", test8(12345)?.length.toString())
 
-        test9()
+        //for循环
+        //test9()
+
+        //while循环
+        //test10()
+
+        //when表达式
+        //Log.d("test11",test11("1"))
+        //Log.d("test11",test11(1))
+        //Log.d("test11",test11(2))
+
+        //使用区间（range）
+        //test12()
+
+        //集合
+        test13()
+
+    }
+
+    private fun test13() {
+        val list = listOf("1", "2", "3", "4")
+
+        when {
+//            "1" in list -> Log.d("test13","1 YES")
+//            "3" in list -> Log.d("test13","3 YES")
+//            "4" in list -> Log.d("test13","4 YES")
+            "5" in list -> Log.d("test13", "5 YES")
+        }
+
+
+        val list1 = listOf("abc", "afgg", "bgg", "kioo", "aao")
+        list1.filter { it.startsWith("a") }.sortedBy { it }.map { it.toUpperCase() }.forEach {
+            Log.d("test13", it)
+        }
+
+    }
+
+    private fun test12() {
+//        val a = 10
+//        val b = 9
+//        if(a in 0..b+1){
+//            Log.d("test12","YES")
+//        }else{
+//            Log.d("test12","NO")
+//        }
+//
+//        val list = listOf("1", "2", "3", "4")
+//
+//        if(4 !in 0..list.size){
+//            Log.d("test12","4 index out of list size")
+//        }
+//
+//        if(4 !in list.indices){
+//            Log.d("test12","4 index out of list indices")
+//        }
+//
+//        for (item in list.indices){
+//            Log.d("test12",item.toString())
+//        }
+//        for (i in 0..10 step 2){
+//            Log.d("test12",i.toString())
+//        }
+
+        for (i in 10 downTo 0 step 4) {
+            Log.d("test12", i.toString())
+        }
+    }
+
+    private fun test11(obj: Any): String =
+            when (obj) {
+                "1" -> "haha"
+                1 -> "heihei"
+                else -> "0"
+            }
+
+
+    private fun test10() {
+        val list = listOf("1", "2", "3", "4")
+        var index = 0
+
+        while (index < list.size) {
+            Log.d("test10", list[index])
+            index++
+        }
 
     }
 
@@ -53,7 +136,8 @@ class MainActivity : AppCompatActivity() {
             Log.d("test9", item)
         }
 
-        for (index in list.indices){
+        //list.indices 为下标集合
+        for (index in list.indices) {
             Log.d("test9", list[index])
         }
     }
