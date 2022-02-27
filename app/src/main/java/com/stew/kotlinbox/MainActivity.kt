@@ -63,7 +63,46 @@ class MainActivity : AppCompatActivity() {
         //map
         //test14()
 
-        test15()
+        //test15()
+
+        //Break 与 Continue 标签
+        //test16()
+
+
+        //return
+        test17()
+    }
+
+    private fun test17() {
+
+//        listOf(1, 2, 3, 4, 5).forEach {
+//            if (it == 3) return@forEach
+//            print(it)
+//        }
+
+        listOf(1, 2, 3, 4, 5).forEach(fun(value: Int) {
+            if (value == 3) return  // 局部返回到匿名函数的调用者，即 forEach 循环
+            print(value)
+        })
+
+        Log.d("test17", ".........s........")
+
+    }
+
+    private fun test16() {
+        stew@ for (i in 1..5) {
+            for (j in 1..5) {
+                Log.d("test16", j.toString())
+                if (j == 2) break@stew
+            }
+        }
+
+//        for (i in 1..5) {
+//            for (j in 1..5) {
+//                Log.d("test16", j.toString())
+//                if (j == 2) break
+//            }
+//        }
     }
 
     private fun test15() {
@@ -71,12 +110,12 @@ class MainActivity : AppCompatActivity() {
         val a = 1_000_000;
         Log.d("test15", a.toString())
 
-        val b:Int = 1
+        val b: Int = 1
         //不能直接赋值，需要显式转换
-        val c:Long = b.toLong()
+        val c: Long = b.toLong()
 
-        // 5/2 = 2 ,必须加上
-        val x = 5/2.toFloat()
+        // 5/2 = 2 ,必须显式转换为浮点类型
+        val x = 5 / 2.toFloat()
         Log.d("test15", x.toString())
 
     }
