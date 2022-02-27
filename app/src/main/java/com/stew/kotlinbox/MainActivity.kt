@@ -58,8 +58,37 @@ class MainActivity : AppCompatActivity() {
         //test12()
 
         //集合
-        test13()
+        //test13()
 
+        //map
+        //test14()
+
+        test15()
+    }
+
+    private fun test15() {
+
+        val a = 1_000_000;
+        Log.d("test15", a.toString())
+
+        val b:Int = 1
+        //不能直接赋值，需要显式转换
+        val c:Long = b.toLong()
+
+        // 5/2 = 2 ,必须加上
+        val x = 5/2.toFloat()
+        Log.d("test15", x.toString())
+
+    }
+
+    private fun test14() {
+        val map = mapOf("a" to 111, "b" to 2, "c" to 3)
+        Log.d("test14", map["a"].toString())
+
+        val map1 = mapOf(null to "a", 2 to "b", 3 to "c")
+        Log.d("test14", map1.get(null).toString())
+
+        //kv 都可以为null
     }
 
     private fun test13() {
