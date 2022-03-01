@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         //test17()
 
 //let函数测试------------------------------
-//        val s = stew("ww", "cc")
+        val s = stew("ww", "cc")
 //        s.let {
 //            Log.d("stew--",s.toString())
 //            Log.d("stew--",it.toString())
@@ -88,25 +88,68 @@ class MainActivity : AppCompatActivity() {
 //            this.a()
 //            Log.d("stew--",this.toString())
 //        }
-
-        val s = stew("ww", "cc")
 //        s.let {
 //            it.a()
 //            it.b()
 //        }
-        deals(s)
-        deals(null)
+//        deals(s)
+//        deals(null)
+
+//also函数测试------------------------------
+
+//        Log.d("stew--", s.toString())
+//        val str = s.also {
+//            it.a()
+//            it.b()
+//            "9999"
+//        }.a()
+//        Log.d("stew--", str.toString())
+        //also函数返回对象本身
+
+
+//with函数测试------------------------------
+//调用同一个对象的多个方法 / 属性时，可以省去对象名重复，直接调用方法名 / 属性即可
+//        with(s){
+//            Log.d("stew--", s1)
+//            Log.d("stew--", s2)
+//        }
+
+
+//run函数测试------------------------------
+//        结合了let、with两个函数的作用，即：
+//        调用同一个对象的多个方法 / 属性时，可以省去对象名重复，直接调用方法名 / 属性即可
+//        定义一个变量在特定作用域内
+//        统一做判空处理
+//        返回值 = 函数块的最后一行
+
+//        val y = s.run {
+//            Log.d("stew--", s1)
+//            a()
+//            "sssss"
+//        }
+//        Log.d("stew--", y.toString())
+
+//apply函数测试------------------------------
+//与run类似但区别在于返回值：
+//run函数返回最后一行的值 / 表达式
+//apply函数返回传入的对象的本身
     }
 
-    private fun deals(s:stew?){
+    private fun deals(s: stew?) {
         Log.d("stew--", "deals")
-        s?.let {
+        val str = s?.let {
             it.a()
             it.b()
+            "mmmmmm"
         }
+        Log.d("stew--", str.toString())
+        //let函数，返回最后一行
     }
 
     class stew(var name: String, var age: String) {
+
+        val s1 = name
+        val s2 = age
 
         init {
             Log.d("stew--", "init")
