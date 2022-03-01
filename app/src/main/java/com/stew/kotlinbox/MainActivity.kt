@@ -70,7 +70,56 @@ class MainActivity : AppCompatActivity() {
 
 
         //return
-        test17()
+        //test17()
+
+//let函数测试------------------------------
+//        val s = stew("ww", "cc")
+//        s.let {
+//            Log.d("stew--",s.toString())
+//            Log.d("stew--",it.toString())
+//            s.a()
+//            it.a()
+//            Log.d("stew--",it.toString())
+//        }
+//        s.run {
+//            Log.d("stew--",s.toString())
+//            Log.d("stew--",this.toString())
+//            s.a()
+//            this.a()
+//            Log.d("stew--",this.toString())
+//        }
+
+        val s = stew("ww", "cc")
+//        s.let {
+//            it.a()
+//            it.b()
+//        }
+        deals(s)
+        deals(null)
+    }
+
+    private fun deals(s:stew?){
+        Log.d("stew--", "deals")
+        s?.let {
+            it.a()
+            it.b()
+        }
+    }
+
+    class stew(var name: String, var age: String) {
+
+        init {
+            Log.d("stew--", "init")
+        }
+
+        fun a() {
+            Log.d("stew--", "fun $name")
+        }
+
+        fun b() {
+            Log.d("stew--", "fun $age")
+        }
+
     }
 
     private fun test17() {
