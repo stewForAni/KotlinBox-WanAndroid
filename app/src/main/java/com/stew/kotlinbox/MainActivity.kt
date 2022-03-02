@@ -1,8 +1,11 @@
 package com.stew.kotlinbox
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 
 class MainActivity : AppCompatActivity() {
 
@@ -73,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         //test17()
 
 //let函数测试------------------------------
-        val s = stew("ww", "cc")
+//        val s = stew("ww", "cc")
 //        s.let {
 //            Log.d("stew--",s.toString())
 //            Log.d("stew--",it.toString())
@@ -135,6 +138,51 @@ class MainActivity : AppCompatActivity() {
 //apply函数返回传入的对象的本身
     }
 
+
+    //类相关测试------------------------------
+    //如果派生类有一个主构造函数，其基类必须用派生类主构造函数的参数就地初始化。
+    open class human(a: String, b: String) {}
+    class kid(a: String, b: String) : human(a, b) {}
+    open class human1(a: String) {
+        constructor(a: String, b: String) : this(a) {}
+    }
+    class kid1(a: String): human1(a) {}
+
+    class myView:View{
+        constructor(c:Context) : super(c)
+        constructor(c:Context,a:AttributeSet) : super(c,a)
+    }
+
+    //覆盖属性，方法相关测试------------------------------
+    //override前加上final，可以禁止覆盖！
+    open class human2 {
+        open val w:Int = 0
+        open fun a(){
+
+        }
+        fun b(){
+
+        }
+    }
+    open class kid2: human2() {
+        override val w: Int = 9
+        override fun a() {
+
+        }
+
+    }
+    class kid3: kid2() {
+        override val w: Int = 8
+        override fun a() {
+
+        }
+
+    }
+
+    //覆盖属性相关测试----------------------------
+
+    //------------------------------------------
+
     private fun deals(s: stew?) {
         Log.d("stew--", "deals")
         val str = s?.let {
@@ -152,7 +200,7 @@ class MainActivity : AppCompatActivity() {
         val s2 = age
 
         init {
-            Log.d("stew--", "init")
+            Log.d("stew--", "stew init")
         }
 
         fun a() {
@@ -163,6 +211,16 @@ class MainActivity : AppCompatActivity() {
             Log.d("stew--", "fun $age")
         }
 
+    }
+
+    class hellen {
+        init {
+            Log.d("stew--", "hellen init")
+        }
+
+        fun s() {
+
+        }
     }
 
     private fun test17() {
