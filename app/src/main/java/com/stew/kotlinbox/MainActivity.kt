@@ -3,9 +3,11 @@ package com.stew.kotlinbox
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity() {
 
@@ -136,42 +138,110 @@ class MainActivity : AppCompatActivity() {
 //与run类似但区别在于返回值：
 //run函数返回最后一行的值 / 表达式
 //apply函数返回传入的对象的本身
+
+//派生类初始化顺序------------------------------
+
+        val t = TestClass("stew", "12")
+//        t.fun2()
+        t.draw()
+
+        
+    }
+
+    open class BaseClass(val name: String) {
+        init {
+            Log.d("stew---", "BaseClass init")
+        }
+
+        open var a: String = "00000000"
+
+        fun fun1() {
+            Log.d("stew---", "fun1------${a}")
+        }
+
+        open fun draw() {
+            Log.d("stew---", "base class draw")
+        }
+    }
+
+    interface BaseInterface {
+        fun draw() {
+            Log.d("stew---", "base inter draw")
+        }
+    }
+
+    class TestClass(name: String, age: String)
+        : BaseClass(name.also { Log.d("stew---", "Base class construct") }), BaseInterface {
+        init {
+            Log.d("stew---", "TestClass init")
+        }
+
+//        override var a: String = name.also { Log.d("stew---", "TestClass a var init") }
+
+        fun fun2() {
+            super.fun1()
+            fun1()
+
+            Log.d("stew---", "fun2------$a")
+
+            var o = a
+            val t = TestInnerClas()
+            t.innerFun1()
+        }
+
+        inner class TestInnerClas {
+            fun innerFun1() {
+                Log.d("stew---", "innerFun1------$a")
+                super@TestClass.fun1()
+            }
+        }
+
+        //
+        override fun draw() {
+            Log.d("stew---", "TestClass draw")
+            super<BaseInterface>.draw()
+            super<BaseClass>.draw()
+        }
     }
 
 
     //类相关测试------------------------------
-    //如果派生类有一个主构造函数，其基类必须用派生类主构造函数的参数就地初始化。
+//如果派生类有一个主构造函数，其基类必须用派生类主构造函数的参数就地初始化。
     open class human(a: String, b: String) {}
     class kid(a: String, b: String) : human(a, b) {}
     open class human1(a: String) {
         constructor(a: String, b: String) : this(a) {}
     }
-    class kid1(a: String): human1(a) {}
 
-    class myView:View{
-        constructor(c:Context) : super(c)
-        constructor(c:Context,a:AttributeSet) : super(c,a)
+    class kid1(a: String) : human1(a) {}
+
+    class myView : View {
+        constructor(c: Context) : super(c)
+        constructor(c: Context, a: AttributeSet) : super(c, a)
     }
 
     //覆盖属性，方法相关测试------------------------------
-    //override前加上final，可以禁止覆盖！
+//override前加上final，可以禁止覆盖！
     open class human2 {
-        open val w:Int = 0
-        open fun a(){
+        open val w: Int = 0
+        open fun a() {
 
         }
-        fun b(){
+
+        fun b() {
 
         }
     }
-    open class kid2: human2() {
+
+    open class kid2 : human2() {
         override val w: Int = 9
         override fun a() {
 
         }
 
     }
-    class kid3: kid2() {
+
+    class kid3 : kid2() {
         override val w: Int = 8
         override fun a() {
 
@@ -179,9 +249,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //覆盖属性相关测试----------------------------
+//覆盖属性相关测试----------------------------
 
-    //------------------------------------------
+//------------------------------------------
 
     private fun deals(s: stew?) {
         Log.d("stew--", "deals")
