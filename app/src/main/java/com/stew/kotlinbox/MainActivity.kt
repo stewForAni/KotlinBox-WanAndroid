@@ -3,11 +3,13 @@ package com.stew.kotlinbox
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import java.lang.StringBuilder
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //函数
         //Log.d("test1", test1(1, 2).toString())
         //Log.d("test2", test2(1, 2).toString())
@@ -140,12 +141,161 @@ class MainActivity : AppCompatActivity() {
 //apply函数返回传入的对象的本身
 
 //派生类初始化顺序------------------------------
-
-        val t = TestClass("stew", "12")
+//        val t = TestClass("stew", "12")
 //        t.fun2()
-        t.draw()
+//        t.draw()
 
-        
+//测试 SAM  函数式接口------------------------------
+//        val tc = TestasmClass()
+//        Log.d("stew---", tc.test1().toString())
+//
+//
+//        val tc1 = object : testasm {
+//            override fun test1(): Int {
+//                Log.d("stew---", "TestasmClass fun test2")
+//                return 200
+//            }
+//        }
+//
+//        Log.d("stew---", tc1.test1().toString())
+//
+//
+//        val tc2 = testasm {
+//            Log.d("stew---", "TestasmClass fun test3")
+//            300
+//        }
+//
+//        Log.d("stew---", tc2.test1().toString())
+
+
+//测试扩展函数------------------------------
+//        val list = mutableListOf(1, 2, 3)
+//        Log.d("stew---", list.toString())
+//        list.swap(0, 1)
+//        Log.d("stew---", list.toString())
+//
+//
+//        val listS = mutableListOf("a", "b", "c")
+//        Log.d("stew---", listS.toString())
+//        listS.swap(0, 1)
+//        Log.d("stew---", listS.toString())
+
+//        val BaseClass("ww").se: Int
+//            get() = size - 1
+
+//        val bb = BaseClass("jj")
+//        Log.d("stew---", bb.ss.toString())
+//测试枚举类------------------------------
+//        Log.d("stew---", Direction.NORTH.ordinal.toString())
+//        Log.d("stew---", Direction.SOUTH.ordinal.toString())
+//        Log.d("stew---", Direction.WEST.toString())
+//        Log.d("stew---", Direction.EAST.toString())
+
+//测试类------------------------------
+//        test20()
+//        val x1 = foo().x        // 没问题
+//        val x2 = publicFoo().x  // 错误：未能解析的引用“x”
+//单例模式------------------------------
+//        Test21.fun1()
+//        Log.d("stew---", Test21.toString())
+//        Test21.fun2()
+//        Log.d("stew---", Test21.toString())
+//伴生对象------------------------------
+//        val instance = Test22
+//        instance.fun1()
+//相关函数测试------------------------------
+//        yy()
+
+        runBlocking {
+            Log.d("runBlocking", "启动一个协程")
+        }
+        GlobalScope.launch {
+            Log.d("launch", "启动一个协程")
+        }
+        GlobalScope.async {
+            Log.d("async", "启动一个协程")
+        }
+    }
+
+
+    fun yy(y1: Int = 9, y2: Int = 8) {
+        Log.d("stew---", "y1:" + y1)
+        Log.d("stew---", "y2:" + y2)
+
+    }
+
+    fun yy(y1: Int) {
+        Log.d("stew---", "y1:" + y1)
+    }
+
+    class Test22 {
+        companion object {
+            fun fun1() {
+                Log.d("stew---", "test companion object")
+            }
+        }
+    }
+
+    object Test21 {
+        fun fun1() {
+            Log.d("stew---", "test 1 singleton")
+        }
+
+        fun fun2() {
+            Log.d("stew---", "test 2 singleton")
+        }
+    }
+
+    // 私有函数，所以其返回类型是匿名对象类型
+    private fun foo() = object {
+        val x: String = "x"
+    }
+
+    // 公有函数，所以其返回类型是 Any
+    fun publicFoo() = object {
+        val x: String = "x"
+    }
+
+
+    fun test20() {
+        val test = object {
+            val a = 1
+            val b = 2
+        }
+
+        Log.d("stew---", test.a.toString())
+        Log.d("stew---", test.b.toString())
+    }
+
+    enum class Direction(i: Int) {
+        NORTH(1),
+        SOUTH(2),
+        WEST(3),
+        EAST(4)
+    }
+
+    val BaseClass.ss: Int
+        get() = 1111111111
+
+
+    //扩展函数
+    fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
+        val tmp = this[index1]
+        this[index1] = this[index2]
+        this[index2] = tmp
+    }
+
+    //函数式接口
+    fun interface testasm {
+        fun test1(): Int
+    }
+
+    class TestasmClass : testasm {
+        override fun test1(): Int {
+            Log.d("stew---", "TestasmClass fun test1")
+            return 100
+        }
+
     }
 
     open class BaseClass(val name: String) {
@@ -170,8 +320,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    class TestClass(name: String, age: String)
-        : BaseClass(name.also { Log.d("stew---", "Base class construct") }), BaseInterface {
+    class TestClass(name: String, age: String) :
+        BaseClass(name.also { Log.d("stew---", "Base class construct") }), BaseInterface {
         init {
             Log.d("stew---", "TestClass init")
         }
@@ -400,11 +550,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun test11(obj: Any): String =
-            when (obj) {
-                "1" -> "haha"
-                1 -> "heihei"
-                else -> "0"
-            }
+        when (obj) {
+            "1" -> "haha"
+            1 -> "heihei"
+            else -> "0"
+        }
 
 
     private fun test10() {
