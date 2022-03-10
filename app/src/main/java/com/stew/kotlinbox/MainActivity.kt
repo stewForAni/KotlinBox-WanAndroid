@@ -212,8 +212,28 @@ class MainActivity : AppCompatActivity() {
 //        val d = DelegatePlayer(p)
 //        d.rank()
 
-        val a = Test23().stew
-        Test23().stew = "999888777"
+//        val a = Test23().stew
+//        Test23().stew = "999888777"
+//集合测试------------------------------
+//        dealCol1(mutableListOf("aa", "bb", "cc"))
+//
+//        dealCol2(listOf("aa", "bb", "cc"))
+
+//        val doubled = List(3, { it * 2 })
+//        Log.d("stew---", doubled.toString())
+
+//        val numbers = mutableListOf("one", "two", "three", "four")
+//        val mutableIterator = numbers.iterator()
+//        mutableIterator.next()
+//        mutableIterator.remove()
+//        mutableIterator.next()
+//        mutableIterator.remove()
+//        Log.d("stew---", numbers.toString())
+
+        val numbers = listOf("one", "two", "three", "four")
+        Log.d("stew---", numbers.toString())
+        val longerThan3 = numbers.filter { it.length > 3 }
+        Log.d("stew---", longerThan3.toString())
 
 //协程测试------------------------------
 //        runBlocking {
@@ -226,6 +246,19 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("async", "启动一个协程")
 //        }
     }
+    fun dealCol2(c: List<String>) {
+        for (s in c) {
+            Log.d("stew---", s)
+        }
+    }
+
+    fun dealCol1(c: MutableCollection<String>) {
+        c.add("dd")
+        for (s in c) {
+            Log.d("stew---", s)
+        }
+    }
+
 
     class Test23 {
         var stew: String by Delegate()
