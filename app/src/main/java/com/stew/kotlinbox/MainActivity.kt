@@ -10,6 +10,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlin.reflect.KProperty
 
 class MainActivity : AppCompatActivity() {
 
@@ -205,18 +206,56 @@ class MainActivity : AppCompatActivity() {
 //        instance.fun1()
 //相关函数测试------------------------------
 //        yy()
+//委托测试------------------------------
 
-        runBlocking {
-            Log.d("runBlocking", "启动一个协程")
+//        val p = RealPlayer("stew")
+//        val d = DelegatePlayer(p)
+//        d.rank()
+
+        val a = Test23().stew
+        Test23().stew = "999888777"
+
+//协程测试------------------------------
+//        runBlocking {
+//            Log.d("runBlocking", "启动一个协程")
+//        }
+//        GlobalScope.launch {
+//            Log.d("launch", "启动一个协程")
+//        }
+//        GlobalScope.async {
+//            Log.d("async", "启动一个协程")
+//        }
+    }
+
+    class Test23 {
+        var stew: String by Delegate()
+    }
+
+    class Delegate {
+        operator fun getValue(ref: Any?, property: KProperty<*>): String {
+            Log.d("stew---", "getValue ref:" + ref.toString())
+            Log.d("stew---", "getValue property:" + property.name)
+            return "111222333"
         }
-        GlobalScope.launch {
-            Log.d("launch", "启动一个协程")
-        }
-        GlobalScope.async {
-            Log.d("async", "启动一个协程")
+
+        operator fun setValue(ref: Any?, property: KProperty<*>, s: String) {
+            Log.d("stew---", "setValue ref:" + ref.toString())
+            Log.d("stew---", "setValue property:" + property.name)
+            Log.d("stew---", "setValue s:" + s)
         }
     }
 
+    interface IGamePlayer {
+        fun rank()
+    }
+
+    class RealPlayer(var name: String) : IGamePlayer {
+        override fun rank() {
+            Log.d("stew---", "$name go rank")
+        }
+    }
+
+    class DelegatePlayer(player: IGamePlayer) : IGamePlayer by player
 
     fun yy(y1: Int = 9, y2: Int = 8) {
         Log.d("stew---", "y1:" + y1)
