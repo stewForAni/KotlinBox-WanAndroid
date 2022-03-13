@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import kotlin.reflect.KProperty
 
 class MainActivity : AppCompatActivity() {
@@ -230,22 +227,103 @@ class MainActivity : AppCompatActivity() {
 //        mutableIterator.remove()
 //        Log.d("stew---", numbers.toString())
 
-        val numbers = listOf("one", "two", "three", "four")
-        Log.d("stew---", numbers.toString())
-        val longerThan3 = numbers.filter { it.length > 3 }
-        Log.d("stew---", longerThan3.toString())
+//        val numbers = listOf("one", "two", "three", "four")
+//        Log.d("stew---", numbers.toString())
+//        val longerThan3 = numbers.filter { it.length > 3 }
+//        Log.d("stew---", longerThan3.toString())
+
+//        val numbers = listOf("one", "two", "three", "four")
+//
+//        val plusList = numbers + "five"
+//        val plusList1 = numbers + listOf("three", "four")
+//        val minusList = numbers - listOf("three", "four")
+//        Log.d("stew---", plusList.toString())
+//        Log.d("stew---", plusList1.toString())
+//        Log.d("stew---", minusList.toString())
 
 //协程测试------------------------------
+
 //        runBlocking {
-//            Log.d("runBlocking", "启动一个协程")
+//            Log.d("runBlocking", "启动一个协程" + Thread.currentThread().name)
+//        }
+//
+//        GlobalScope.launch {
+//            Log.d("launch", "启动一个协程" + Thread.currentThread().name)
+//        }
+//
+//        GlobalScope.async {
+//            Log.d("async", "启动一个协程" + Thread.currentThread().name)
+//        }
+
+//        GlobalScope.launch {
+//            delay(1000)
+//            Log.d("stew---", "coroutine done1 " + Thread.currentThread().name)
 //        }
 //        GlobalScope.launch {
-//            Log.d("launch", "启动一个协程")
+//            delay(2000)
+//            Log.d("stew---", "coroutine done2 " + Thread.currentThread().name)
 //        }
-//        GlobalScope.async {
-//            Log.d("async", "启动一个协程")
+//        GlobalScope.launch {
+//            delay(3000)
+//            Log.d("stew---", "coroutine done3 " + Thread.currentThread().name)
 //        }
+//        Log.d("stew---", "main thread " + Thread.currentThread().name)
+
+//        runBlocking {
+//            Log.d("stew---", "Thread1 :" + Thread.currentThread().name)
+//            val job = GlobalScope.launch {
+//                delay(2000)
+//                Log.d("stew---", "Thread2 :" + Thread.currentThread().name)
+//            }
+//            job.join()
+//            Log.d("stew---", "Thread3 :" + Thread.currentThread().name)
+//        }
+
+//        runBlocking {
+//            Log.d("stew---", "Thread1 :" + Thread.currentThread().name)
+//            launch {
+//                hei()
+//            }
+//        }
+//        runBlocking {
+//            GlobalScope.launch {
+//                repeat(1000) { i ->
+//                    Log.d("stew---", "I'm sleeping $i ..." + Thread.currentThread().name)
+//                    delay(500L)
+//                }
+//            }
+//            Log.d("stew---", "Thread2 :" + Thread.currentThread().name)
+//            delay(1300L) // 在延迟后退出
+//        }
+//
+//        runBlocking {
+//            delay(3000)
+//        }
+//
+//        Log.d("stew---", "Thread1 :" + Thread.currentThread().name)
+//高阶函数+lambda测试------------------------------
+        Log.d("stew---", test30(0).invoke(999))
+        val e = ::test33
+        test32(e)
     }
+
+    fun test32(myfun1:(Int) -> String) {
+        Log.d("stew---", myfun1(66))
+    }
+
+    fun test33(i:Int):String{
+        return "44444$i"
+    }
+
+    fun test30(myScore: Int): (Int) -> String {
+        return ::test33
+    }
+
+    suspend fun hei() {
+        delay(1000)
+        Log.d("stew---", "Thread :" + Thread.currentThread().name)
+    }
+
     fun dealCol2(c: List<String>) {
         for (s in c) {
             Log.d("stew---", s)
