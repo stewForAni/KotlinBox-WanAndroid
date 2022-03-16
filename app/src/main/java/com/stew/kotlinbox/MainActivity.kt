@@ -7,7 +7,9 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import kotlinx.coroutines.*
+import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
+import kotlin.system.measureTimeMillis
 
 class MainActivity : AppCompatActivity() {
 
@@ -203,14 +205,6 @@ class MainActivity : AppCompatActivity() {
 //        instance.fun1()
 //相关函数测试------------------------------
 //        yy()
-//委托测试------------------------------
-
-//        val p = RealPlayer("stew")
-//        val d = DelegatePlayer(p)
-//        d.rank()
-
-//        val a = Test23().stew
-//        Test23().stew = "999888777"
 //集合测试------------------------------
 //        dealCol1(mutableListOf("aa", "bb", "cc"))
 //
@@ -301,17 +295,126 @@ class MainActivity : AppCompatActivity() {
 //        }
 //
 //        Log.d("stew---", "Thread1 :" + Thread.currentThread().name)
+
+//        runBlocking {
+//            val job = launch {
+//                try {
+//                    repeat(1000) {
+//                        Log.d("stew---", "----$it")
+//                        delay(1000)
+//                    }
+//                } finally {
+//                    withContext(NonCancellable) {
+//                        Log.d("stew---", "finally1")
+//                        delay(1000)
+//                        Log.d("stew---", "finally2")
+//                    }
+//                }
+//            }
+//
+//            delay(2500)
+//            Log.d("stew---", "try to cancel")
+//            job.cancelAndJoin()
+//            Log.d("stew---", "Now canceled")
+//        }
+
+
 //高阶函数+lambda测试------------------------------
-        Log.d("stew---", test30(0).invoke(999))
-        val e = ::test33
-        test32(e)
+//        Log.d("stew---", test30(0).invoke(999))
+//        val e = ::test33
+//        test32(e)
+//委托测试------------------------------
+
+//        val p = RealPlayer("stew")
+//        val d = DelegatePlayer(p)
+//        d.rank()
+
+//        val a = Test23().stew
+//        Test23().stew = "999888777"
+
+
+//        val lazyS:String by lazy{
+//            Log.d("stew---", "---------")
+//            "123"
+//        }
+//
+//        Log.d("stew---", lazyS+"-1")
+//        Log.d("stew---", lazyS+"-2")
+//        Log.d("stew---", lazyS+"-3")
+
+//        var obS: String by Delegates.observable("111") {
+//                property, oldValue, newValue ->
+//            Log.d("stew---", "1-"+property.name)
+//            Log.d("stew---", "2-"+oldValue)
+//            Log.d("stew---", "3-"+newValue)
+//        }
+//
+//        Log.d("stew---", "1----" + obS)
+//        obS = "222"
+//        Log.d("stew---", "2----" + obS)
+//        obS = "333"
+//        Log.d("stew---", "3----" + obS)
+
+
+//        val user = User(
+//            mapOf(
+//                "name" to "stew",
+//                "age" to "30"
+//            )
+//        )
+//
+//        Log.d("stew---", user.name)
+//        Log.d("stew---", user.age)
+//协程测试------------------------------
+
+        runBlocking {
+            val time = measureTimeMillis {
+                val one = async(start = CoroutineStart.LAZY) { doSomethingUsefulOne() }
+                val two = async(start = CoroutineStart.LAZY) { doSomethingUsefulTwo() }
+                Log.d("stew---", "~~~~~~~~~~~~~~~~~~~~~~1")
+//                one.start()
+//                two.start()
+                Log.d("stew---", "The answer is ${one.await()} / ${System.currentTimeMillis()}")
+                Log.d("stew---", "~~~~~~~~~~~~~~~~~~~~~~2")
+                Log.d("stew---", "The answer is ${two.await()} / ${System.currentTimeMillis()}")
+            }
+            Log.d("stew---", "Completed in $time ms")
+        }
+
+
+//        runBlocking {
+//            delay(3000)
+//            Log.d("stew---", "rb" + Thread.currentThread().name)
+//        }
+//        Log.d("stew---", "n" + Thread.currentThread().name)
     }
 
-    fun test32(myfun1:(Int) -> String) {
+    suspend fun doSomethingUsefulOne(): Int {
+        delay(1000L) // 假设我们在这里做了一些有用的事
+        Log.d("stew---", "doSomethingUsefulOne${System.currentTimeMillis()}")
+        return 13
+    }
+
+    suspend fun doSomethingUsefulTwo(): Int {
+        delay(1000L) // 假设我们在这里也做了一些有用的事
+        Log.d("stew---", "doSomethingUsefulTwo${System.currentTimeMillis()}")
+        return 29
+    }
+
+    class User(val map: Map<String, Any?>) {
+        val name: String by map
+        val age: String by map
+    }
+
+    fun test32(myfun1: (Int) -> String) {
         Log.d("stew---", myfun1(66))
     }
 
-    fun test33(i:Int):String{
+    fun test33(i: Int): String {
+        return "44444$i"
+    }
+
+    val y = fun(i: Int): String {
         return "44444$i"
     }
 
