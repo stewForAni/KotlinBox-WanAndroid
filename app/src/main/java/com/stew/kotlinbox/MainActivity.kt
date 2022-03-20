@@ -6,7 +6,13 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlin.coroutines.CoroutineContext
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 import kotlin.system.measureTimeMillis
@@ -367,19 +373,19 @@ class MainActivity : AppCompatActivity() {
 //        Log.d("stew---", user.age)
 //协程测试------------------------------
 
-        runBlocking {
-            val time = measureTimeMillis {
-                val one = async(start = CoroutineStart.LAZY) { doSomethingUsefulOne() }
-                val two = async(start = CoroutineStart.LAZY) { doSomethingUsefulTwo() }
-                Log.d("stew---", "~~~~~~~~~~~~~~~~~~~~~~1")
-//                one.start()
-//                two.start()
-                Log.d("stew---", "The answer is ${one.await()} / ${System.currentTimeMillis()}")
-                Log.d("stew---", "~~~~~~~~~~~~~~~~~~~~~~2")
-                Log.d("stew---", "The answer is ${two.await()} / ${System.currentTimeMillis()}")
-            }
-            Log.d("stew---", "Completed in $time ms")
-        }
+//        runBlocking {
+//            val time = measureTimeMillis {
+//                val one = async(start = CoroutineStart.LAZY) { doSomethingUsefulOne() }
+//                val two = async(start = CoroutineStart.LAZY) { doSomethingUsefulTwo() }
+//                Log.d("stew---", "~~~~~~~~~~~~~~~~~~~~~~1")
+////                one.start()
+////                two.start()
+//                Log.d("stew---", "The answer is ${one.await()} / ${System.currentTimeMillis()}")
+//                Log.d("stew---", "~~~~~~~~~~~~~~~~~~~~~~2")
+//                Log.d("stew---", "The answer is ${two.await()} / ${System.currentTimeMillis()}")
+//            }
+//            Log.d("stew---", "Completed in $time ms")
+//        }
 
 
 //        runBlocking {
@@ -387,7 +393,79 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("stew---", "rb" + Thread.currentThread().name)
 //        }
 //        Log.d("stew---", "n" + Thread.currentThread().name)
+
+//        val tx = findViewById<TextView>(R.id.tx)
+//
+//        GlobalScope.launch(Dispatchers.Main) {
+//            Log.d("stew---", "1")
+//            var str = ""
+//            withContext(Dispatchers.IO){
+//                Log.d("stew---", "2")
+//                delay(3000)
+//                str="123"
+//                Log.d("stew---", "3")
+//            }
+//
+//            Log.d("stew---", "4")
+//            tx.text = str
+//            Log.d("stew---", "5")
+//        }
+
+//        runBlocking {
+//
+//            Log.d("stew---", "0————" + Thread.currentThread().name)
+//
+//            val job = launch {
+//                Log.d("stew---", "1————" + Thread.currentThread().name)
+//                launch {
+//                    Log.d("stew---", "2————" + Thread.currentThread().name)
+//                    delay(3000)
+//                    Log.d("stew---", "22————" + Thread.currentThread().name)
+//                }
+//
+//                GlobalScope.launch{
+//                    Log.d("stew---", "3————" + Thread.currentThread().name)
+//                    delay(4000)
+//                    Log.d("stew---", "33————" + Thread.currentThread().name)
+//                }
+//            }
+//
+//            delay(2000)
+//            job.cancel()
+//            Log.d("stew---", "00————" + Thread.currentThread().name)
+//        }
+
+
+//
+//        runBlocking<Unit> {
+//            simple().forEach { value -> println(value) }
+//        }
+//        runBlocking {
+//
+//
+//            test40().collect { value: String ->
+//                Log.d("stew---", "00————" + value)
+//            }
+//
+//        }
+
+        runBlocking {
+            (1..3).asFlow().collect { value -> Log.d("stew---", "00————" + value) }
+        }
     }
+
+    fun test40(): Flow<String> = flow {
+        for (i in 1..5) {
+            delay(1000)
+            emit(i.toString())
+        }
+    }
+
+    suspend fun simple(): List<Int> {
+        delay(1000) // 假装我们在这里做了一些异步的事情
+        return listOf(1, 2, 3)
+    }
+
 
     suspend fun doSomethingUsefulOne(): Int {
         delay(1000L) // 假设我们在这里做了一些有用的事
