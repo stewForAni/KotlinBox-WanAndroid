@@ -1,13 +1,17 @@
 package com.stew.kotlinbox
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+
+import com.stew.kb_common.base.BaseActivity
+import com.stew.kotlinbox.databinding.ActivityMainBinding
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getLayoutID(): Int {
+        return R.layout.activity_main
+    }
+
+    override fun initData() {
+
     }
 
 }

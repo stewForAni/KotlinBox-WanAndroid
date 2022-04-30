@@ -14,8 +14,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/home" />
+            <option value="$PROJECT_DIR$/kb_common" />
             <option value="$PROJECT_DIR$/login" />
           </set>
         </option>

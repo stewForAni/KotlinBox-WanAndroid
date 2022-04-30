@@ -1,5 +1,6 @@
+include ':kb_common'
 include ':home'
 include ':login'
-include ':common'
+include ':kb_common'
 include ':app'
 rootProject.name = "KotlinBox"

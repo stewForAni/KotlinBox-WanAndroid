@@ -13,8 +13,8 @@ android {
 
 dependencies {
 
-    implementation project(path: ":common")
-    if (!isNeedSingleModule.toBoolean()) {
-        implementation project(path: ":login")
-    }
+    implementation project(path: ':kb_common')
+//    if (!isNeedSingleModule.toBoolean()) {
+//        implementation project(path: ":login")
+//       implementation project(path: ':home')}
 }
