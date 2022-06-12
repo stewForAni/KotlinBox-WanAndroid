@@ -23,7 +23,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        StatusBarUtil.fitSystemBar(this)
+//        StatusBarUtil.fitSystemBar(this)
         mBind = DataBindingUtil.setContentView(this, getLayoutID())
         initData()
     }

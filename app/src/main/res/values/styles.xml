@@ -5,9 +5,13 @@
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryDark">@color/purple_500</item>
         <item name="colorAccent">@color/purple_700</item>
+
+        <item name="android:statusBarColor">@color/theme_color</item>
+        <item name="android:navigationBarColor">@color/white</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@drawable/splash_windows_background</item>
     </style>
 
