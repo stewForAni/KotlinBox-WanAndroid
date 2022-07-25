@@ -15,12 +15,12 @@ object RetrofitManager {
 
     private const val BASE_URL = "https://www.wanandroid.com/"
 
-    private var retrofit:Retrofit? = null
+    private var retrofit: Retrofit? = null
 
     init {
 
         val logInterceptor = HttpLoggingInterceptor {
-            Log.d("OkHttp Log", it)
+            Log.d("OkHttp Log : ", it)
         }.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         val okHttpClient = OkHttpClient().newBuilder()
@@ -41,7 +41,7 @@ object RetrofitManager {
 
     }
 
-    fun <T> getService(service:Class<T>): T {
+    fun <T> getService(service: Class<T>): T {
         return retrofit!!.create(service)
     }
 }
