@@ -8,6 +8,7 @@
 
         <item name="android:statusBarColor">@color/theme_color</item>
         <item name="android:navigationBarColor">@color/white</item>
+
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
