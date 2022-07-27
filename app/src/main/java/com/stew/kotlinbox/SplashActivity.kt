@@ -13,7 +13,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         return R.layout.activity_splash
     }
 
-    override fun initData() {
+    override fun init() {
         Thread.sleep(1000)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
