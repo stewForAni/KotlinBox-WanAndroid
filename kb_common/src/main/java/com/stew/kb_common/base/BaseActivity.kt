@@ -15,7 +15,7 @@ import com.stew.kb_common.util.StatusBarUtil
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     val TAG: String = this.javaClass.simpleName
-    var mBind: T? = null
+    lateinit var mBind: T
 
     abstract fun getLayoutID(): Int
 
@@ -30,16 +30,16 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mBind?.unbind()
+        mBind.unbind()
     }
 
     fun showLoadingDialog() {
-        Log.d(TAG, "showLoadingDialog: ")
+        Log.d(TAG, TAG + "showLoadingDialog: ")
         LoadingViewUtil.showLoadingDialog(this, true)
     }
 
     fun dismissLoadingDialog() {
-        Log.d(TAG, "dismissLoadingDialog: ")
+        Log.d(TAG, TAG + "dismissLoadingDialog: ")
         LoadingViewUtil.dismissLoadingDialog()
     }
 }

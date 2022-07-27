@@ -4,30 +4,54 @@
 
     <data>
 
+        <variable
+            name="f_name"
+            type="String" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/theme_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@{f_name}"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
 
         <FrameLayout
             android:id="@+id/f_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="60dp" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bnv"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:itemIconTint="@drawable/selector_bottom_navigation"
+            app:itemTextColor="@drawable/selector_bottom_navigation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:menu="@menu/main_bottom_menu"
-            android:orientation="horizontal"
-            android:background="@color/white"
-            app:itemIconTint="@drawable/selector_bottom_navigation"
-            app:itemTextColor="@drawable/selector_bottom_navigation"/>
+            app:menu="@menu/main_bottom_menu" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

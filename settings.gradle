@@ -1,3 +1,6 @@
+include ':kb_me'
+include ':kb_project'
+include ':kb_home'
 include ':kb_common'
 include ':home'
 include ':login'
