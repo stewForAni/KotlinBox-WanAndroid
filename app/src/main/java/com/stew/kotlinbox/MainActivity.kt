@@ -60,8 +60,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         if (!targetFragment.isAdded) {
             ft.add(R.id.f_content, targetFragment)
         }
-        ft.show(targetFragment)
-        ft.commitAllowingStateLoss()
+        ft.show(targetFragment).commitAllowingStateLoss()
     }
 
     private var exitTime: Long = 0

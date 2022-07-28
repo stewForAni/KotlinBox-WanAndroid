@@ -10,9 +10,7 @@ android {
 
 dependencies {
     implementation project(path: ':kb_common')
-    if (!isNeedSingleModule.toBoolean()) {
-        implementation project(path: ":kb_home")
-        implementation project(path: ':kb_project')
-        implementation project(path: ':kb_me')
-    }
+    implementation project(path: ":kb_home")
+    implementation project(path: ':kb_project')
+    implementation project(path: ':kb_me')
 }
