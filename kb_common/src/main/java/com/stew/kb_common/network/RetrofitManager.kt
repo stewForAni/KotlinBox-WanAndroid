@@ -15,7 +15,7 @@ object RetrofitManager {
 
     private const val BASE_URL = "https://www.wanandroid.com/"
 
-    private var retrofit: Retrofit? = null
+    private lateinit var retrofit: Retrofit
 
     init {
 
@@ -42,6 +42,6 @@ object RetrofitManager {
     }
 
     fun <T> getService(service: Class<T>): T {
-        return retrofit!!.create(service)
+        return retrofit.create(service)
     }
 }

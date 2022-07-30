@@ -21,6 +21,8 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     lateinit var mBind: T
     lateinit var mContext: Context
 
+    abstract fun getLayoutID(): Int
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Log.d(TAG, "onAttach: ")
@@ -39,7 +41,6 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
         Log.d(TAG, "onViewCreated: ")
     }
 
@@ -83,8 +84,5 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         LoadingViewUtil.dismissLoadingDialog()
     }
 
-    abstract fun getLayoutID(): Int
-
-    abstract fun init()
 
 }
