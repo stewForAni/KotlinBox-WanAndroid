@@ -20,7 +20,6 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
     override fun init() {
         homeViewModel.getBanner()
-        homeViewModel.getHomeList()
     }
 
     override fun observe() {
