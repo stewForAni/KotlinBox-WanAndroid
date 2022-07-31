@@ -12,8 +12,4 @@ class MeFragment:BaseFragment<FragmentMeBinding>() {
     override fun getLayoutID(): Int {
         return R.layout.fragment_me
     }
-
-    override fun init() {
-
-    }
 }

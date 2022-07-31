@@ -12,7 +12,4 @@ class ProjectFragment:BaseFragment<FragmentProjectBinding>() {
     override fun getLayoutID(): Int {
         return R.layout.fragment_project
     }
-
-    override fun init() {
-    }
 }

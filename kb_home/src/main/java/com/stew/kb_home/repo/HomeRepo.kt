@@ -7,5 +7,7 @@ import com.stew.kb_common.base.BaseRepository
  * mail: stewforani@gmail.com
  */
 class HomeRepo : BaseRepository() {
+    fun test() {
 
+    }
 }

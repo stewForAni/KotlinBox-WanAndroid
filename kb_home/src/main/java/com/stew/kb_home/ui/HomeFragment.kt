@@ -1,6 +1,7 @@
 package com.stew.kb_home.ui
 
 import android.util.Log
+import androidx.fragment.app.viewModels
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_home.R
 import com.stew.kb_home.databinding.FragmentHomeBinding
@@ -12,12 +13,13 @@ import com.stew.kb_home.viewmodel.HomeViewModel
  */
 class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
+    private val homeViewModel: HomeViewModel by viewModels()
     override fun getLayoutID(): Int {
         return R.layout.fragment_home
     }
 
     override fun init() {
-        var homeViewModel = HomeViewModel()
+        homeViewModel.getBanner()
     }
 
     override fun observe() {
