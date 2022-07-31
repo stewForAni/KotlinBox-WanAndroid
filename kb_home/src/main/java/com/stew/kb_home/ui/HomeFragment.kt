@@ -1,6 +1,5 @@
 package com.stew.kb_home.ui
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_home.R

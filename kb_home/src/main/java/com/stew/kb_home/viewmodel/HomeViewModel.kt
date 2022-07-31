@@ -1,9 +1,7 @@
 package com.stew.kb_home.viewmodel
 
 import android.util.Log
-import com.stew.kb_common.base.BLOCK
 import com.stew.kb_common.base.BaseViewModel
-import com.stew.kb_common.base.ERROR
 import com.stew.kb_home.repo.HomeRepo
 
 /**
@@ -11,8 +9,6 @@ import com.stew.kb_home.repo.HomeRepo
  * mail: stewforani@gmail.com
  */
 class HomeViewModel(private val homeRepo: HomeRepo) : BaseViewModel() {
-
-    //private val homeRepo: HomeRepo by lazy { HomeRepo() }
 
     fun getBanner() {
         Log.d("HomeViewModel", "homeRepo: $homeRepo")
