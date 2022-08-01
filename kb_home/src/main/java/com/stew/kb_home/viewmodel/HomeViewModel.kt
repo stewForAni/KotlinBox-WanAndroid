@@ -1,7 +1,9 @@
 package com.stew.kb_home.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_home.bean.Banner
 import com.stew.kb_home.repo.HomeRepo
 
 /**
@@ -10,13 +12,11 @@ import com.stew.kb_home.repo.HomeRepo
  */
 class HomeViewModel(private val homeRepo: HomeRepo) : BaseViewModel() {
 
+    var bannerList = MutableLiveData<List<Banner>>()
     fun getBanner() {
-        Log.d("HomeViewModel", "homeRepo: $homeRepo")
-        homeRepo.test()
-        Log.d("HomeViewModel", "homeRepo: $homeRepo")
+        launch(
+            block = { bannerList.value = homeRepo.getBanner().data }
+        )
     }
 
-    fun getHomeList() {
-
-    }
 }

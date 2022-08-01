@@ -36,6 +36,7 @@ android {
 
 }
 
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
@@ -51,5 +52,16 @@ dependencies {
     // 协程Android支持库
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
+
+    // Koin for Kotlin
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-core-ext:$koin_version"
+
+    // Koin for AndroidX
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+    implementation "org.koin:koin-androidx-ext:$koin_version"
+
 
 }
