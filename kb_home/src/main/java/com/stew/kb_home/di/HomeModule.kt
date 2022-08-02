@@ -12,10 +12,7 @@ import org.koin.dsl.module
  * mail: stewforani@gmail.com
  */
 val homeModule = module {
-
     single { RetrofitManager.getService(HomeApi::class.java) }
-
     single { HomeRepo(get()) }
-
     viewModel { HomeViewModel(get()) }
 }

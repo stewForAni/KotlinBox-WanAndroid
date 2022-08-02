@@ -1,7 +1,6 @@
 package com.stew.kb_home.ui
 
 import android.util.Log
-import androidx.fragment.app.viewModels
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_home.R
 import com.stew.kb_home.databinding.FragmentHomeBinding
@@ -22,11 +21,16 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
     override fun init() {
         homeViewModel.getBanner()
+        homeViewModel.getArticle(currentPage)
     }
 
     override fun observe() {
         homeViewModel.bannerList.observe(this, {
-            Log.d(TAG, "observe: $it")
+            Log.d(TAG, "bannerList: " + it.size)
+        })
+
+        homeViewModel.articleList.observe(this, {
+            Log.d(TAG, "articleList: " + it.size)
         })
     }
 
