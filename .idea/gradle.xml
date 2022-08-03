@@ -17,8 +17,9 @@
             <option value="$PROJECT_DIR$/home" />
             <option value="$PROJECT_DIR$/kb_common" />
             <option value="$PROJECT_DIR$/kb_home" />
-            <option value="$PROJECT_DIR$/kb_me" />
+            <option value="$PROJECT_DIR$/kb_navigation" />
             <option value="$PROJECT_DIR$/kb_project" />
+            <option value="$PROJECT_DIR$/kb_system" />
             <option value="$PROJECT_DIR$/login" />
           </set>
         </option>
