@@ -5,7 +5,23 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
     <color name="black">#FF000000</color>
+    <color name="black1">#111111</color>
+    <color name="black2">#222222</color>
+    <color name="black3">#333333</color>
+    <color name="black4">#444444</color>
+    <color name="black5">#555555</color>
+    <color name="black6">#666666</color>
+    <color name="black7">#777777</color>
+    <color name="black8">#888888</color>
+    <color name="black9">#999999</color>
+    <color name="blacka">#aaaaaa</color>
+    <color name="blackb">#bbbbbb</color>
+    <color name="blackc">#cccccc</color>
+    <color name="blackd">#dddddd</color>
+    <color name="blacke">#eeeeee</color>
+
     <color name="white">#FFFFFFFF</color>
     <color name="color_transparent">#00000000</color>
     <color name="theme_color">#42545c</color>

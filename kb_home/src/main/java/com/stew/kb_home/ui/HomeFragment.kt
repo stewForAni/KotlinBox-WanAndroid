@@ -2,9 +2,11 @@ package com.stew.kb_home.ui
 
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_home.R
 import com.stew.kb_home.adapter.BannerAdapter
+import com.stew.kb_home.adapter.HomeRVAdapter
 import com.stew.kb_home.databinding.FragmentHomeBinding
 import com.stew.kb_home.viewmodel.HomeViewModel
 import com.zhpan.bannerview.constants.PageStyle
@@ -17,6 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
     private val homeViewModel: HomeViewModel by viewModel()
+    lateinit var homeRVAdapter: HomeRVAdapter
 
     override fun getLayoutID(): Int {
         return R.layout.fragment_home
@@ -35,6 +38,10 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             setAutoPlay(false)
         }.create()
 
+        mBind.rv.layoutManager = LinearLayoutManager(activity)
+        homeRVAdapter = HomeRVAdapter()
+        mBind.rv.adapter = homeRVAdapter
+
         homeViewModel.getBanner()
         homeViewModel.getArticle(currentPage)
     }
@@ -48,6 +55,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
         homeViewModel.articleList.observe(this, {
             Log.d(TAG, "articleList: " + it.size)
+            homeRVAdapter.setData(it)
         })
 
     }

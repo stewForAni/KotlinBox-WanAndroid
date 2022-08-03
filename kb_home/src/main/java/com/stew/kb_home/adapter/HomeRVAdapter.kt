@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -20,7 +19,6 @@ class HomeRVAdapter :
     RecyclerView.Adapter<HomeRVAdapter.MyViewHolder>() {
 
     private val diff: AsyncListDiffer<Article.ArticleDetail>
-    private val list: MutableList<Article.ArticleDetail> = mutableListOf()
 
     init {
         diff = AsyncListDiffer(this, MyCallback())
@@ -34,27 +32,34 @@ class HomeRVAdapter :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         Log.d("RecyclerAdapter", "onBindViewHolder: $position")
-        var data = diff.currentList[position]
-        holder.name?.text = data.name
-        holder.image?.setImageResource(data.image)
+        val data = diff.currentList[position]
+
+        holder.title.text = data.title
+        holder.time.text = data.niceDate
+
+        if (data.author.isEmpty()){
+            holder.nameT.text = "分享："
+            holder.name.text = data.shareUser
+        }else{
+            holder.nameT.text = "作者："
+            holder.name.text = data.author
+        }
+
     }
 
     override fun getItemCount(): Int {
         return diff.currentList.size
     }
 
-    fun setData(list: MutableList<Article.ArticleDetail>) {
+    fun setData(list: List<Article.ArticleDetail>) {
         diff.submitList(list)
     }
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-        var name: TextView? = null
-        var image: ImageView? = null
-
-        init {
-            name = item.findViewById(R.id.textView)
-            image = item.findViewById(R.id.imageView)
-        }
+        var title: TextView = item.findViewById(R.id.title)
+        var nameT: TextView = item.findViewById(R.id.t1)
+        var name: TextView = item.findViewById(R.id.name)
+        var time: TextView = item.findViewById(R.id.time)
     }
 
     class MyCallback : DiffUtil.ItemCallback<Article.ArticleDetail>() {
