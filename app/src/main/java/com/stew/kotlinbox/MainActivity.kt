@@ -1,11 +1,10 @@
 package com.stew.kotlinbox
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.ui.HomeFragment
-import com.stew.kb_me.ui.MeFragment
+import com.stew.kb_me.ui.SysFragment
 import com.stew.kb_project.ui.ProjectFragment
 import com.stew.kotlinbox.databinding.ActivityMainBinding
 
@@ -24,31 +23,33 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mBind.bnv.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.f1 -> {
-                    Log.d(TAG, "bnv 0")
                     switchFragment(0)
-                    mBind.fName = "Home"
+                    mBind.fName = "首页"
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.f2 -> {
-                    Log.d(TAG, "bnv 1")
                     switchFragment(1)
-                    mBind.fName = "Project"
+                    mBind.fName = "项目"
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.f3 -> {
-                    Log.d(TAG, "bnv 2")
                     switchFragment(2)
-                    mBind.fName = "Me"
+                    mBind.fName = "体系"
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.f4 -> {
+                    switchFragment(3)
+                    mBind.fName = "导航"
                     return@setOnNavigationItemSelectedListener true
                 }
             }
             false
         }
 
-        fragmentList = mutableListOf(HomeFragment(), ProjectFragment(), MeFragment())
+        fragmentList = mutableListOf(HomeFragment(), ProjectFragment(), SysFragment(), SysFragment())
 
         switchFragment(0)
-        mBind.fName = "Home"
+        mBind.fName = "首页"
     }
 
     private fun switchFragment(position: Int) {

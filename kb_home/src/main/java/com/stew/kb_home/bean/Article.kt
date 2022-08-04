@@ -15,13 +15,13 @@ data class Article(
 ) {
     data class ArticleDetail(
         val author: String,
-        var collect: Boolean,
         val fresh: Boolean,
         val id: Int,
         val link: String,
         val niceDate: String,
         val shareUser: String,
         val title: String,
+        val superChapterName: String,
     )
 }
 

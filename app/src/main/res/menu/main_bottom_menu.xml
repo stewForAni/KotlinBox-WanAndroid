@@ -4,15 +4,21 @@
         android:id="@+id/f1"
         android:icon="@drawable/icon_1"
         android:contentDescription="Home"
-        android:title="Home" />
+        android:title="首页" />
     <item
         android:id="@+id/f2"
         android:icon="@drawable/icon_2"
         android:contentDescription="Project"
-        android:title="Project" />
+        android:title="项目" />
     <item
         android:id="@+id/f3"
         android:icon="@drawable/icon_3"
-        android:contentDescription="Me"
-        android:title="Me" />
+        android:contentDescription="System"
+        android:title="体系" />
+    <item
+        android:id="@+id/f4"
+        android:icon="@drawable/icon_4"
+        android:contentDescription="navigation"
+        android:title="导航" />
+
 </menu>

@@ -14,7 +14,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     override fun init() {
-        Thread.sleep(1000)
+//        Thread.sleep(1000)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

@@ -8,7 +8,7 @@
     android:layout_marginRight="8dp"
     android:layout_marginBottom="4dp"
     app:cardCornerRadius="4dp"
-    app:cardElevation="4dp">
+    app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,57 +17,85 @@
         android:paddingRight="10dp">
 
         <TextView
+            android:id="@+id/tag"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_tag"
+            android:gravity="center"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="New"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:text="N/A"
             android:textColor="@color/theme_color"
             android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/tag"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/t1"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            style="@style/style_home_rv_item"
+            android:layout_marginLeft="10dp"
             android:text="N/A"
             android:textColor="@color/blacka"
-            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            style="@style/style_home_rv_item"
             android:text="N/A"
             android:textColor="@color/black6"
-            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/t1" />
 
         <TextView
             android:id="@+id/t2"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            style="@style/style_home_rv_item"
             android:layout_marginLeft="20dp"
             android:text="时间："
             android:textColor="@color/blacka"
-            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/name" />
 
         <TextView
             android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            style="@style/style_home_rv_item"
             android:text="N/A"
             android:textColor="@color/black6"
-            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/t2" />
+
+        <TextView
+            android:id="@+id/t3"
+            style="@style/style_home_rv_item"
+            android:layout_marginLeft="20dp"
+            android:text="分类："
+            android:textColor="@color/blacka"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/time" />
+
+        <TextView
+            android:id="@+id/type"
+            style="@style/style_home_rv_item"
+            android:text="N/A"
+            android:textColor="@color/black6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/t3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

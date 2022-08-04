@@ -8,7 +8,7 @@
     android:layout_marginRight="4dp"
     android:layout_marginBottom="10dp"
     app:cardCornerRadius="4dp"
-    app:cardElevation="4dp">
+    app:cardElevation="2dp">
 
     <ImageView
         android:id="@+id/image_banner"
