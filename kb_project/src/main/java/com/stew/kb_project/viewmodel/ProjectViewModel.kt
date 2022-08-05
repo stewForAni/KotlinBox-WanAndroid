@@ -21,9 +21,9 @@ class ProjectViewModel(var repo: ProjectRepo) : BaseViewModel() {
         )
     }
 
-    fun getProList(currentPage: Int) {
+    fun getProList(currentPage: Int, cid: Int) {
         launch(
-            block = { proList.value = repo.getProList(currentPage).data?.datas }
+            block = { proList.value = repo.getProList(currentPage, cid).data?.datas }
         )
     }
 }

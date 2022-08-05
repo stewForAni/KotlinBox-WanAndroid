@@ -21,6 +21,7 @@ interface ProjectApi {
     @GET("project/list/{page}/json")
     suspend fun getProList(
         @Path("page") page: Int,
+        @Query("page_size") page_size: Int,
         @Query("cid") cid: Int
     ): BaseResp<Project>
 

@@ -9,5 +9,5 @@ import com.stew.kb_project.api.ProjectApi
  */
 class ProjectRepo(private val projectApi: ProjectApi) : BaseRepository() {
     suspend fun getProTypeList() = projectApi.getProType()
-    suspend fun getProList(currentPage: Int) = projectApi.getProList(currentPage, 10)
+    suspend fun getProList(currentPage: Int, cid: Int) = projectApi.getProList(currentPage, 10, cid)
 }

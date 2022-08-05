@@ -5,5 +5,5 @@ package com.stew.kb_project.bean
  */
 data class ProjectType(
     val id: Int,
-    val link: String,
+    val name: String,
 )
