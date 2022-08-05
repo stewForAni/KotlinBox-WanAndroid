@@ -16,6 +16,10 @@
         <item name="android:windowBackground">@drawable/splash_windows_background</item>
     </style>
 
+    <style name="style_bnv_tx">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 
 </resources>

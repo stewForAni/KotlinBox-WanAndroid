@@ -5,6 +5,7 @@ import com.stew.kb_home.bean.Article
 import com.stew.kb_home.bean.Banner
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * Created by stew on 7/30/22.
@@ -18,6 +19,9 @@ interface HomeApi {
 
     //首页文章列表
     @GET("article/list/{page}/json")
-    suspend fun getArticleList(@Path("page") page: Int): BaseResp<Article>
+    suspend fun getArticleList(
+        @Path("page") page: Int,
+        @Query("page_size") page_size: Int
+    ): BaseResp<Article>
 
 }

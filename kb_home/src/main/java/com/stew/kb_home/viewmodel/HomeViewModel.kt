@@ -11,20 +11,20 @@ import com.stew.kb_home.repo.HomeRepo
  * Created by stew on 7/30/22.
  * mail: stewforani@gmail.com
  */
-class HomeViewModel(private val homeRepo: HomeRepo) : BaseViewModel() {
+class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
 
     var bannerList = MutableLiveData<List<Banner>>()
     var articleList = MutableLiveData<List<Article.ArticleDetail>>()
 
     fun getBanner() {
         launch(
-            block = { bannerList.value = homeRepo.getBanner().data }
+            block = { bannerList.value = repo.getBanner().data }
         )
     }
 
     fun getArticle(currentPage: Int) {
         launch(
-            block = { articleList.value = homeRepo.getArticle(currentPage).data?.datas }
+            block = { articleList.value = repo.getArticle(currentPage).data?.datas }
         )
     }
 

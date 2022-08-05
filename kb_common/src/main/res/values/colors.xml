@@ -21,10 +21,12 @@
     <color name="blackc">#cccccc</color>
     <color name="blackd">#dddddd</color>
     <color name="blacke">#eeeeee</color>
+    <color name="blackf">#fcfcfc</color>
 
     <color name="white">#FFFFFFFF</color>
 
     <color name="red">#e44d41</color>
+    <color name="green">#32b464</color>
 
     <color name="color_transparent">#00000000</color>
     <color name="theme_color">#42545c</color>

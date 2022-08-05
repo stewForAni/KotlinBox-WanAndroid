@@ -11,6 +11,7 @@ import androidx.databinding.ViewDataBinding
 abstract class BaseVMFragment<T : ViewDataBinding> : BaseFragment<T>() {
 
     protected var currentPage = 0
+    protected var currentPageSize = 10
 
     abstract fun init()
     abstract fun observe()

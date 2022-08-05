@@ -29,11 +29,11 @@ class HomeRVAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if(viewType == NORMAL){
+        return if (viewType == NORMAL) {
             MyViewHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.item_home_rv, parent, false)
             )
-        }else{
+        } else {
             MyFootHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.foot_home_rv, parent, false)
             )
@@ -50,23 +50,16 @@ class HomeRVAdapter :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        if(getItemViewType(position) == FOOT){
+        if (getItemViewType(position) == FOOT) {
 
-        }else{
+        } else {
             val data = diff.currentList[position]
             (holder as MyViewHolder).title.text = data.title
             holder.time.text = data.niceDate
             holder.type.text = data.superChapterName
-
-            holder.tag.visibility = if (data.fresh) View.VISIBLE else View.GONE
-
-            if (data.author.isEmpty()) {
-                holder.nameT.text = "分享："
-                holder.name.text = data.shareUser
-            } else {
-                holder.nameT.text = "作者："
-                holder.name.text = data.author
-            }
+            holder.tag1.visibility = if (data.fresh) View.VISIBLE else View.GONE
+            holder.tag2.visibility = if (data.superChapterId == 408) View.VISIBLE else View.GONE
+            holder.name.text = if (data.author.isEmpty()) data.shareUser else data.author
         }
 
 
@@ -82,11 +75,11 @@ class HomeRVAdapter :
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         var title: TextView = item.findViewById(R.id.title)
-        var nameT: TextView = item.findViewById(R.id.t1)
         var name: TextView = item.findViewById(R.id.name)
         var time: TextView = item.findViewById(R.id.time)
         var type: TextView = item.findViewById(R.id.type)
-        var tag: TextView = item.findViewById(R.id.tag)
+        var tag1: TextView = item.findViewById(R.id.tag1)
+        var tag2: TextView = item.findViewById(R.id.tag2)
     }
 
     class MyFootHolder(item: View) : RecyclerView.ViewHolder(item) {

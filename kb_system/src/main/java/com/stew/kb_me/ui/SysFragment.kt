@@ -10,6 +10,6 @@ import com.stew.kb_me.databinding.FragmentMeBinding
  */
 class SysFragment:BaseFragment<FragmentMeBinding>() {
     override fun getLayoutID(): Int {
-        return R.layout.fragment_me
+        return R.layout.fragment_sys
     }
 }

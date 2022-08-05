@@ -9,5 +9,5 @@ import com.stew.kb_home.api.HomeApi
  */
 class HomeRepo(private val homeApi: HomeApi) : BaseRepository() {
     suspend fun getBanner() = homeApi.getBanner()
-    suspend fun getArticle(currentPage: Int) = homeApi.getArticleList(currentPage)
+    suspend fun getArticle(currentPage: Int) = homeApi.getArticleList(currentPage, 10)
 }

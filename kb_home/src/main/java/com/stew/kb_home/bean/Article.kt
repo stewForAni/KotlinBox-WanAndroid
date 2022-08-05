@@ -5,13 +5,7 @@ package com.stew.kb_home.bean
  * mail: stewforani@gmail.com
  */
 data class Article(
-    val curPage: Int,
     val datas: List<ArticleDetail>,
-    val offset: Int,
-    val over: Boolean,
-    val pageCount: Int,
-    val size: Int,
-    val total: Int
 ) {
     data class ArticleDetail(
         val author: String,
@@ -21,6 +15,7 @@ data class Article(
         val niceDate: String,
         val shareUser: String,
         val title: String,
+        val superChapterId: Int,
         val superChapterName: String,
     )
 }
