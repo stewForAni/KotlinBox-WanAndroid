@@ -37,13 +37,13 @@ class ProjectFragment : BaseVMFragment<FragmentProjectBinding>() {
 
     private fun initTab(list: List<ProjectType>) {
         for (i in 1..5) {
-            l.add(list[i].name)
-            f.add(ProjectChildFragment.newInstance(list[i].id))
+            l.add(i.toString()+"."+list[i].name)
+            f.add(ProjectChildFragment.newInstance(list[i].id,i))
         }
         mBind.viewPager.adapter = ProVPAdapter(this, f)
+        mBind.viewPager.offscreenPageLimit = 5
         TabLayoutMediator(mBind.tabLayout, mBind.viewPager) { tab, position ->
             tab.text = l[position]
-            Log.d(TAG, "initTab: $position")
         }.attach()
     }
 

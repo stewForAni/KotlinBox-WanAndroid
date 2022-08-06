@@ -9,6 +9,7 @@ import com.stew.kb_home.R
 import com.stew.kb_home.adapter.BannerAdapter
 import com.stew.kb_home.adapter.HomeRVAdapter
 import com.stew.kb_home.bean.Article
+import com.stew.kb_home.bean.a
 import com.stew.kb_home.databinding.FragmentHomeBinding
 import com.stew.kb_home.viewmodel.HomeViewModel
 import com.zhpan.bannerview.constants.PageStyle
@@ -30,25 +31,44 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         return R.layout.fragment_home
     }
 
+    override fun observe() {
+
+        homeViewModel.bannerList.observe(this, {
+            mBind.banner.refreshData(it)
+        })
+
+        homeViewModel.articleList.observe(this, {
+            //AsyncListDiffer需要一个新数据，不然添加无效
+            val newList : MutableList<a> = arrayListOf()
+
+            isLoadMore = false
+            list.addAll(it)
+            newList.addAll(list)
+
+            homeRVAdapter.setData(newList)
+        })
+
+    }
+
     override fun init() {
         mBind.banner.apply {
             setAdapter(BannerAdapter())
             setLifecycleRegistry(lifecycle)
             setScrollDuration(600)
             setInterval(5000)
-            setPageStyle(PageStyle.MULTI_PAGE_SCALE)
-            setRevealWidth(80)
+            //setPageStyle(PageStyle.MULTI_PAGE_SCALE)
+            //setRevealWidth(80)
             //setPageMargin(20)
-            setIndicatorVisibility(View.INVISIBLE)
+            //setIndicatorVisibility(View.INVISIBLE)
             setAutoPlay(false)
         }.create()
 
         lm = LinearLayoutManager(activity)
-        mBind.rv.layoutManager = lm
+        mBind.rvHome.layoutManager = lm
         homeRVAdapter = HomeRVAdapter()
-        mBind.rv.adapter = homeRVAdapter
+        mBind.rvHome.adapter = homeRVAdapter
 
-        mBind.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        mBind.rvHome.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE &&
                     (lm.findLastVisibleItemPosition() + 1 == homeRVAdapter.itemCount &&
@@ -64,25 +84,6 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
         homeViewModel.getBanner()
         homeViewModel.getArticle(currentPage)
-    }
-
-    override fun observe() {
-
-        homeViewModel.bannerList.observe(this, {
-            mBind.banner.refreshData(it)
-        })
-
-        homeViewModel.articleList.observe(this, {
-            //AsyncListDiffer需要一个新数据，不然添加无效
-            val newList : MutableList<Article.ArticleDetail> = arrayListOf()
-
-            isLoadMore = false
-            list.addAll(it)
-            newList.addAll(list)
-
-            homeRVAdapter.setData(newList)
-        })
-
     }
 
 }

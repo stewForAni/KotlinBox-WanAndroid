@@ -7,24 +7,25 @@
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            app:layout_scrollFlags="scroll|enterAlways"
+            android:layout_height="46dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="@color/theme_color"
             app:tabIndicatorFullWidth="false"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/theme_color"
-            app:tabTextColor="@color/blacka"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:tabTextAppearance="@style/style_pro_tab"
+            app:tabTextColor="@color/blacka" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 </layout>

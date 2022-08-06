@@ -55,6 +55,5 @@
             app:layout_constraintRight_toRightOf="parent"
             app:menu="@menu/main_bottom_menu" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

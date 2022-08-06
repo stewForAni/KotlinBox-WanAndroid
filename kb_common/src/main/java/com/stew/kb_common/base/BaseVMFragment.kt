@@ -12,21 +12,25 @@ abstract class BaseVMFragment<T : ViewDataBinding> : BaseFragment<T>() {
 
     protected var currentPage = 0
     protected var currentPageSize = 10
+    private var isFirstLoad: Boolean = true
 
     abstract fun init()
     abstract fun observe()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
         observe()
+        init()
     }
 
     override fun onResume() {
         super.onResume()
 
-        //fragment懒加载，待定
-        lazyLoad()
+        if (isFirstLoad) {
+            isFirstLoad = false
+            lazyLoad()
+        }
+
     }
 
     open fun lazyLoad() {

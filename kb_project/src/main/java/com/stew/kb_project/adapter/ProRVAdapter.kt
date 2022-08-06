@@ -1,4 +1,4 @@
-package com.stew.kb_home.adapter
+package com.stew.kb_project.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,17 +7,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.stew.kb_home.R
-import com.stew.kb_home.bean.a
+import coil.load
+import com.makeramen.roundedimageview.RoundedImageView
+import com.stew.kb_project.R
+import com.stew.kb_project.bean.p
 
-/**
- * Created by stew on 8/3/22.
- * mail: stewforani@gmail.com
- */
-class HomeRVAdapter :
+
+class ProRVAdapter :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var diff: AsyncListDiffer<a>
+    private var diff: AsyncListDiffer<p>
 
     private val NORMAL: Int = 0
     private val FOOT: Int = 1
@@ -29,11 +28,11 @@ class HomeRVAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == NORMAL) {
             MyViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_home_rv, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_pro_rv, parent, false)
             )
         } else {
             MyFootHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.foot_home_rv, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.foot_pro_rv, parent, false)
             )
         }
     }
@@ -52,12 +51,9 @@ class HomeRVAdapter :
 
         } else {
             val data = diff.currentList[position]
-            (holder as MyViewHolder).title.text = data.title
-            holder.time.text = data.niceDate
-            holder.type.text = data.superChapterName
-            holder.tag1.visibility = if (data.fresh) View.VISIBLE else View.GONE
-            holder.tag2.visibility = if (data.superChapterId == 408) View.VISIBLE else View.GONE
-            holder.name.text = if (data.author.isEmpty()) data.shareUser else data.author
+            (holder as MyViewHolder).rimg.load(data.envelopePic)
+            holder.desc.text = data.desc
+            holder.title.text = data.title
         }
 
 
@@ -67,32 +63,29 @@ class HomeRVAdapter :
         return diff.currentList.size
     }
 
-    fun setData(list: List<a>) {
+    fun setData(list: List<p>) {
         diff.submitList(list)
     }
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         var title: TextView = item.findViewById(R.id.title)
-        var name: TextView = item.findViewById(R.id.name)
-        var time: TextView = item.findViewById(R.id.time)
-        var type: TextView = item.findViewById(R.id.type)
-        var tag1: TextView = item.findViewById(R.id.tag1)
-        var tag2: TextView = item.findViewById(R.id.tag2)
+        var desc: TextView = item.findViewById(R.id.desc)
+        var rimg:RoundedImageView = item.findViewById(R.id.rimg)
     }
 
     class MyFootHolder(item: View) : RecyclerView.ViewHolder(item)
 
-    class MyCallback : DiffUtil.ItemCallback<a>() {
+    class MyCallback : DiffUtil.ItemCallback<p>() {
         override fun areItemsTheSame(
-            oldItem: a,
-            newItem: a
+            oldItem: p,
+            newItem: p
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: a,
-            newItem: a
+            oldItem: p,
+            newItem: p
         ): Boolean {
             return oldItem.title == newItem.title
         }

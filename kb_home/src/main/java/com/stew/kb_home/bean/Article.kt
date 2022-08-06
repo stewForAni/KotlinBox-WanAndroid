@@ -4,6 +4,8 @@ package com.stew.kb_home.bean
  * Created by stew on 8/2/22.
  * mail: stewforani@gmail.com
  */
+typealias a = Article.ArticleDetail
+
 data class Article(
     val datas: List<ArticleDetail>,
 ) {
