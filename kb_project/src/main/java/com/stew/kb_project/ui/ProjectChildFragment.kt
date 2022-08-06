@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_project.R
 import com.stew.kb_project.adapter.ProRVAdapter
@@ -91,7 +90,7 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
 
 
     override fun lazyLoad() {
-        projectViewModel.getProList(currentPage, currentID)
+        projectViewModel.getProList(currentPage+1, currentID)
     }
 
     //----------------------------------------------------------------

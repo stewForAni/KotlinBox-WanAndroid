@@ -11,15 +11,16 @@ import coil.load
 import com.makeramen.roundedimageview.RoundedImageView
 import com.stew.kb_project.R
 import com.stew.kb_project.bean.p
+import java.lang.StringBuilder
 
 
 class ProRVAdapter :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var diff: AsyncListDiffer<p>
-
     private val NORMAL: Int = 0
     private val FOOT: Int = 1
+    private val sb = StringBuilder()
 
     init {
         diff = AsyncListDiffer(this, MyCallback())
@@ -54,6 +55,8 @@ class ProRVAdapter :
             (holder as MyViewHolder).rimg.load(data.envelopePic)
             holder.desc.text = data.desc
             holder.title.text = data.title
+            sb.setLength(0)
+            holder.info.text = sb.append(data.niceDate).append("  ").append(data.author)
         }
 
 
@@ -70,7 +73,8 @@ class ProRVAdapter :
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         var title: TextView = item.findViewById(R.id.title)
         var desc: TextView = item.findViewById(R.id.desc)
-        var rimg:RoundedImageView = item.findViewById(R.id.rimg)
+        var info: TextView = item.findViewById(R.id.info)
+        var rimg: RoundedImageView = item.findViewById(R.id.rimg)
     }
 
     class MyFootHolder(item: View) : RecyclerView.ViewHolder(item)

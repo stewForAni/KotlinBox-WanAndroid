@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blackf"
+        android:background="@color/blacke"
         android:orientation="vertical">
 
         <com.zhpan.bannerview.BannerViewPager

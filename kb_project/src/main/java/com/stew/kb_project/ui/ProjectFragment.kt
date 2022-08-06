@@ -36,7 +36,7 @@ class ProjectFragment : BaseVMFragment<FragmentProjectBinding>() {
     }
 
     private fun initTab(list: List<ProjectType>) {
-        for (i in 1..5) {
+        for (i in 0..4) {
             l.add(i.toString()+"."+list[i].name)
             f.add(ProjectChildFragment.newInstance(list[i].id,i))
         }
