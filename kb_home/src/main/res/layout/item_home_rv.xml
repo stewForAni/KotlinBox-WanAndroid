@@ -44,7 +44,7 @@
             <TextView
                 android:id="@+id/name"
                 style="@style/style_home_rv_item"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textColor="@color/black6" />
         </LinearLayout>
 
@@ -52,7 +52,7 @@
         <TextView
             android:id="@+id/time"
             style="@style/style_home_rv_item"
-            android:text="N/A"
+            android:text="@string/n_a"
             android:textColor="@color/black6"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +65,7 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
-            android:text="N/A"
+            android:text="@string/n_a"
             android:textColor="@color/theme_color"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -86,7 +86,7 @@
             android:id="@+id/type"
             style="@style/style_home_rv_item"
             android:layout_marginTop="10dp"
-            android:text="N/A"
+            android:text="@string/n_a"
             android:textColor="@color/black6"
             app:layout_constraintLeft_toRightOf="@id/t3"
             app:layout_constraintTop_toBottomOf="@id/title" />

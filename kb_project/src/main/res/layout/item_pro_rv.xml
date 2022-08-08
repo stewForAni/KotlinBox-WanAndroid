@@ -32,7 +32,7 @@
             android:layout_marginStart="10dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="N/A"
+            android:text="@string/n_a"
             android:textColor="@color/theme_color"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -49,8 +49,8 @@
             android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:maxLines="4"
-            android:text="N/A"
-            android:textColor="@color/black6"
+            android:text="@string/n_a"
+            android:textColor="@color/black8"
             android:textSize="12sp"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toRightOf="@id/rimg"
@@ -58,15 +58,25 @@
             app:layout_constraintTop_toBottomOf="@id/title" />
 
         <TextView
-            android:id="@+id/info"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="N/A"
+            android:text="@string/n_a"
             android:textColor="@color/black4"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/rimg" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/n_a"
+            android:textColor="@color/black4"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

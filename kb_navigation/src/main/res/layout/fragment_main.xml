@@ -18,10 +18,9 @@
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:tabIndicatorColor="@color/theme_color"
-            app:tabIndicatorFullWidth="false"
-            app:tabMode="scrollable"
+            app:tabIndicatorFullWidth="true"
             app:tabSelectedTextColor="@color/theme_color"
-            app:tabTextAppearance="@style/style_pro_tab"
+            app:tabTextAppearance="@style/style_navi_tab"
             app:tabTextColor="@color/blacka" />
 
         <androidx.viewpager2.widget.ViewPager2
@@ -30,4 +29,5 @@
             android:layout_height="match_parent"
             android:background="@color/blacke" />
     </LinearLayout>
+
 </layout>

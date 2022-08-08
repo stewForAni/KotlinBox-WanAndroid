@@ -7,7 +7,7 @@ import com.stew.kb_home.api.HomeApi
  * Created by stew on 7/30/22.
  * mail: stewforani@gmail.com
  */
-class HomeRepo(private val homeApi: HomeApi) : BaseRepository() {
-    suspend fun getBanner() = homeApi.getBanner()
-    suspend fun getArticle(currentPage: Int) = homeApi.getArticleList(currentPage, 10)
+class HomeRepo(private val api: HomeApi) : BaseRepository() {
+    suspend fun getBanner() = api.getBanner()
+    suspend fun getArticle(currentPage: Int) = api.getArticleList(currentPage, 10)
 }

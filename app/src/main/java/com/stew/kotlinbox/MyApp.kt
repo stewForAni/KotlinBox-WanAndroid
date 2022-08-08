@@ -3,6 +3,7 @@ package com.stew.kotlinbox
 import android.app.Application
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.di.homeModule
+import com.stew.kb_navigation.di.naviModule
 import com.stew.kb_project.di.ProjectModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -14,7 +15,7 @@ import org.koin.core.context.GlobalContext.startKoin
  */
 class MyApp : Application() {
 
-    private val modules = mutableListOf(homeModule,ProjectModule)
+    private val modules = mutableListOf(homeModule, ProjectModule, naviModule)
 
     override fun onCreate() {
         super.onCreate()

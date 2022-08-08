@@ -37,8 +37,8 @@ class ProjectFragment : BaseVMFragment<FragmentProjectBinding>() {
 
     private fun initTab(list: List<ProjectType>) {
         for (i in 0..4) {
-            l.add(i.toString()+"."+list[i].name)
-            f.add(ProjectChildFragment.newInstance(list[i].id,i))
+            l.add((i+1).toString() + "." + list[i].name)
+            f.add(ProjectChildFragment.newInstance(list[i].id, i))
         }
         mBind.viewPager.adapter = ProVPAdapter(this, f)
         mBind.viewPager.offscreenPageLimit = 5

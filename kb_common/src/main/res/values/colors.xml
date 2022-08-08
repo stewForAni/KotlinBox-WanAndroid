@@ -29,5 +29,6 @@
     <color name="green">#32b464</color>
 
     <color name="color_transparent">#00000000</color>
-    <color name="theme_color">#42545c</color>
+<!--    <color name="theme_color">#42545c</color>-->
+    <color name="theme_color">#227bfa</color>
 </resources>

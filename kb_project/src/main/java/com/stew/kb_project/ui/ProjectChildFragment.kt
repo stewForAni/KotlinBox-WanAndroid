@@ -95,44 +95,44 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
 
     //----------------------------------------------------------------
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d("pcf", "onViewCreated: F$currentIndex")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("pcf", "onStart: F$currentIndex")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("pcf", "onResume: F$currentIndex")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("pcf", "onPause: F$currentIndex")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("pcf", "onStop: F$currentIndex")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("pcf", "onDestroyView: F$currentIndex")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("pcf", "onDestroy: F$currentIndex")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("pcf", "onDetach: F$currentIndex")
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        Log.d("pcf", "onViewCreated: F$currentIndex")
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        Log.d("pcf", "onStart: F$currentIndex")
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        Log.d("pcf", "onResume: F$currentIndex")
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        Log.d("pcf", "onPause: F$currentIndex")
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        Log.d("pcf", "onStop: F$currentIndex")
+//    }
+//
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        Log.d("pcf", "onDestroyView: F$currentIndex")
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        Log.d("pcf", "onDestroy: F$currentIndex")
+//    }
+//
+//    override fun onDetach() {
+//        super.onDetach()
+//        Log.d("pcf", "onDetach: F$currentIndex")
+//    }
 
 }

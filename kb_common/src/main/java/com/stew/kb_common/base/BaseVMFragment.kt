@@ -14,8 +14,8 @@ abstract class BaseVMFragment<T : ViewDataBinding> : BaseFragment<T>() {
     protected var currentPageSize = 10
     private var isFirstLoad: Boolean = true
 
-    abstract fun init()
     abstract fun observe()
+    abstract fun init()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
