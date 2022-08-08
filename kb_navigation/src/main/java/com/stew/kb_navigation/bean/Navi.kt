@@ -5,5 +5,13 @@ package com.stew.kb_navigation.bean
  * mail: stewforani@gmail.com
  */
 data class Navi(
-    val id:Int
-)
+    val cid: Int,
+    val name: String,
+    val articles: List<NaviChild>
+) {
+    data class NaviChild(
+        val id: Int,
+        val link: String,
+        val title: String,
+    )
+}

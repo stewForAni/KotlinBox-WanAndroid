@@ -1,16 +1,17 @@
 package com.stew.kb_navigation.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.stew.kb_common.base.BaseVMFragment
 
 import com.stew.kb_navigation.R
+import com.stew.kb_navigation.adapter.SysRVAdapter
 import com.stew.kb_navigation.bean.Sys
 import com.stew.kb_navigation.databinding.FragmentSysBinding
-import com.stew.kb_navigation.viewmodel.NaviViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by stew on 7/27/22.
@@ -18,31 +19,47 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class SysFragment : BaseVMFragment<FragmentSysBinding>() {
 
-    private val naviViewModel: NaviViewModel by viewModel()
     private val txList = arrayListOf<View>()
     private var oldPosition = -1
+    lateinit var sysAdapter: SysRVAdapter
+    lateinit var lm: LinearLayoutManager
+    private val myData = arrayListOf<Sys>()
+    private lateinit var f: MainFragment
 
     override fun getLayoutID(): Int {
         return R.layout.fragment_sys
     }
 
     override fun observe() {
-        naviViewModel.sysList.observe(this, {
-            addView(it)
+        f = parentFragment as MainFragment
+        f.naviViewModel.sysList.observe(this, {
+            for (i in 0..19) {
+                myData.add(it[i])
+            }
+            addView(myData)
+            sysAdapter.setData(myData)
+            Log.d(TAG, "observe: update data")
         })
     }
 
     override fun init() {
-        naviViewModel.getSys()
+        lm = LinearLayoutManager(activity)
+        mBind.rvSys.layoutManager = lm
+        sysAdapter = SysRVAdapter()
+        mBind.rvSys.adapter = sysAdapter
+
+
+        f.naviViewModel.getSys()
     }
 
     private fun addView(list: List<Sys>) {
 
-        for (i in 0..19) {
+        for (i in list.indices) {
             val layout = LayoutInflater.from(activity).inflate(R.layout.item_sys, null, false)
             layout.tag = i
             layout.setOnClickListener {
                 setColor(it.tag as Int)
+                lm.scrollToPositionWithOffset(it.tag as Int, 0)
             }
 
             val t = layout.findViewById<TextView>(R.id.tx_sys)
@@ -53,7 +70,7 @@ class SysFragment : BaseVMFragment<FragmentSysBinding>() {
                 setColor(i)
             }
 
-            mBind.ll.addView(layout)
+            mBind.llSys.addView(layout)
         }
 
     }

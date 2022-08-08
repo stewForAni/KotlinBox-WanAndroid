@@ -10,4 +10,5 @@ import com.stew.kb_navigation.api.NaviApi
  */
 class NaviRepo(private val api: NaviApi) : BaseRepository() {
     suspend fun getSys() = api.getSys()
+    suspend fun getNavi() = api.getNavi()
 }

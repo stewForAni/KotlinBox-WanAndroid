@@ -8,6 +8,8 @@ import com.stew.kb_common.base.BaseFragment
 import com.stew.kb_navigation.R
 import com.stew.kb_navigation.adapter.NaviVPAdapter
 import com.stew.kb_navigation.databinding.FragmentMainBinding
+import com.stew.kb_navigation.viewmodel.NaviViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by stew on 8/8/22.
@@ -15,6 +17,7 @@ import com.stew.kb_navigation.databinding.FragmentMainBinding
  */
 class MainFragment:BaseFragment<FragmentMainBinding>() {
 
+    val naviViewModel: NaviViewModel by viewModel()
     private lateinit var l: MutableList<String>
     private lateinit var f: MutableList<Fragment>
 

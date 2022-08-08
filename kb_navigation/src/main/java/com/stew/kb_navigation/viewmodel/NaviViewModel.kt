@@ -2,6 +2,7 @@ package com.stew.kb_navigation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_navigation.bean.Navi
 import com.stew.kb_navigation.bean.Sys
 import com.stew.kb_navigation.repo.NaviRepo
 
@@ -11,9 +12,14 @@ import com.stew.kb_navigation.repo.NaviRepo
  */
 class NaviViewModel(private val repo: NaviRepo) : BaseViewModel() {
 
+    var naviList = MutableLiveData<List<Navi>>()
     var sysList = MutableLiveData<List<Sys>>()
 
     fun getSys() = launch(
         block = { sysList.value = repo.getSys().data }
+    )
+
+    fun getNavi() = launch(
+        block = { naviList.value = repo.getNavi().data }
     )
 }

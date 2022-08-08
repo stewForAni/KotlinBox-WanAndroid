@@ -4,14 +4,15 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tx_sys"
-        android:layout_width="match_parent"
+        android:id="@+id/tx_flex"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="6dp"
-        android:layout_marginRight="6dp"
         android:background="@drawable/shape_10dp_white"
         android:gravity="center"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
         android:text="@string/n_a"
         android:textColor="@color/black6"
         android:textSize="12sp"

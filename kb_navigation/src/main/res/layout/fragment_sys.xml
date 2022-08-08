@@ -11,21 +11,21 @@
         android:orientation="horizontal">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/ns"
+            android:id="@+id/ns_sys"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2">
 
             <LinearLayout
                 android:orientation="vertical"
-                android:id="@+id/ll"
+                android:id="@+id/ll_sys"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
         </androidx.core.widget.NestedScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+            android:id="@+id/rv_sys"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5" />

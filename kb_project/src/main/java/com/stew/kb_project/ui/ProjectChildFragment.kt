@@ -50,13 +50,15 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
     override fun observe() {
         projectViewModel.proList.observe(this, {
             //AsyncListDiffer需要一个新数据，不然添加无效
-            val newList : MutableList<p> = arrayListOf()
+            val newList: MutableList<p> = arrayListOf()
 
             isLoadMore = false
             list.addAll(it)
             newList.addAll(list)
 
             proRVAdapter.setData(newList)
+
+            Log.d(TAG, "observe: update data $currentIndex")
         })
     }
 
