@@ -1,10 +1,10 @@
 package com.stew.kotlinbox
 
-import android.view.View
 import androidx.fragment.app.Fragment
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.ui.HomeFragment
+import com.stew.kb_me.ui.MeFragment
 import com.stew.kb_navigation.ui.MainFragment
 import com.stew.kb_project.ui.ProjectFragment
 import com.stew.kotlinbox.databinding.ActivityMainBinding
@@ -47,15 +47,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             false
         }
 
-        fragmentList = mutableListOf(HomeFragment(), ProjectFragment(), MainFragment())
+        fragmentList = mutableListOf(
+            HomeFragment(),
+            ProjectFragment(),
+            MainFragment(),
+            MeFragment()
+        )
 
         switchFragment(0)
         mBind.fName = "首页"
     }
 
     private fun switchFragment(position: Int) {
-
-//        mBind.rl.visibility = if (position == 2) View.GONE else View.VISIBLE
 
         val targetFragment = fragmentList.get(position)
         val oldFragment = fragmentList.get(oldFragmentIndex)

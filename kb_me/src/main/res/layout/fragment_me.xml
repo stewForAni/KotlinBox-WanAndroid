@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl1"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@color/theme_color">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/rimg"
+                    android:layout_width="86dp"
+                    android:layout_height="86dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/icon_avatar" />
+
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rl2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/t1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Developer:"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Stew"
+                    app:layout_constraintLeft_toRightOf="@id/t1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/t2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Github:"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/t1" />
+
+                <TextView
+                    android:id="@+id/github"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="https://github.com/stewForAni"
+                    app:layout_constraintLeft_toRightOf="@id/t2"
+                    app:layout_constraintTop_toBottomOf="@id/t1" />
+
+                <TextView
+                    android:id="@+id/t3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Blog:"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/t2" />
+
+                <TextView
+                    android:id="@+id/blog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="https://stewforani.github.io"
+                    app:layout_constraintLeft_toRightOf="@id/t3"
+                    app:layout_constraintTop_toBottomOf="@id/t2" />
+
+                <TextView
+                    android:id="@+id/t4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Api:"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/t3" />
+
+                <TextView
+                    android:id="@+id/api"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="https://www.wanandroid.com"
+                    app:layout_constraintLeft_toRightOf="@id/t4"
+                    app:layout_constraintTop_toBottomOf="@id/t3" />
+
+                <View
+                    android:id="@+id/d"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/blackf"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/api" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/d">
+
+                    <TextView
+                        style="@style/tx_me"
+                        android:text="Implementation:" />
+
+                    <TextView
+                        style="@style/tx_me"
+                        android:text="okhttp3" />
+
+                    <TextView
+                        style="@style/tx_me"
+                        android:text="retrofit2" />
+
+                    <TextView
+                        style="@style/tx_me"
+                        android:text="Koin" />
+
+                    <TextView
+                        style="@style/tx_me"
+                        android:text="coil" />
+
+                    <TextView
+                        style="@style/tx_me"
+                        android:text="flexbox" />
+
+                    <TextView
+                        style="@style/tx_me"
+                        android:text="androidx.navigation" />
+
+                    <TextView
+                        style="@style/tx_me"
+                        android:text="kotlinx-coroutines" />
+
+
+                    <TextView
+                        style="@style/tx_me"
+                        android:text="bannerviewpager" />
+
+                    <TextView
+                        style="@style/tx_me"
+                        android:text="roundedimageview" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
