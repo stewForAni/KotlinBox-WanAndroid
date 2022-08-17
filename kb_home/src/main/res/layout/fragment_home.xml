@@ -6,24 +6,28 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/blacke"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.zhpan.bannerview.BannerViewPager
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home"
+        <com.stew.kb_home.widget.NSParentLayout2
+            android:id="@+id/ns2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            android:background="@color/blacke">
 
-    </LinearLayout>
+            <com.zhpan.bannerview.BannerViewPager
+                android:id="@+id/top_view"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.stew.kb_home.widget.NSParentLayout2>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

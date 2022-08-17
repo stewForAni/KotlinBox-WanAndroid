@@ -75,5 +75,8 @@ dependencies {
     //flex
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
+    //swiperefreshlayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
 
 }

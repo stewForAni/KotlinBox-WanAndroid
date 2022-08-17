@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_home.R
 import com.stew.kb_home.adapter.BannerAdapter
@@ -34,7 +35,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
     override fun observe() {
 
         homeViewModel.bannerList.observe(this, {
-            mBind.banner.refreshData(it)
+            mBind.topView.refreshData(it)
         })
 
         homeViewModel.articleList.observe(this, {
@@ -51,7 +52,13 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
     }
 
     override fun init() {
-        mBind.banner.apply {
+
+        mBind.srl.setOnRefreshListener {
+            Log.d(TAG, "setOnRefreshListener: ")
+            mBind.srl.isRefreshing = false
+        }
+
+        mBind.topView.apply {
             setAdapter(BannerAdapter())
             setLifecycleRegistry(lifecycle)
             setScrollDuration(600)
@@ -64,11 +71,11 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         }.create()
 
         lm = LinearLayoutManager(activity)
-        mBind.rvHome.layoutManager = lm
+        mBind.bottomView.layoutManager = lm
         homeRVAdapter = HomeRVAdapter()
-        mBind.rvHome.adapter = homeRVAdapter
+        mBind.bottomView.adapter = homeRVAdapter
 
-        mBind.rvHome.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        mBind.bottomView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE &&
                     (lm.findLastVisibleItemPosition() + 1 == homeRVAdapter.itemCount &&
