@@ -1,5 +1,6 @@
 package com.stew.kb_home.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,18 +8,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.stew.kb_common.util.Constants
 import com.stew.kb_home.R
 import com.stew.kb_home.bean.a
+import java.util.*
 
 /**
  * Created by stew on 8/3/22.
  * mail: stewforani@gmail.com
  */
-class HomeRVAdapter :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeRVAdapter(var listener: HomeItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
+    private var lastClickTime: Long = 0
     private var diff: AsyncListDiffer<a>
-
     private val NORMAL: Int = 0
     private val FOOT: Int = 1
 
@@ -39,7 +42,7 @@ class HomeRVAdapter :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == (itemCount - 1)) {
+        return if (position == itemCount - 1) {
             FOOT
         } else {
             NORMAL
@@ -47,10 +50,8 @@ class HomeRVAdapter :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-        if (getItemViewType(position) == FOOT) {
-
-        } else {
+        Log.d("HomeRVAdapter", "onBindViewHolder: position = $position")
+        if (getItemViewType(position) == NORMAL) {
             val data = diff.currentList[position]
             (holder as MyViewHolder).title.text = data.title
             holder.time.text = data.niceDate
@@ -58,13 +59,13 @@ class HomeRVAdapter :
             holder.tag1.visibility = if (data.fresh) View.VISIBLE else View.GONE
             holder.tag2.visibility = if (data.superChapterId == 408) View.VISIBLE else View.GONE
             holder.name.text = if (data.author.isEmpty()) data.shareUser else data.author
+            holder.itemView.tag = position
+            holder.itemView.setOnClickListener(this)
         }
-
-
     }
 
     override fun getItemCount(): Int {
-        return diff.currentList.size
+        return if (diff.currentList.size == 0) 0 else diff.currentList.size + 1
     }
 
     fun setData(list: List<a>) {
@@ -94,7 +95,16 @@ class HomeRVAdapter :
             oldItem: a,
             newItem: a
         ): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.title == newItem.title && oldItem.niceDate == newItem.niceDate
+        }
+    }
+
+
+    override fun onClick(v: View?) {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastClickTime > Constants.MIN_CLICK_DELAY_TIME && v != null) {
+            lastClickTime = currentTime
+            listener.onClick(v.tag as Int)
         }
     }
 }

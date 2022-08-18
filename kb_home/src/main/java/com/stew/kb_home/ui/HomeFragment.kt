@@ -5,9 +5,12 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
+import com.stew.kb_common.util.Constants
 import com.stew.kb_home.R
 import com.stew.kb_home.adapter.BannerAdapter
+import com.stew.kb_home.adapter.HomeItemClickListener
 import com.stew.kb_home.adapter.HomeRVAdapter
 import com.stew.kb_home.bean.Article
 import com.stew.kb_home.bean.a
@@ -40,22 +43,28 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
         homeViewModel.articleList.observe(this, {
             //AsyncListDiffer需要一个新数据，不然添加无效
-            val newList : MutableList<a> = arrayListOf()
 
+            val newList: MutableList<a> = arrayListOf()
             isLoadMore = false
             list.addAll(it)
             newList.addAll(list)
-
+            Log.d(TAG, "observe: " + newList.size)
             homeRVAdapter.setData(newList)
+
+            if (mBind.srl.isRefreshing) {
+                mBind.srl.isRefreshing = false
+            }
         })
 
     }
 
     override fun init() {
-
+        mBind.srl.setColorSchemeResources(R.color.theme_color)
         mBind.srl.setOnRefreshListener {
-            Log.d(TAG, "setOnRefreshListener: ")
-            mBind.srl.isRefreshing = false
+            isLoadMore = false
+            list.clear()
+            currentPage = 0
+            homeViewModel.getArticle(currentPage)
         }
 
         mBind.topView.apply {
@@ -63,27 +72,39 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             setLifecycleRegistry(lifecycle)
             setScrollDuration(600)
             setInterval(5000)
+            setAutoPlay(false)
             //setPageStyle(PageStyle.MULTI_PAGE_SCALE)
             //setRevealWidth(80)
             //setPageMargin(20)
             //setIndicatorVisibility(View.INVISIBLE)
-            setAutoPlay(false)
         }.create()
 
         lm = LinearLayoutManager(activity)
         mBind.bottomView.layoutManager = lm
-        homeRVAdapter = HomeRVAdapter()
+
+        homeRVAdapter = HomeRVAdapter {
+            Log.d(TAG, "position: $it")
+            val data = list[it]
+            //跳转到webView 文章详情
+            ARouter.getInstance()
+                .build(Constants.PATH_WEB)
+                .withString(Constants.WEB_LINK, data.link)
+                .withString(Constants.WEB_TITLE, data.title)
+                .navigation()
+        }
+
         mBind.bottomView.adapter = homeRVAdapter
 
         mBind.bottomView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE &&
-                    (lm.findLastVisibleItemPosition() + 1 == homeRVAdapter.itemCount &&
-                            !isLoadMore)
-                ) {
+                    (lm.findLastVisibleItemPosition() + 1) == homeRVAdapter.itemCount && !isLoadMore) {
                     Log.d(TAG, "onScrollStateChanged: last-----")
                     isLoadMore = true
                     currentPage++
+
+                    list[9].niceDate="123"
+
                     homeViewModel.getArticle(currentPage)
                 }
             }

@@ -1,6 +1,7 @@
 package com.stew.kotlinbox
 
 import android.app.Application
+import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.di.homeModule
 import com.stew.kb_navigation.di.naviModule
@@ -21,6 +22,15 @@ class MyApp : Application() {
         super.onCreate()
         ToastUtil.init(this)
         initKoin()
+        initARouter()
+    }
+
+    private fun initARouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
     }
 
     private fun initKoin() {

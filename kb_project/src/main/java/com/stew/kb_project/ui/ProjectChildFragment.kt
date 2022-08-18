@@ -71,7 +71,9 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
 
         lm = LinearLayoutManager(activity)
         mBind.rvPro.layoutManager = lm
-        proRVAdapter = ProRVAdapter()
+        proRVAdapter = ProRVAdapter{
+            Log.d(TAG, "init: $it")
+        }
         mBind.rvPro.adapter = proRVAdapter
 
         mBind.rvPro.addOnScrollListener(object : RecyclerView.OnScrollListener() {

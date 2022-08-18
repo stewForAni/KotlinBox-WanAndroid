@@ -9,14 +9,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.makeramen.roundedimageview.RoundedImageView
+import com.stew.kb_common.util.Constants
 import com.stew.kb_project.R
 import com.stew.kb_project.bean.p
-import java.lang.StringBuilder
 
 
-class ProRVAdapter :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ProRVAdapter(var listener: ProItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
+    private var lastClickTime: Long = 0
     private var diff: AsyncListDiffer<p>
     private val NORMAL: Int = 0
     private val FOOT: Int = 1
@@ -54,12 +55,14 @@ class ProRVAdapter :
             holder.title.text = data.title
             holder.name.text = data.author
             holder.time.text = data.niceDate
+            holder.itemView.tag = position
+            holder.itemView.setOnClickListener(this)
         }
 
     }
 
     override fun getItemCount(): Int {
-        return diff.currentList.size
+        return if (diff.currentList.size == 0) 0 else diff.currentList.size + 1
     }
 
     fun setData(list: List<p>) {
@@ -89,6 +92,14 @@ class ProRVAdapter :
             newItem: p
         ): Boolean {
             return oldItem.title == newItem.title
+        }
+    }
+
+    override fun onClick(v: View?) {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastClickTime > Constants.MIN_CLICK_DELAY_TIME && v != null) {
+            lastClickTime = currentTime
+            listener.onClick(v.tag as Int)
         }
     }
 }

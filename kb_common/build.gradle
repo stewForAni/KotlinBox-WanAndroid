@@ -1,6 +1,15 @@
 apply plugin: 'com.android.library'
 apply from: '../dependencies.gradle'
 
+android {
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+        }
+    }
+}
+
+
 dependencies {
     //oKHttp
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
