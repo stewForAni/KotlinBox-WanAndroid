@@ -1,5 +1,7 @@
 package com.stew.kb_home.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,9 +85,9 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         mBind.bottomView.layoutManager = lm
 
         homeRVAdapter = HomeRVAdapter {
-            Log.d(TAG, "position: $it")
             val data = list[it]
-            //跳转到webView 文章详情
+            Log.d(TAG, "t: " + data.title)
+            Log.d(TAG, "l: " + data.link)
             ARouter.getInstance()
                 .build(Constants.PATH_WEB)
                 .withString(Constants.WEB_LINK, data.link)
@@ -98,13 +100,11 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         mBind.bottomView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE &&
-                    (lm.findLastVisibleItemPosition() + 1) == homeRVAdapter.itemCount && !isLoadMore) {
+                    (lm.findLastVisibleItemPosition() + 1) == homeRVAdapter.itemCount && !isLoadMore
+                ) {
                     Log.d(TAG, "onScrollStateChanged: last-----")
                     isLoadMore = true
                     currentPage++
-
-                    list[9].niceDate="123"
-
                     homeViewModel.getArticle(currentPage)
                 }
             }
