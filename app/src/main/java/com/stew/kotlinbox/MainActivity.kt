@@ -21,6 +21,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun init() {
 
+        mBind.imgDraw.setOnClickListener {
+            mBind.dl.open()
+        }
+
         mBind.bnv.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.f1 -> {

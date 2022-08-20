@@ -44,14 +44,18 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         })
 
         homeViewModel.articleList.observe(this, {
-            //AsyncListDiffer需要一个新数据，不然添加无效
-
-            val newList: MutableList<a> = arrayListOf()
             isLoadMore = false
             list.addAll(it)
-            newList.addAll(list)
-            Log.d(TAG, "observe: " + newList.size)
-            homeRVAdapter.setData(newList)
+            Log.d(TAG, "observe: " + list.size)
+
+            if (currentPage == 0) {
+                homeRVAdapter.setData(null)
+                homeRVAdapter.setData(list)
+                lm.scrollToPosition(0)
+            } else {
+                list.addAll(list)
+                homeRVAdapter.setData(list)
+            }
 
             if (mBind.srl.isRefreshing) {
                 mBind.srl.isRefreshing = false

@@ -65,11 +65,12 @@ class HomeRVAdapter(var listener: HomeItemClickListener) :
     }
 
     override fun getItemCount(): Int {
+        //AsyncListDiffer需要一个新数据，不然添加无效
         return if (diff.currentList.size == 0) 0 else diff.currentList.size + 1
     }
 
-    fun setData(list: List<a>) {
-        diff.submitList(list)
+    fun setData(list: List<a>?) {
+        diff.submitList(if (list != null) ArrayList(list) else null)
     }
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
+import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -45,7 +46,7 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
 
 
 
-        web = WebView(this)
+        web = WebView(applicationContext)
         mBind.webContainer.addView(web)
 
         web.settings.javaScriptEnabled = true
@@ -66,29 +67,19 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
 
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 Log.d(TAG, "shouldOverrideUrlLoading: =====")
-                return super.shouldOverrideUrlLoading(view, url)
+                return true
             }
 
             override fun shouldOverrideUrlLoading(
                 view: WebView?,
                 request: WebResourceRequest?
             ): Boolean {
-//                if (l.equals(request?.url)) {
-//                    Log.d(TAG, "shouldOverrideUrlLoading: 0")
-//                    if (request?.url.toString().startsWith("https://juejin")) {
-//                        Log.d(TAG, "shouldOverrideUrlLoading: 1")
-//                        startActivity(
-//                            Intent(
-//                                Intent.ACTION_VIEW,
-//                                Uri.parse(request?.url.toString())
-//                            )
-//                        )
-//                        return true
-//                    }
-//                    Log.d(TAG, "shouldOverrideUrlLoading: 2")
-//                    return false
-//                }
-                Log.d(TAG, "shouldOverrideUrlLoading: 3")
+                if (!l.equals(request?.url)) {
+                    startActivity(
+                        Intent(Intent.ACTION_VIEW, Uri.parse(request?.url.toString()))
+                    )
+                    return true
+                }
                 return false
             }
         }
@@ -96,6 +87,10 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
         web.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 Log.d(TAG, "onProgressChanged: $newProgress")
+                mBind.pb.progress = newProgress
+                if (newProgress == 100) {
+                    mBind.pb.visibility = View.GONE
+                }
             }
         }
 
