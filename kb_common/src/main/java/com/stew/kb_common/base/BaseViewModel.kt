@@ -30,7 +30,7 @@ open class BaseViewModel : ViewModel() {
     }
 
     private fun onError(e: Exception) {
-
+        Log.d("onError", "onError: $e")
     }
 }
 

@@ -66,7 +66,7 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
             }
 
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                Log.d(TAG, "shouldOverrideUrlLoading: =====")
+                Log.d(TAG, "shouldOverrideUrlLoading: =====1")
                 return true
             }
 
@@ -74,7 +74,9 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
                 view: WebView?,
                 request: WebResourceRequest?
             ): Boolean {
+                Log.d(TAG, "shouldOverrideUrlLoading: =====2")
                 if (!l.equals(request?.url)) {
+                    Log.d(TAG, "shouldOverrideUrlLoading: =====3")
                     startActivity(
                         Intent(Intent.ACTION_VIEW, Uri.parse(request?.url.toString()))
                     )

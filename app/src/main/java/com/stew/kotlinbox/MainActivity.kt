@@ -44,7 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
                 R.id.f4 -> {
                     switchFragment(3)
-                    mBind.fName = "我的"
+                    mBind.fName = "收藏"
                     return@setOnNavigationItemSelectedListener true
                 }
             }

@@ -89,4 +89,8 @@ dependencies {
     implementation "com.alibaba:arouter-api:1.5.0"
     kapt "com.alibaba:arouter-compiler:1.2.2"
 
+    //mmkv
+    implementation 'com.tencent:mmkv:1.2.10'
+
+
 }

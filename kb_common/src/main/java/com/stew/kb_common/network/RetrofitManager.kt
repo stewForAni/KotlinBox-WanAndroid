@@ -15,7 +15,7 @@ object RetrofitManager {
 
     private const val BASE_URL = "https://www.wanandroid.com/"
 
-    private lateinit var retrofit: Retrofit
+    private var retrofit: Retrofit
 
     init {
 
@@ -30,6 +30,7 @@ object RetrofitManager {
             .writeTimeout(10, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .followRedirects(false)
+            .cookieJar(MyCookieJar())
             .addInterceptor(logInterceptor)
             .build()
 

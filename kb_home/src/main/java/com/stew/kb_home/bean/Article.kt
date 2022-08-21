@@ -19,6 +19,7 @@ data class Article(
         val title: String,
         val superChapterId: Int,
         val superChapterName: String,
+        var collect: Boolean
     )
 }
 

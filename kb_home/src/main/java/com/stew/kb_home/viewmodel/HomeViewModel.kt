@@ -1,6 +1,5 @@
 package com.stew.kb_home.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_home.bean.Article
@@ -15,6 +14,7 @@ class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
 
     var bannerList = MutableLiveData<List<Banner>>()
     var articleList = MutableLiveData<List<Article.ArticleDetail>>()
+    var collectData = MutableLiveData<Boolean>()
 
     fun getBanner() {
         launch(
@@ -28,4 +28,9 @@ class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
         )
     }
 
+    fun collect(id: Int) {
+        launch(
+            block = { collectData.value = repo.collect(id).errorCode == 0 }
+        )
+    }
 }

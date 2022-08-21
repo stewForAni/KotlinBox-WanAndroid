@@ -1,3 +1,4 @@
+include ':kb_user'
 include ':kb_me'
 include ':kb_navigation'
 include ':kb_project'

@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -17,7 +18,7 @@ import java.util.*
  * Created by stew on 8/3/22.
  * mail: stewforani@gmail.com
  */
-class HomeRVAdapter(var listener: HomeItemClickListener) :
+class HomeRVAdapter(var listener:HomeItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
     private var lastClickTime: Long = 0
@@ -59,8 +60,12 @@ class HomeRVAdapter(var listener: HomeItemClickListener) :
             holder.tag1.visibility = if (data.fresh) View.VISIBLE else View.GONE
             holder.tag2.visibility = if (data.superChapterId == 408) View.VISIBLE else View.GONE
             holder.name.text = if (data.author.isEmpty()) data.shareUser else data.author
+
             holder.itemView.tag = position
             holder.itemView.setOnClickListener(this)
+
+            holder.collect.tag = position
+            holder.collect.setOnClickListener(this)
         }
     }
 
@@ -80,6 +85,7 @@ class HomeRVAdapter(var listener: HomeItemClickListener) :
         var type: TextView = item.findViewById(R.id.type)
         var tag1: TextView = item.findViewById(R.id.tag1)
         var tag2: TextView = item.findViewById(R.id.tag2)
+        var collect: ImageView = item.findViewById(R.id.img_collect)
     }
 
     class MyFootHolder(item: View) : RecyclerView.ViewHolder(item)
@@ -105,7 +111,13 @@ class HomeRVAdapter(var listener: HomeItemClickListener) :
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastClickTime > Constants.MIN_CLICK_DELAY_TIME && v != null) {
             lastClickTime = currentTime
-            listener.onClick(v.tag as Int)
+
+            if(v.id == R.id.img_collect){
+                listener.onCollectClick(v.tag as Int)
+            }else{
+                listener.onItemClick(v.tag as Int)
+            }
+
         }
     }
 }

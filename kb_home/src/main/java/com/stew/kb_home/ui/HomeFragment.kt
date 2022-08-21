@@ -1,6 +1,5 @@
 package com.stew.kb_home.ui
 
-import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.view.View
@@ -10,6 +9,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_common.util.Constants
+import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.R
 import com.stew.kb_home.adapter.BannerAdapter
 import com.stew.kb_home.adapter.HomeItemClickListener
@@ -33,6 +33,8 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
     var isLoadMore = false
     var list: MutableList<Article.ArticleDetail> = arrayListOf()
 
+    var collectPosition: Int = 0
+
     override fun getLayoutID(): Int {
         return R.layout.fragment_home
     }
@@ -53,12 +55,20 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
                 homeRVAdapter.setData(list)
                 lm.scrollToPosition(0)
             } else {
-                list.addAll(list)
                 homeRVAdapter.setData(list)
             }
 
             if (mBind.srl.isRefreshing) {
                 mBind.srl.isRefreshing = false
+            }
+        })
+
+        homeViewModel.collectData.observe(this, {
+            if (it) {
+                dismissLoadingDialog()
+                ToastUtil.showMsg("收藏成功！")
+                list[collectPosition].collect = true
+                homeRVAdapter.notifyItemChanged(collectPosition)
             }
         })
 
@@ -88,16 +98,23 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         lm = LinearLayoutManager(activity)
         mBind.bottomView.layoutManager = lm
 
-        homeRVAdapter = HomeRVAdapter {
-            val data = list[it]
-            Log.d(TAG, "t: " + data.title)
-            Log.d(TAG, "l: " + data.link)
-            ARouter.getInstance()
-                .build(Constants.PATH_WEB)
-                .withString(Constants.WEB_LINK, data.link)
-                .withString(Constants.WEB_TITLE, data.title)
-                .navigation()
-        }
+        homeRVAdapter = HomeRVAdapter(object : HomeItemClickListener {
+            override fun onItemClick(position: Int) {
+                val data = list[position]
+                ARouter.getInstance()
+                    .build(Constants.PATH_WEB)
+                    .withString(Constants.WEB_LINK, data.link)
+                    .withString(Constants.WEB_TITLE, data.title)
+                    .navigation()
+            }
+
+            override fun onCollectClick(position: Int) {
+                showLoadingDialog()
+                collectPosition = position
+                homeViewModel.collect(list[position].id)
+            }
+
+        })
 
         mBind.bottomView.adapter = homeRVAdapter
 

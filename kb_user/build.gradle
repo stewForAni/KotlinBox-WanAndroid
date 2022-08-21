@@ -1,0 +1,7 @@
+apply plugin: 'com.android.library'
+apply from: '../dependencies.gradle'
+
+
+dependencies {
+    implementation project(path: ':kb_common')
+}

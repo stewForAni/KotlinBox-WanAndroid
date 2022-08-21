@@ -11,9 +11,9 @@
     app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
         android:padding="16dp">
 
         <LinearLayout
@@ -45,6 +45,7 @@
             <TextView
                 android:id="@+id/name"
                 style="@style/style_home_rv_item"
+                android:maxLength="20"
                 android:text="@string/n_a"
                 android:textColor="@color/black6" />
         </LinearLayout>
@@ -73,7 +74,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll" />
 
-
         <TextView
             android:id="@+id/t3"
             style="@style/style_home_rv_item"
@@ -90,6 +90,15 @@
             android:text="@string/n_a"
             android:textColor="@color/black6"
             app:layout_constraintLeft_toRightOf="@id/t3"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <ImageView
+            android:id="@+id/img_collect"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_collect_1"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
