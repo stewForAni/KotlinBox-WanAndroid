@@ -2,6 +2,7 @@ package com.stew.kb_user.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_user.bean.LoginBean
 import com.stew.kb_user.repo.LoginRepo
 
 /**
@@ -9,12 +10,13 @@ import com.stew.kb_user.repo.LoginRepo
  * mail: stewforani@gmail.com
  */
 class LoginViewModel(private val repo: LoginRepo) : BaseViewModel() {
-    var loginData = MutableLiveData<Boolean>()
+
+    var loginData = MutableLiveData<LoginBean>()
 
     fun login(username: String, password: String) {
         launch(
             block = {
-                loginData.value = repo.login(username, password).errorCode == 0
+                repo.login(username, password,loginData)
             }
         )
     }

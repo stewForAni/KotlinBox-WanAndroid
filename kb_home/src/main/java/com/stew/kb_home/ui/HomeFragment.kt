@@ -42,13 +42,14 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
     override fun observe() {
 
         homeViewModel.bannerList.observe(this, {
+            Log.d(TAG, "observe bannerList: " + it.size)
             mBind.topView.refreshData(it)
         })
 
-        homeViewModel.articleList.observe(this, {
+        homeViewModel.article.observe(this, {
             isLoadMore = false
-            list.addAll(it)
-            Log.d(TAG, "observe: " + list.size)
+            list.addAll(it.datas)
+            Log.d(TAG, "observe articleList: " + list.size)
 
             if (currentPage == 0) {
                 homeRVAdapter.setData(null)
@@ -64,12 +65,12 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         })
 
         homeViewModel.collectData.observe(this, {
-            if (it) {
-                dismissLoadingDialog()
-                ToastUtil.showMsg("收藏成功！")
-                list[collectPosition].collect = true
-                homeRVAdapter.notifyItemChanged(collectPosition)
-            }
+//            if (it) {
+//                dismissLoadingDialog()
+//                ToastUtil.showMsg("收藏成功！")
+//                list[collectPosition].collect = true
+//                homeRVAdapter.notifyItemChanged(collectPosition)
+//            }
         })
 
     }

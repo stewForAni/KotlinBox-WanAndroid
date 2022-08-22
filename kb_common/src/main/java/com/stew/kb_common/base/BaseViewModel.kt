@@ -10,13 +10,12 @@ import kotlinx.coroutines.launch
  * mail: stewforani@gmail.com
  */
 
-typealias BLOCK = suspend () -> Unit
-typealias ERROR = suspend (Exception) -> Unit
+typealias vmBLOCK = suspend () -> Unit
 
 open class BaseViewModel : ViewModel() {
     //fun 默认public，这里使用protected
     protected fun launch(
-        block: BLOCK
+        block: vmBLOCK
     ) {
         //使用viewModelScope需要添加依赖androidx.navigation:navigation-fragment-ktx
         //这里不需要指定viewModelScope.launch(Dispatchers.IO)，因为retrofit自身会在子线程进行网络请求

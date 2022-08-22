@@ -1,7 +1,11 @@
 package com.stew.kotlinbox
 
+import android.util.Log
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.stew.kb_common.base.BaseActivity
+import com.stew.kb_common.util.Constants
+import com.stew.kb_common.util.KVUtil
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.ui.HomeFragment
 import com.stew.kb_me.ui.MeFragment
@@ -83,6 +87,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+        findViewById<TextView>(R.id.tx_name).text = KVUtil.getString(Constants.USER_NAME,"Null")
     }
 
 }
