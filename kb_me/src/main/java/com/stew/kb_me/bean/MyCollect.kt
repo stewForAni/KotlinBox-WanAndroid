@@ -5,11 +5,13 @@ package com.stew.kb_me.bean
  * mail: stewforani@gmail.com
  */
 typealias c = MyCollect.MyCollectDetail
+
 data class MyCollect(
     val datas: List<MyCollectDetail>
 ) {
     data class MyCollectDetail(
         val author: String,
+        val chapterName: String,
         val niceDate: String,
         val title: String,
         val link: String,

@@ -23,26 +23,42 @@ class ProRVAdapter(var listener: ProItemClickListener) :
     private var diff: AsyncListDiffer<p>
     private val NORMAL: Int = 0
     private val FOOT: Int = 1
+    private val LAST: Int = 2
+    var isLastPage = false
 
     init {
         diff = AsyncListDiffer(this, MyCallback())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == NORMAL) {
-            MyViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_pro_rv, parent, false)
-            )
-        } else {
-            MyFootHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.foot_pro_rv, parent, false)
-            )
+        return when (viewType) {
+            NORMAL -> {
+                MyViewHolder(
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_pro_rv, parent, false)
+                )
+            }
+            FOOT -> {
+                MyFootHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.foot_rv, parent, false)
+                )
+            }
+            else -> {
+                MyLastHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.last_rv, parent, false)
+                )
+            }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == (itemCount - 1)) {
-            FOOT
+        return if (position == itemCount - 1) {
+            if (isLastPage) {
+                LAST
+            } else {
+                FOOT
+            }
         } else {
             NORMAL
         }
@@ -95,6 +111,8 @@ class ProRVAdapter(var listener: ProItemClickListener) :
     }
 
     class MyFootHolder(item: View) : RecyclerView.ViewHolder(item)
+
+    class MyLastHolder(item: View) : RecyclerView.ViewHolder(item)
 
     class MyCallback : DiffUtil.ItemCallback<p>() {
         override fun areItemsTheSame(

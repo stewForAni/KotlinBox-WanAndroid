@@ -44,6 +44,10 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             isLoadMore = false
             list.addAll(it.datas)
 
+            if (it.datas.size < 10) {
+                homeRVAdapter.isLastPage = true
+            }
+
             Log.d(TAG, "observe articleList: " + list.size)
 
             if (currentPage == 0) {
@@ -75,13 +79,6 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
     }
 
     override fun init() {
-        mBind.srlHome.setColorSchemeResources(R.color.theme_color)
-        mBind.srlHome.setOnRefreshListener {
-            isLoadMore = false
-            list.clear()
-            currentPage = 0
-            homeViewModel.getArticle(currentPage)
-        }
 
         mBind.topView.apply {
             setAdapter(BannerAdapter())
@@ -121,7 +118,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         mBind.bottomView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE &&
-                    (lm.findLastVisibleItemPosition() + 1) == homeRVAdapter.itemCount && !isLoadMore
+                    (lm.findLastVisibleItemPosition() + 1) == homeRVAdapter.itemCount && !isLoadMore && !homeRVAdapter.isLastPage
                 ) {
                     Log.d(TAG, "onScrollStateChanged: last-----")
                     isLoadMore = true
@@ -130,6 +127,16 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
                 }
             }
         })
+
+
+        mBind.srlHome.setColorSchemeResources(R.color.theme_color)
+        mBind.srlHome.setOnRefreshListener {
+            isLoadMore = false
+            homeRVAdapter.isLastPage = false
+            list.clear()
+            currentPage = 0
+            homeViewModel.getArticle(currentPage)
+        }
 
         homeViewModel.getBanner()
         homeViewModel.getArticle(currentPage)

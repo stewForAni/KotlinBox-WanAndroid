@@ -11,7 +11,7 @@ import com.stew.kb_me.repo.MeRepo
  */
 class MeViewModel(private val repo: MeRepo) : BaseViewModel() {
 
-    private val collectList = MutableLiveData<MyCollect>()
+    val collectList = MutableLiveData<MyCollect>()
 
     fun getCollectList(currentPage: Int) = launch { repo.getCollectList(currentPage, collectList) }
 }

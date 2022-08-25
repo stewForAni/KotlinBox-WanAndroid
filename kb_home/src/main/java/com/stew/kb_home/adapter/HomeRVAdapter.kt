@@ -24,26 +24,42 @@ class HomeRVAdapter(var listener: HomeItemClickListener) :
     private var diff: AsyncListDiffer<a>
     private val NORMAL: Int = 0
     private val FOOT: Int = 1
+    private val LAST: Int = 2
+    var isLastPage = false
 
     init {
         diff = AsyncListDiffer(this, MyCallback())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == NORMAL) {
-            MyViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_home_rv, parent, false)
-            )
-        } else {
-            MyFootHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.foot_home_rv, parent, false)
-            )
+        return when (viewType) {
+            NORMAL -> {
+                MyViewHolder(
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_home_rv, parent, false)
+                )
+            }
+            FOOT -> {
+                MyFootHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.foot_rv, parent, false)
+                )
+            }
+            else -> {
+                MyLastHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.last_rv, parent, false)
+                )
+            }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return if (position == itemCount - 1) {
-            FOOT
+            if (isLastPage) {
+                LAST
+            } else {
+                FOOT
+            }
         } else {
             NORMAL
         }
@@ -76,11 +92,11 @@ class HomeRVAdapter(var listener: HomeItemClickListener) :
     }
 
     override fun getItemCount(): Int {
-        //AsyncListDiffer需要一个新数据，不然添加无效
         return if (diff.currentList.size == 0) 0 else diff.currentList.size + 1
     }
 
     fun setData(list: List<a>?) {
+        //AsyncListDiffer需要一个新数据，不然添加无效
         diff.submitList(if (list != null) ArrayList(list) else null)
     }
 
@@ -95,6 +111,8 @@ class HomeRVAdapter(var listener: HomeItemClickListener) :
     }
 
     class MyFootHolder(item: View) : RecyclerView.ViewHolder(item)
+
+    class MyLastHolder(item: View) : RecyclerView.ViewHolder(item)
 
     class MyCallback : DiffUtil.ItemCallback<a>() {
         override fun areItemsTheSame(

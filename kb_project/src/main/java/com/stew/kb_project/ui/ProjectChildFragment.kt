@@ -59,6 +59,10 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
             isLoadMore = false
             list.addAll(it.datas)
 
+            if (it.datas.size < 10) {
+                proRVAdapter.isLastPage = true
+            }
+
             Log.d(TAG, "observe articleList: " + list.size)
 
             if (currentPage == 0) {
@@ -77,6 +81,7 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
 
 
         projectViewModel.collectData.observe(this, {
+            dismissLoadingDialog()
             if (list[collectPosition].collect) {
                 ToastUtil.showMsg("取消收藏！")
                 list[collectPosition].collect = false
@@ -109,8 +114,8 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
             }
 
             override fun onCollectClick(position: Int) {
+                showLoadingDialog()//暂时处理，应该设计到框架内
                 collectPosition = position
-
                 if (list[collectPosition].collect) {
                     projectViewModel.unCollect(list[collectPosition].id)
                 } else {
@@ -125,7 +130,7 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE &&
                     (lm.findLastVisibleItemPosition() + 1 == proRVAdapter.itemCount &&
-                            !isLoadMore)
+                            !isLoadMore && !proRVAdapter.isLastPage)
                 ) {
                     Log.d(TAG, "onScrollStateChanged: last-----")
                     isLoadMore = true
@@ -139,6 +144,7 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
         mBind.srlPro.setColorSchemeResources(R.color.theme_color)
         mBind.srlPro.setOnRefreshListener {
             isLoadMore = false
+            proRVAdapter.isLastPage = false
             list.clear()
             currentPage = 0
             lazyLoad()
