@@ -15,7 +15,8 @@ data class Project(
         val link: String,
         val desc: String,
         val niceDate: String,
-        val envelopePic:String,
+        val envelopePic: String,
         val title: String,
+        var collect: Boolean
     )
 }

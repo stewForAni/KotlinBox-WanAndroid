@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexboxLayout
+import com.stew.kb_common.util.Constants
 import com.stew.kb_navigation.R
 import com.stew.kb_navigation.bean.Navi
+import java.util.ArrayList
 
-class NaviRVAdapter :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NaviRVAdapter(private val listener: NaviItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
     private var diff: AsyncListDiffer<Navi>
 
@@ -30,10 +32,15 @@ class NaviRVAdapter :
         val data = diff.currentList[position]
         (holder as MyViewHolder).name.text = data.name
         holder.flex.removeAllViews()
-        for (item in data.articles){
-            val layout = LayoutInflater.from(holder.itemView.context).inflate(R.layout.item_flex, null, false)
+        for (i in data.articles.indices) {
+            val layout = LayoutInflater.from(holder.itemView.context)
+                .inflate(R.layout.item_flex, null, false)
             val t = layout.findViewById<TextView>(R.id.tx_flex)
-            t.text = item.title
+            t.text = data.articles[i].title
+
+            layout.tag = NaviItemEvent(position, i)
+            layout.setOnClickListener(this)
+
             holder.flex.addView(layout)
         }
     }
@@ -42,8 +49,8 @@ class NaviRVAdapter :
         return diff.currentList.size
     }
 
-    fun setData(list: List<Navi>) {
-        diff.submitList(list)
+    fun setData(list: List<Navi>?) {
+        diff.submitList(if (list != null) ArrayList(list) else null)
     }
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
@@ -64,6 +71,15 @@ class NaviRVAdapter :
             newItem: Navi
         ): Boolean {
             return oldItem.name == newItem.name
+        }
+    }
+
+    private var lastClickTime: Long = 0
+    override fun onClick(v: View?) {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastClickTime > Constants.MIN_CLICK_DELAY_TIME && v != null) {
+            lastClickTime = currentTime
+            listener.onClick(v.tag as NaviItemEvent)
         }
     }
 }

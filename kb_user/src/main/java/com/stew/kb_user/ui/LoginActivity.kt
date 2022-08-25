@@ -25,16 +25,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun init() {
         loginViewModel.loginData.observe(this, {
-            dismissLoadingDialog()
+            KVUtil.put(Constants.USER_NAME,it.username)
             ToastUtil.showMsg("登陆成功！")
             finish()
-            KVUtil.put(Constants.USER_ID,it.id)
-            KVUtil.put(Constants.USER_NAME,it.username)
         })
 
         mBind.txLogin.setOnClickListener {
             if (mBind.edit1.text.isNotEmpty() && mBind.edit2.text.isNotEmpty()) {
-                showLoadingDialog()
                 loginViewModel.login(mBind.edit1.text.toString(), mBind.edit2.text.toString())
             } else {
                 ToastUtil.showMsg("输入有误！")
@@ -42,7 +39,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         }
 
         mBind.imgBack.setOnClickListener { finish() }
-
 
     }
 

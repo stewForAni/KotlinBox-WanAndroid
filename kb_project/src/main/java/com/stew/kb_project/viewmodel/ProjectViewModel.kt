@@ -13,13 +13,26 @@ import com.stew.kb_project.repo.ProjectRepo
 class ProjectViewModel(private var repo: ProjectRepo) : BaseViewModel() {
 
     var proTypeList = MutableLiveData<List<ProjectType>>()
-    var proList = MutableLiveData<List<Project.ProjectDetail>>()
+    var proList = MutableLiveData<Project>()
+    var collectData = MutableLiveData<String>()
 
     fun getProTypeList() = launch(
-        block = { proTypeList.value = repo.getProTypeList().data }
+        block = { repo.getProTypeList(proTypeList) }
     )
 
     fun getProList(currentPage: Int, cid: Int) = launch(
-        block = { proList.value = repo.getProList(currentPage, cid).data?.datas }
+        block = { repo.getProList(currentPage, cid, proList) }
     )
+
+    fun collect(id: Int) {
+        launch(
+            block = { repo.collect(id, collectData) }
+        )
+    }
+
+    fun unCollect(id: Int) {
+        launch(
+            block = { repo.unCollect(id, collectData) }
+        )
+    }
 }

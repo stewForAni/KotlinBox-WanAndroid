@@ -6,8 +6,8 @@
 
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/srl"
+    <com.stew.kb_common.widget.MySwipeRefreshLayout
+        android:id="@+id/srl_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -29,5 +29,5 @@
                 android:layout_height="match_parent" />
 
         </com.stew.kb_home.widget.NSParentLayout2>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.stew.kb_common.widget.MySwipeRefreshLayout>
 </layout>

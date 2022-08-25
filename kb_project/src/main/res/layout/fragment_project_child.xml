@@ -9,9 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_pro"
+        <com.stew.kb_common.widget.MySwipeRefreshLayout
+            android:id="@+id/srl_pro"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_pro"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.stew.kb_common.widget.MySwipeRefreshLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

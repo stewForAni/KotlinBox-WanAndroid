@@ -1,11 +1,8 @@
 package com.stew.kb_home.ui
 
-import android.net.Uri
 import android.util.Log
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_common.util.Constants
@@ -15,10 +12,8 @@ import com.stew.kb_home.adapter.BannerAdapter
 import com.stew.kb_home.adapter.HomeItemClickListener
 import com.stew.kb_home.adapter.HomeRVAdapter
 import com.stew.kb_home.bean.Article
-import com.stew.kb_home.bean.a
 import com.stew.kb_home.databinding.FragmentHomeBinding
 import com.stew.kb_home.viewmodel.HomeViewModel
-import com.zhpan.bannerview.constants.PageStyle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -32,7 +27,6 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
     lateinit var lm: LinearLayoutManager
     var isLoadMore = false
     var list: MutableList<Article.ArticleDetail> = arrayListOf()
-
     var collectPosition: Int = 0
 
     override fun getLayoutID(): Int {
@@ -49,6 +43,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         homeViewModel.article.observe(this, {
             isLoadMore = false
             list.addAll(it.datas)
+
             Log.d(TAG, "observe articleList: " + list.size)
 
             if (currentPage == 0) {
@@ -59,25 +54,29 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
                 homeRVAdapter.setData(list)
             }
 
-            if (mBind.srl.isRefreshing) {
-                mBind.srl.isRefreshing = false
+            if (mBind.srlHome.isRefreshing) {
+                mBind.srlHome.isRefreshing = false
             }
+
         })
 
         homeViewModel.collectData.observe(this, {
-//            if (it) {
-//                dismissLoadingDialog()
-//                ToastUtil.showMsg("收藏成功！")
-//                list[collectPosition].collect = true
-//                homeRVAdapter.notifyItemChanged(collectPosition)
-//            }
+            dismissLoadingDialog()
+            if (list[collectPosition].collect) {
+                ToastUtil.showMsg("取消收藏！")
+                list[collectPosition].collect = false
+            } else {
+                ToastUtil.showMsg("收藏成功！")
+                list[collectPosition].collect = true
+            }
+            homeRVAdapter.notifyItemChanged(collectPosition)
         })
 
     }
 
     override fun init() {
-        mBind.srl.setColorSchemeResources(R.color.theme_color)
-        mBind.srl.setOnRefreshListener {
+        mBind.srlHome.setColorSchemeResources(R.color.theme_color)
+        mBind.srlHome.setOnRefreshListener {
             isLoadMore = false
             list.clear()
             currentPage = 0
@@ -90,10 +89,6 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             setScrollDuration(600)
             setInterval(5000)
             setAutoPlay(false)
-            //setPageStyle(PageStyle.MULTI_PAGE_SCALE)
-            //setRevealWidth(80)
-            //setPageMargin(20)
-            //setIndicatorVisibility(View.INVISIBLE)
         }.create()
 
         lm = LinearLayoutManager(activity)
@@ -110,9 +105,13 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             }
 
             override fun onCollectClick(position: Int) {
-                showLoadingDialog()
+                showLoadingDialog()//暂时处理，应该设计到框架内
                 collectPosition = position
-                homeViewModel.collect(list[position].id)
+                if (list[collectPosition].collect) {
+                    homeViewModel.unCollect(list[collectPosition].id)
+                } else {
+                    homeViewModel.collect(list[collectPosition].id)
+                }
             }
 
         })

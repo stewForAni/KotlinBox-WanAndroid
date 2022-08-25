@@ -18,10 +18,9 @@ import java.util.*
  * Created by stew on 8/3/22.
  * mail: stewforani@gmail.com
  */
-class HomeRVAdapter(var listener:HomeItemClickListener) :
+class HomeRVAdapter(var listener: HomeItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
-    private var lastClickTime: Long = 0
     private var diff: AsyncListDiffer<a>
     private val NORMAL: Int = 0
     private val FOOT: Int = 1
@@ -60,6 +59,13 @@ class HomeRVAdapter(var listener:HomeItemClickListener) :
             holder.tag1.visibility = if (data.fresh) View.VISIBLE else View.GONE
             holder.tag2.visibility = if (data.superChapterId == 408) View.VISIBLE else View.GONE
             holder.name.text = if (data.author.isEmpty()) data.shareUser else data.author
+
+            if (data.collect) {
+                holder.collect.setImageResource(R.drawable.icon_collect_2)
+            } else {
+                holder.collect.setImageResource(R.drawable.icon_collect_1)
+            }
+
 
             holder.itemView.tag = position
             holder.itemView.setOnClickListener(this)
@@ -106,15 +112,15 @@ class HomeRVAdapter(var listener:HomeItemClickListener) :
         }
     }
 
-
+    private var lastClickTime: Long = 0
     override fun onClick(v: View?) {
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastClickTime > Constants.MIN_CLICK_DELAY_TIME && v != null) {
             lastClickTime = currentTime
 
-            if(v.id == R.id.img_collect){
+            if (v.id == R.id.img_collect) {
                 listener.onCollectClick(v.tag as Int)
-            }else{
+            } else {
                 listener.onItemClick(v.tag as Int)
             }
 

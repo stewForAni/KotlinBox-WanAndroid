@@ -6,8 +6,11 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
+import com.stew.kb_common.util.Constants
 import com.stew.kb_navigation.R
+import com.stew.kb_navigation.adapter.NaviItemClickListener
 import com.stew.kb_navigation.adapter.NaviRVAdapter
 import com.stew.kb_navigation.bean.Navi
 import com.stew.kb_navigation.databinding.FragmentSysBinding
@@ -16,7 +19,7 @@ import com.stew.kb_navigation.databinding.FragmentSysBinding
  * Created by stew on 8/8/22.
  * mail: stewforani@gmail.com
  */
-class NaviFragment:BaseVMFragment<FragmentSysBinding>() {
+class NaviFragment : BaseVMFragment<FragmentSysBinding>() {
 
     private val txList = arrayListOf<View>()
     private var oldPosition = -1
@@ -44,7 +47,14 @@ class NaviFragment:BaseVMFragment<FragmentSysBinding>() {
     override fun init() {
         lm = LinearLayoutManager(activity)
         mBind.rvSys.layoutManager = lm
-        naviAdapter = NaviRVAdapter()
+        naviAdapter = NaviRVAdapter {
+            val data = myData[it.p1].articles[it.p2]
+            ARouter.getInstance()
+                .build(Constants.PATH_WEB)
+                .withString(Constants.WEB_LINK, data.link)
+                .withString(Constants.WEB_TITLE, data.title)
+                .navigation()
+        }
         mBind.rvSys.adapter = naviAdapter
         f.naviViewModel.getNavi()
     }

@@ -8,7 +8,7 @@ import com.stew.kb_common.util.Constants
 import com.stew.kb_common.util.KVUtil
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.ui.HomeFragment
-import com.stew.kb_me.ui.MeFragment
+import com.stew.kb_me.ui.MyCollectFragment
 import com.stew.kb_navigation.ui.MainFragment
 import com.stew.kb_project.ui.ProjectFragment
 import com.stew.kotlinbox.databinding.ActivityMainBinding
@@ -59,7 +59,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             HomeFragment(),
             ProjectFragment(),
             MainFragment(),
-            MeFragment()
+            MyCollectFragment()
         )
 
         switchFragment(0)
@@ -92,7 +92,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "onResume: ")
-        findViewById<TextView>(R.id.tx_name).text = KVUtil.getString(Constants.USER_NAME,"Null")
+
+        val name = KVUtil.getString(Constants.USER_NAME)
+        if (name != null) {
+            findViewById<TextView>(R.id.tx_info).text = name
+        }
+
     }
 
 }

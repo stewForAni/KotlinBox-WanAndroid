@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="如无账号，请先去WanAndroid官网注册"
+                android:text="若无账号，请前往WanAndroid官网注册"
                 android:textColor="@color/black6"
                 android:textSize="14sp" />
 

@@ -5,7 +5,7 @@ package com.stew.kb_common.network
  * mail: stewforani@gmail.com
  */
 class BaseResp<T> {
-    var errorCode: Int? = null
-    var errorMsg: String? = null
+    var errorCode: Int = -1
+    var errorMsg: String = ""
     var data: T? = null
 }

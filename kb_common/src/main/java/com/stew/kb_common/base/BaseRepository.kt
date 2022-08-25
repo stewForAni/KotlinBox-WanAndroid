@@ -24,19 +24,13 @@ open class BaseRepository {
         val result = block.invoke()
         when (result.errorCode) {
             SUCCESS -> {
-                Log.d("BaseRepository", "dealResp: success" + result.errorCode)
-                Log.d("BaseRepository", "dealResp: success" + result.errorMsg)
-                Log.d("BaseRepository", "dealResp: success" + result.data)
+                Log.d("BaseRepository", "success" + result.errorCode + "/" + result.errorMsg)
                 liveData.value = result.data
             }
             AUTH_INVALID -> {
-                Log.d("BaseRepository", "dealResp: auth" + result.errorCode)
-                Log.d("BaseRepository", "dealResp: auth" + result.errorMsg)
-                Log.d("BaseRepository", "dealResp: auth" + result.data)
+                Log.d("BaseRepository", "auth" + result.errorCode + "/" + result.errorMsg)
                 ToastUtil.showMsg("认证过期，请重新登录！")
-                ARouter.getInstance()
-                    .build(Constants.PATH_LOGIN)
-                    .navigation()
+                ARouter.getInstance().build(Constants.PATH_LOGIN).navigation()
             }
             else -> {
                 Log.d("BaseRepository", "dealResp: error")

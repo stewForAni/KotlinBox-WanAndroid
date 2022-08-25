@@ -1,5 +1,6 @@
 package com.stew.kb_common.util
 
+import android.os.Parcelable
 import com.tencent.mmkv.MMKV
 
 /**
@@ -8,7 +9,7 @@ import com.tencent.mmkv.MMKV
  */
 object KVUtil {
 
-    private var kv = MMKV.defaultMMKV()
+    var kv = MMKV.defaultMMKV()
 
     fun put(key: String, value: Any?) {
         when (value) {
@@ -34,5 +35,17 @@ object KVUtil {
     fun getString(key: String, defValue: String? = null) = kv.getString(key, defValue)
 
     fun remove(key: String) = kv.remove(key)
+
+
+    //------------------------------------------------------------------------
+
+
+    fun <T : Parcelable> putParcelable(key: String, t: T): Boolean {
+        return kv.encode(key, t)
+    }
+
+    inline fun <reified T : Parcelable> getParcelable(key: String): T? {
+        return kv.decodeParcelable(key, T::class.java)
+    }
 
 }

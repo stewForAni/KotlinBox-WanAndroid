@@ -4,6 +4,7 @@ import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.di.homeModule
+import com.stew.kb_me.di.meModule
 import com.stew.kb_navigation.di.naviModule
 import com.stew.kb_project.di.ProjectModule
 import com.stew.kb_user.di.userModule
@@ -18,7 +19,7 @@ import org.koin.core.context.GlobalContext.startKoin
  */
 class MyApp : Application() {
 
-    private val modules = mutableListOf(homeModule, ProjectModule, naviModule, userModule)
+    private val modules = mutableListOf(homeModule, ProjectModule, naviModule, meModule, userModule)
 
     override fun onCreate() {
         super.onCreate()
