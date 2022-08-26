@@ -1,5 +1,6 @@
 package com.stew.kotlinbox
 
+import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -68,14 +69,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun switchFragment(position: Int) {
 
-        val targetFragment = fragmentList.get(position)
-        val oldFragment = fragmentList.get(oldFragmentIndex)
+        val targetFragment = fragmentList[position]
+        val oldFragment = fragmentList[oldFragmentIndex]
         oldFragmentIndex = position
         val ft = supportFragmentManager.beginTransaction()
-        ft.hide(oldFragment)
+
+        if (oldFragment.isAdded) {
+            ft.hide(oldFragment)
+        }
+
         if (!targetFragment.isAdded) {
             ft.add(R.id.f_content, targetFragment)
         }
+
         ft.show(targetFragment).commitAllowingStateLoss()
     }
 
@@ -91,13 +97,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume: ")
-
         val name = KVUtil.getString(Constants.USER_NAME)
         if (name != null) {
             findViewById<TextView>(R.id.tx_info).text = name
         }
 
     }
+
 
 }
