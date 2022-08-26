@@ -117,7 +117,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
         mBind.bottomView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE &&
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && homeRVAdapter.itemCount != 0 &&
                     (lm.findLastVisibleItemPosition() + 1) == homeRVAdapter.itemCount && !isLoadMore && !homeRVAdapter.isLastPage
                 ) {
                     Log.d(TAG, "onScrollStateChanged: last-----")

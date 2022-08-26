@@ -128,7 +128,7 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
 
         mBind.rvPro.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE &&
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && proRVAdapter.itemCount != 0 &&
                     (lm.findLastVisibleItemPosition() + 1 == proRVAdapter.itemCount &&
                             !isLoadMore && !proRVAdapter.isLastPage)
                 ) {
