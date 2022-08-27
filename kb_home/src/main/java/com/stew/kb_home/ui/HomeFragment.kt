@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
+import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_common.util.Constants
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.R
@@ -31,6 +32,10 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
     override fun getLayoutID(): Int {
         return R.layout.fragment_home
+    }
+
+    override fun getViewModel(): BaseViewModel {
+        return homeViewModel
     }
 
     override fun observe() {
@@ -65,7 +70,6 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         })
 
         homeViewModel.collectData.observe(this, {
-            dismissLoadingDialog()
             if (list[collectPosition].collect) {
                 ToastUtil.showMsg("取消收藏！")
                 list[collectPosition].collect = false
@@ -102,7 +106,6 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             }
 
             override fun onCollectClick(position: Int) {
-                showLoadingDialog()//暂时处理，应该设计到框架内
                 collectPosition = position
                 if (list[collectPosition].collect) {
                     homeViewModel.unCollect(list[collectPosition].id)
@@ -135,6 +138,8 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             homeRVAdapter.isLastPage = false
             list.clear()
             currentPage = 0
+
+            homeViewModel.getBanner()
             homeViewModel.getArticle(currentPage)
         }
 

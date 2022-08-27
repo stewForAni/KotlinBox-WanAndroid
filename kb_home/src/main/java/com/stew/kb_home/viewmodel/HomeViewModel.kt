@@ -19,7 +19,7 @@ class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
 
     fun getBanner() = launch { repo.getBanner(bannerList) }
     fun getArticle(currentPage: Int) = launch { repo.getArticle(currentPage, article) }
-    fun collect(id: Int) = launch { repo.collect(id, collectData) }
+    fun collect(id: Int) = launch { repo.collect(id, collectData, loadState) }
     fun unCollect(id: Int) = launch { repo.unCollect(id, collectData) }
 
 }

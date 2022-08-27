@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.stew.kb_common.base.BaseVMFragment
+import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_project.R
 import com.stew.kb_project.adapter.ProVPAdapter
 import com.stew.kb_project.bean.ProjectType
@@ -23,6 +24,10 @@ class ProjectFragment : BaseVMFragment<FragmentProjectBinding>() {
 
     override fun getLayoutID(): Int {
         return R.layout.fragment_project
+    }
+
+    override fun getViewModel(): BaseViewModel {
+        return projectViewModel
     }
 
     override fun init() {

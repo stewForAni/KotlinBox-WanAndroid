@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
+import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_common.util.Constants
 import com.stew.kb_me.R
 import com.stew.kb_me.adapter.CollectRVAdapter
@@ -30,6 +31,10 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
         return R.layout.fragment_collect
     }
 
+    override fun getViewModel(): BaseViewModel {
+        return meViewModel
+    }
+
     override fun observe() {
         meViewModel.collectList.observe(this, {
             isLoadMore = false
@@ -49,9 +54,7 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
                 collectRVAdapter.setData(list)
             }
 
-            if (mBind.srlCollect.isRefreshing) {
-                mBind.srlCollect.isRefreshing = false
-            }
+            resetRefresh()
 
         })
     }
@@ -100,4 +103,11 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
     fun getCollectList() {
         meViewModel.getCollectList(currentPage)
     }
+
+    private fun resetRefresh() {
+        if (mBind.srlCollect.isRefreshing) {
+            mBind.srlCollect.isRefreshing = false
+        }
+    }
+
 }

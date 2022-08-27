@@ -20,9 +20,8 @@ class HomeRepo(private val api: HomeApi) : BaseRepository() {
         { api.getArticleList(currentPage, 10) }, data
     )
 
-    suspend fun collect(id: Int, data: MutableLiveData<String>) = dealResp(
-        { api.collect(id) }, data
-    )
+    suspend fun collect(id: Int, data: MutableLiveData<String>, load: MutableLiveData<Boolean>) =
+        dealResp({ api.collect(id) }, data, load)
 
     suspend fun unCollect(id: Int, data: MutableLiveData<String>) = dealResp(
         { api.unCollect(id) }, data

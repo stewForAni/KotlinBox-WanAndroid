@@ -1,6 +1,7 @@
 package com.stew.kb_common.base
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -13,6 +14,9 @@ import kotlinx.coroutines.launch
 typealias vmBLOCK = suspend () -> Unit
 
 open class BaseViewModel : ViewModel() {
+
+    val loadState = MutableLiveData<Boolean>()
+
     //fun 默认public，这里使用protected
     protected fun launch(
         block: vmBLOCK

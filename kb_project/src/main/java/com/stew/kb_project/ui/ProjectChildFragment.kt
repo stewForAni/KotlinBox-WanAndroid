@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
+import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_common.util.Constants
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_project.R
@@ -53,6 +54,10 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
         return R.layout.fragment_project_child
     }
 
+    override fun getViewModel(): BaseViewModel {
+        return projectViewModel
+    }
+
     override fun observe() {
         projectViewModel.proList.observe(this, {
 
@@ -81,7 +86,6 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
 
 
         projectViewModel.collectData.observe(this, {
-            dismissLoadingDialog()
             if (list[collectPosition].collect) {
                 ToastUtil.showMsg("取消收藏！")
                 list[collectPosition].collect = false
@@ -114,7 +118,6 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
             }
 
             override fun onCollectClick(position: Int) {
-                showLoadingDialog()//暂时处理，应该设计到框架内
                 collectPosition = position
                 if (list[collectPosition].collect) {
                     projectViewModel.unCollect(list[collectPosition].id)
