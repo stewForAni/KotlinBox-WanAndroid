@@ -1,9 +1,36 @@
-# Kotlin-WanAndroid
-MVVM+Kotlin+Jetpack+组件化
+### 🥑 WanAndroid（MVVM+Kotlin+Jetpack+组件化）
 
-<table align="center">
-  <tr><td>首页</td><td>项目</td><td>导航</td></tr>
-  <tr><td><img src="https://github.com/stewForAni/KotlinBox-WanAndroid/blob/main/github_imgs/w1.jpeg?raw=true"  height=480></td><td><img src="https://github.com/stewForAni/KotlinBox-WanAndroid/blob/main/github_imgs/w2.jpeg?raw=true"  height=480></td><td><img src="https://github.com/stewForAni/KotlinBox-WanAndroid/blob/main/github_imgs/w3.jpeg?raw=true"  height=480></td></tr>
-  <tr><td>登录</td><td>个人</td><td>收藏</td></tr>
-  <tr><td><img src="https://github.com/stewForAni/KotlinBox-WanAndroid/blob/main/github_imgs/w4.jpeg?raw=true"  height=480></td><td><img src="https://github.com/stewForAni/KotlinBox-WanAndroid/blob/main/github_imgs/w5.jpeg?raw=true"  height=480></td><td><img src="https://github.com/stewForAni/KotlinBox-WanAndroid/blob/main/github_imgs/w6.jpeg?raw=true"  height=480></td></tr>
-</table>
+| 首页 | 项目 | 导航 |
+| :--: | :--: | :--: |
+| <img src="/github_imgs/w1.jpeg" width="256"/> | <img src="/github_imgs/w2.jpeg" width="256"/> | <img src="/github_imgs/w3.jpeg" width="256"/> |
+
+| 登录 | 个人 | 收藏 |
+| :--: | :--: | :--: |
+| <img src="/github_imgs/w4.jpeg" width="256"/> | <img src="/github_imgs/w5.jpeg" width="256"/> | <img src="/github_imgs/w6.jpeg" width="256"/> |
+
+### 🍓 项目介绍
+
+| app module |  |  |  |
+| :--: | :--: | :--: | :--: |
+| kb_login  module | kb_home  module | kb_project  module | kb_navigation  module |
+
+### 🥝 感谢
+
+### 🍇 版本说明
+
+### 🍋 License
+```
+Copyright [2022] [stew]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
