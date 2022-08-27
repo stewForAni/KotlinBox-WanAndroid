@@ -10,9 +10,11 @@
 
 ### 🍓 项目介绍
 
-| app module |  |  |  |
-| :--: | :--: | :--: | :--: |
-| kb_login  module | kb_home  module | kb_project  module | kb_navigation  module |
+项目采用组件化，架构如下：
+| - | - | app module | - | - |
+| :--: | :--: | :--: | :--: | :--: |
+| 用户module<br>kb_user | 首页module<br>kb_home | 项目module<br>kb_project | 导航module<br>kb_navigation | 个人module<br>kb_me |
+| - | - | 公共module<br>kb_common | - | - |
 
 ### 🥝 感谢
 
