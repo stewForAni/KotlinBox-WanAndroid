@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_common.network.BaseStateObserver
 import com.stew.kb_common.util.Constants
 import com.stew.kb_navigation.R
 import com.stew.kb_navigation.adapter.NaviItemClickListener
@@ -33,19 +34,17 @@ class NaviFragment : BaseVMFragment<FragmentSysBinding>() {
         return R.layout.fragment_sys
     }
 
-    override fun getViewModel(): BaseViewModel {
-        return f.naviViewModel
-    }
-
     override fun observe() {
         f = parentFragment as MainFragment
-        f.naviViewModel.naviList.observe(this, {
-            for (i in 0..19) {
-                myData.add(it[i])
+        f.naviViewModel.naviList.observe(this, object : BaseStateObserver<List<Navi>>(null) {
+            override fun getRespDataSuccess(it: List<Navi>) {
+                for (i in 0..19) {
+                    myData.add(it[i])
+                }
+                addView(myData)
+                naviAdapter.setData(myData)
+                Log.d(TAG, "observe: update data")
             }
-            addView(myData)
-            naviAdapter.setData(myData)
-            Log.d(TAG, "observe: update data")
         })
     }
 

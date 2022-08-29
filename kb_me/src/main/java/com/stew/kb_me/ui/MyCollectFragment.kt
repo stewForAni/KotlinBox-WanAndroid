@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_common.network.BaseStateObserver
 import com.stew.kb_common.util.Constants
 import com.stew.kb_me.R
 import com.stew.kb_me.adapter.CollectRVAdapter
+import com.stew.kb_me.bean.MyCollect
 import com.stew.kb_me.bean.c
 import com.stew.kb_me.databinding.FragmentCollectBinding
 import com.stew.kb_me.viewmodel.MeViewModel
@@ -31,31 +33,28 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
         return R.layout.fragment_collect
     }
 
-    override fun getViewModel(): BaseViewModel {
-        return meViewModel
-    }
-
     override fun observe() {
-        meViewModel.collectList.observe(this, {
-            isLoadMore = false
-            list.addAll(it.datas)
+        meViewModel.collectList.observe(this, object : BaseStateObserver<MyCollect>(null) {
+            override fun getRespDataSuccess(it: MyCollect) {
+                isLoadMore = false
+                list.addAll(it.datas)
 
-            if (it.datas.size < 10) {
-                collectRVAdapter.isLastPage = true
+                if (it.datas.size < 10) {
+                    collectRVAdapter.isLastPage = true
+                }
+
+                Log.d(TAG, "observe collectList: " + list.size)
+
+                if (currentPage == 0) {
+                    collectRVAdapter.setData(null)
+                    collectRVAdapter.setData(list)
+                    lm.scrollToPosition(0)
+                } else {
+                    collectRVAdapter.setData(list)
+                }
+
+                resetRefresh()
             }
-
-            Log.d(TAG, "observe collectList: " + list.size)
-
-            if (currentPage == 0) {
-                collectRVAdapter.setData(null)
-                collectRVAdapter.setData(list)
-                lm.scrollToPosition(0)
-            } else {
-                collectRVAdapter.setData(list)
-            }
-
-            resetRefresh()
-
         })
     }
 

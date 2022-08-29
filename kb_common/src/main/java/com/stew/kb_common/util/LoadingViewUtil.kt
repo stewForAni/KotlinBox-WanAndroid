@@ -34,18 +34,21 @@ object LoadingViewUtil {
             b.setCancelable(isCancel)
             dialog = b.create()
 
-            if(dialog?.window==null){
+            if (dialog?.window == null) {
                 return
             }
 
             dialog?.window?.setBackgroundDrawable(ColorDrawable(0))
         }
 
-        dialog?.show()
+        if (dialog != null && !(dialog!!.isShowing)) {
+            dialog!!.show()
+        }
+
     }
 
     fun dismissLoadingDialog() {
-        if (dialog != null && dialog?.isShowing == true) {
+        if (dialog != null && dialog!!.isShowing) {
             dialog?.dismiss()
             dialog = null
         }

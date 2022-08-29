@@ -1,15 +1,14 @@
 package com.stew.kb_common.base
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.network.BaseResp
+import com.stew.kb_common.network.RespStateData
 import com.stew.kb_common.util.Constants
 import com.stew.kb_common.util.ToastUtil
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.UnknownHostException
-
 
 /**
  * Created by stew on 7/30/22.
@@ -17,44 +16,38 @@ import java.net.UnknownHostException
  */
 open class BaseRepository {
 
-    private val SUCCESS = 0
-    private val AUTH_INVALID = -1001
-
-
     suspend fun <T> dealResp(
         block: suspend () -> BaseResp<T>,
-        liveData: MutableLiveData<T>,
+        liveData: RespStateData<T>,
     ) {
-        this.dealResp(block, liveData, null)
-    }
 
-    suspend fun <T> dealResp(
-        block: suspend () -> BaseResp<T>,
-        liveData: MutableLiveData<T>,
-        load: MutableLiveData<Boolean>?
-    ) {
+        var result = BaseResp<T>()
+
+        result.responseState = BaseResp.ResponseState.REQUEST_START
+        liveData.value = result
 
         try {
 
-            if (load != null) { load.value = true }
-            val result = block.invoke()
-            if (load != null) { load.value = false }
+            //---------------------//
+            result = block.invoke()
+            //---------------------//
 
+            Log.d("BaseRepository", result.errorCode.toString() + "/" + result.errorMsg)
             when (result.errorCode) {
-                SUCCESS -> {
-                    Log.d("BaseRepository", "success" + result.errorCode + "/" + result.errorMsg)
-                    liveData.value = result.data
+                Constants.HTTP_SUCCESS -> {
+                    result.responseState = BaseResp.ResponseState.REQUEST_SUCCESS
                 }
-                AUTH_INVALID -> {
-                    Log.d("BaseRepository", "auth" + result.errorCode + "/" + result.errorMsg)
+                Constants.HTTP_AUTH_INVALID -> {
+                    result.responseState = BaseResp.ResponseState.REQUEST_FAILED
                     ToastUtil.showMsg("认证过期，请重新登录！")
                     ARouter.getInstance().build(Constants.PATH_LOGIN).navigation()
                 }
                 else -> {
-                    Log.d("BaseRepository", "dealResp: error")
+                    result.responseState = BaseResp.ResponseState.REQUEST_FAILED
                     ToastUtil.showMsg("code:" + result.errorCode.toString() + " / msg:" + result.errorMsg)
                 }
             }
+
         } catch (e: Exception) {
             Log.d("BaseRepository", "dealResp: Exception$e")
             when (e) {
@@ -68,8 +61,10 @@ open class BaseRepository {
                 else -> {
                     ToastUtil.showMsg("未知错误！")
                 }
-
             }
+            result.responseState = BaseResp.ResponseState.REQUEST_ERROR
+        } finally {
+            liveData.value = result
         }
     }
 

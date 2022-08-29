@@ -2,6 +2,7 @@ package com.stew.kb_project.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_common.network.RespStateData
 import com.stew.kb_project.bean.Project
 import com.stew.kb_project.bean.ProjectType
 import com.stew.kb_project.repo.ProjectRepo
@@ -12,9 +13,9 @@ import com.stew.kb_project.repo.ProjectRepo
  */
 class ProjectViewModel(private var repo: ProjectRepo) : BaseViewModel() {
 
-    var proTypeList = MutableLiveData<List<ProjectType>>()
-    var proList = MutableLiveData<Project>()
-    var collectData = MutableLiveData<String>()
+    var proTypeList = RespStateData<List<ProjectType>>()
+    var proList = RespStateData<Project>()
+    var collectData = RespStateData<String>()
 
     fun getProTypeList() = launch(
         block = { repo.getProTypeList(proTypeList) }

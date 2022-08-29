@@ -5,14 +5,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
-import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_common.network.BaseStateObserver
 import com.stew.kb_common.util.Constants
+import com.stew.kb_common.util.LoadingViewUtil
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.R
 import com.stew.kb_home.adapter.BannerAdapter
 import com.stew.kb_home.adapter.HomeItemClickListener
 import com.stew.kb_home.adapter.HomeRVAdapter
 import com.stew.kb_home.bean.Article
+import com.stew.kb_home.bean.Banner
 import com.stew.kb_home.databinding.FragmentHomeBinding
 import com.stew.kb_home.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,50 +36,63 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         return R.layout.fragment_home
     }
 
-    override fun getViewModel(): BaseViewModel {
-        return homeViewModel
-    }
-
     override fun observe() {
 
-        homeViewModel.bannerList.observe(this, {
-            Log.d(TAG, "observe bannerList: " + it.size)
-            mBind.topView.refreshData(it)
+        homeViewModel.bannerList.observe(this, object : BaseStateObserver<List<Banner>>(null) {
+            override fun getRespDataSuccess(it: List<Banner>) {
+                Log.d(TAG, "observe bannerList: " + it.size)
+                mBind.topView.refreshData(it)
+            }
         })
 
-        homeViewModel.article.observe(this, {
-            isLoadMore = false
-            list.addAll(it.datas)
+        homeViewModel.article.observe(this, object : BaseStateObserver<Article>(null) {
+            override fun getRespDataSuccess(it: Article) {
+                isLoadMore = false
+                list.addAll(it.datas)
 
-            if (it.datas.size < 10) {
-                homeRVAdapter.isLastPage = true
+                if (it.datas.size < 10) {
+                    homeRVAdapter.isLastPage = true
+                }
+
+                Log.d(TAG, "observe articleList: " + list.size)
+
+                if (currentPage == 0) {
+                    homeRVAdapter.setData(null)
+                    homeRVAdapter.setData(list)
+                    lm.scrollToPosition(0)
+                } else {
+                    homeRVAdapter.setData(list)
+                }
+
+                if (mBind.srlHome.isRefreshing) {
+                    mBind.srlHome.isRefreshing = false
+                }
             }
-
-            Log.d(TAG, "observe articleList: " + list.size)
-
-            if (currentPage == 0) {
-                homeRVAdapter.setData(null)
-                homeRVAdapter.setData(list)
-                lm.scrollToPosition(0)
-            } else {
-                homeRVAdapter.setData(list)
-            }
-
-            if (mBind.srlHome.isRefreshing) {
-                mBind.srlHome.isRefreshing = false
-            }
-
         })
 
-        homeViewModel.collectData.observe(this, {
-            if (list[collectPosition].collect) {
-                ToastUtil.showMsg("取消收藏！")
-                list[collectPosition].collect = false
-            } else {
-                ToastUtil.showMsg("收藏成功！")
-                list[collectPosition].collect = true
+        homeViewModel.collectData.observe(this, object : BaseStateObserver<String>(null) {
+            override fun getRespDataStart() {
+                super.getRespDataStart()
+                showLoadingDialog()
             }
-            homeRVAdapter.notifyItemChanged(collectPosition)
+
+            override fun getRespDataEnd() {
+                super.getRespDataEnd()
+                dismissLoadingDialog()
+            }
+
+            override fun getRespDataSuccess(it: String) {
+                dismissLoadingDialog()
+                if (list[collectPosition].collect) {
+                    ToastUtil.showMsg("取消收藏！")
+                    list[collectPosition].collect = false
+                } else {
+                    ToastUtil.showMsg("收藏成功！")
+                    list[collectPosition].collect = true
+                }
+                homeRVAdapter.notifyItemChanged(collectPosition)
+            }
+
         })
 
     }

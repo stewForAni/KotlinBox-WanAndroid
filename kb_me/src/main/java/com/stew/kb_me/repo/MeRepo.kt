@@ -2,6 +2,7 @@ package com.stew.kb_me.repo
 
 import androidx.lifecycle.MutableLiveData
 import com.stew.kb_common.base.BaseRepository
+import com.stew.kb_common.network.RespStateData
 import com.stew.kb_me.api.MeApi
 import com.stew.kb_me.bean.MyCollect
 
@@ -11,7 +12,7 @@ import com.stew.kb_me.bean.MyCollect
  */
 class MeRepo(private val api: MeApi) : BaseRepository() {
 
-    suspend fun getCollectList(currentPage: Int, data: MutableLiveData<MyCollect>) =
+    suspend fun getCollectList(currentPage: Int, data: RespStateData<MyCollect>) =
         dealResp({ api.getCollectList(currentPage, 10) }, data)
 
 }

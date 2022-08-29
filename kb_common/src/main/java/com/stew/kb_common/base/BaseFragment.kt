@@ -19,6 +19,12 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     val TAG: String = this.javaClass.simpleName
     lateinit var mBind: T
+    lateinit var mContext: Context
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
 
     abstract fun getLayoutID(): Int
 
@@ -56,6 +62,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         super.onStop()
         Log.d(TAG, "onStop: ")
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d(TAG, "onDestroyView: ")
@@ -65,5 +72,15 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         super.onDestroy()
         Log.d(TAG, "onDestroy: ")
         mBind.unbind()
+    }
+
+    fun showLoadingDialog() {
+        Log.d(TAG, TAG + "showLoadingDialog: ")
+        LoadingViewUtil.showLoadingDialog(mContext, true)
+    }
+
+    fun dismissLoadingDialog() {
+        Log.d(TAG, TAG + "dismissLoadingDialog: ")
+        LoadingViewUtil.dismissLoadingDialog()
     }
 }

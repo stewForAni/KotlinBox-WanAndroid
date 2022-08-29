@@ -8,9 +8,11 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_common.network.BaseStateObserver
 
 import com.stew.kb_navigation.R
 import com.stew.kb_navigation.adapter.SysRVAdapter
+import com.stew.kb_navigation.bean.Navi
 import com.stew.kb_navigation.bean.Sys
 import com.stew.kb_navigation.databinding.FragmentSysBinding
 
@@ -31,19 +33,17 @@ class SysFragment : BaseVMFragment<FragmentSysBinding>() {
         return R.layout.fragment_sys
     }
 
-    override fun getViewModel(): BaseViewModel {
-        return f.naviViewModel
-    }
-
     override fun observe() {
         f = parentFragment as MainFragment
-        f.naviViewModel.sysList.observe(this, {
-            for (i in 0..19) {
-                myData.add(it[i])
+        f.naviViewModel.sysList.observe(this, object : BaseStateObserver<List<Sys>>(null) {
+            override fun getRespDataSuccess(it: List<Sys>) {
+                for (i in 0..19) {
+                    myData.add(it[i])
+                }
+                addView(myData)
+                sysAdapter.setData(myData)
+                Log.d(TAG, "observe: update data")
             }
-            addView(myData)
-            sysAdapter.setData(myData)
-            Log.d(TAG, "observe: update data")
         })
     }
 

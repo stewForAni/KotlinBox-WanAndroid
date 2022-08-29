@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_common.network.BaseStateObserver
 import com.stew.kb_project.R
 import com.stew.kb_project.adapter.ProVPAdapter
 import com.stew.kb_project.bean.ProjectType
@@ -26,23 +27,21 @@ class ProjectFragment : BaseVMFragment<FragmentProjectBinding>() {
         return R.layout.fragment_project
     }
 
-    override fun getViewModel(): BaseViewModel {
-        return projectViewModel
-    }
-
     override fun init() {
         projectViewModel.getProTypeList()
     }
 
     override fun observe() {
-        projectViewModel.proTypeList.observe(this, {
-            initTab(it)
+        projectViewModel.proTypeList.observe(this, object : BaseStateObserver<List<ProjectType>>(null) {
+            override fun getRespDataSuccess(it: List<ProjectType>) {
+                initTab(it)
+            }
         })
     }
 
     private fun initTab(list: List<ProjectType>) {
         for (i in 0..4) {
-            l.add((i+1).toString() + "." + list[i].name)
+            l.add((i + 1).toString() + "." + list[i].name)
             f.add(ProjectChildFragment.newInstance(list[i].id, i))
         }
         mBind.viewPager.adapter = ProVPAdapter(this, f)

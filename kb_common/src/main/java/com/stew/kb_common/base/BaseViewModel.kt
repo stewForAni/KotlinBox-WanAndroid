@@ -15,8 +15,6 @@ typealias vmBLOCK = suspend () -> Unit
 
 open class BaseViewModel : ViewModel() {
 
-    val loadState = MutableLiveData<Boolean>()
-
     //fun 默认public，这里使用protected
     protected fun launch(
         block: vmBLOCK

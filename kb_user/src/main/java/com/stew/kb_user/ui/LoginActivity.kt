@@ -2,10 +2,12 @@ package com.stew.kb_user.ui
 
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.stew.kb_common.base.BaseActivity
+import com.stew.kb_common.network.BaseStateObserver
 import com.stew.kb_common.util.Constants
 import com.stew.kb_common.util.KVUtil
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_user.R
+import com.stew.kb_user.bean.LoginBean
 import com.stew.kb_user.databinding.ActivityLoginBinding
 import com.stew.kb_user.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,10 +26,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     override fun init() {
-        loginViewModel.loginData.observe(this, {
-            KVUtil.put(Constants.USER_NAME,it.username)
-            ToastUtil.showMsg("登陆成功！")
-            finish()
+        loginViewModel.loginData.observe(this, object :BaseStateObserver<LoginBean>(null){
+            override fun getRespDataSuccess(it: LoginBean) {
+                KVUtil.put(Constants.USER_NAME,it.username)
+                ToastUtil.showMsg("登陆成功！")
+                finish()
+            }
         })
 
         mBind.txLogin.setOnClickListener {

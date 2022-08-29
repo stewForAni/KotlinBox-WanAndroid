@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_common.network.BaseStateObserver
 import com.stew.kb_common.util.Constants
+import com.stew.kb_common.util.LoadingViewUtil
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_project.R
 import com.stew.kb_project.adapter.ProItemClickListener
@@ -54,46 +56,55 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
         return R.layout.fragment_project_child
     }
 
-    override fun getViewModel(): BaseViewModel {
-        return projectViewModel
-    }
-
     override fun observe() {
-        projectViewModel.proList.observe(this, {
+        projectViewModel.proList.observe(this, object : BaseStateObserver<Project>(null) {
 
-            isLoadMore = false
-            list.addAll(it.datas)
+            override fun getRespDataSuccess(it: Project) {
+                isLoadMore = false
+                list.addAll(it.datas)
 
-            if (it.datas.size < 10) {
-                proRVAdapter.isLastPage = true
+                if (it.datas.size < 10) {
+                    proRVAdapter.isLastPage = true
+                }
+
+                Log.d(TAG, "observe articleList: " + list.size)
+
+                if (currentPage == 0) {
+                    proRVAdapter.setData(null)
+                    proRVAdapter.setData(list)
+                    lm.scrollToPosition(0)
+                } else {
+                    proRVAdapter.setData(list)
+                }
+
+                if (mBind.srlPro.isRefreshing) {
+                    mBind.srlPro.isRefreshing = false
+                }
             }
-
-            Log.d(TAG, "observe articleList: " + list.size)
-
-            if (currentPage == 0) {
-                proRVAdapter.setData(null)
-                proRVAdapter.setData(list)
-                lm.scrollToPosition(0)
-            } else {
-                proRVAdapter.setData(list)
-            }
-
-            if (mBind.srlPro.isRefreshing) {
-                mBind.srlPro.isRefreshing = false
-            }
-
         })
 
 
-        projectViewModel.collectData.observe(this, {
-            if (list[collectPosition].collect) {
-                ToastUtil.showMsg("取消收藏！")
-                list[collectPosition].collect = false
-            } else {
-                ToastUtil.showMsg("收藏成功！")
-                list[collectPosition].collect = true
+        projectViewModel.collectData.observe(this, object : BaseStateObserver<String>(null) {
+            override fun getRespDataStart() {
+                super.getRespDataStart()
+                LoadingViewUtil.showLoadingDialog(requireContext(), true)
             }
-            proRVAdapter.notifyItemChanged(collectPosition)
+
+            override fun getRespDataEnd() {
+                super.getRespDataEnd()
+                LoadingViewUtil.dismissLoadingDialog()
+            }
+            override fun getRespDataSuccess(it: String) {
+                LoadingViewUtil.dismissLoadingDialog()
+                if (list[collectPosition].collect) {
+                    ToastUtil.showMsg("取消收藏！")
+                    list[collectPosition].collect = false
+                } else {
+                    ToastUtil.showMsg("收藏成功！")
+                    list[collectPosition].collect = true
+                }
+                proRVAdapter.notifyItemChanged(collectPosition)
+            }
         })
 
     }

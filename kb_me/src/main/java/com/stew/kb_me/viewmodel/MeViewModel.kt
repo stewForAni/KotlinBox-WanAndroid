@@ -2,6 +2,7 @@ package com.stew.kb_me.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.stew.kb_common.base.BaseViewModel
+import com.stew.kb_common.network.RespStateData
 import com.stew.kb_me.bean.MyCollect
 import com.stew.kb_me.repo.MeRepo
 
@@ -11,7 +12,7 @@ import com.stew.kb_me.repo.MeRepo
  */
 class MeViewModel(private val repo: MeRepo) : BaseViewModel() {
 
-    val collectList = MutableLiveData<MyCollect>()
+    val collectList = RespStateData<MyCollect>()
 
     fun getCollectList(currentPage: Int) = launch { repo.getCollectList(currentPage, collectList) }
 }
