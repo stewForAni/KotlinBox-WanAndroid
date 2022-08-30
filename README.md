@@ -41,21 +41,46 @@ open class BaseViewModel : ViewModel() {
 `BaseRepository.kt`
 ```kotlin
 open class BaseRepository {
-    private val SUCCESS = 0
-    private val AUTH_INVALID = -1001
-    suspend fun <T> dealResp(block: suspend () -> BaseResp<T>,liveData: MutableLiveData<T>) {
-        val result = block.invoke()
-        when (result.errorCode) {
-            SUCCESS -> {
-                liveData.value = result.data
+    suspend fun <T> dealResp(
+        block: suspend () -> BaseResp<T>,liveData: RespStateData<T>,) {
+
+        var result = BaseResp<T>()
+        result.responseState = BaseResp.ResponseState.REQUEST_START
+        liveData.value = result
+
+        try {
+            result = block.invoke()
+            when (result.errorCode) {
+                Constants.HTTP_SUCCESS -> {
+                    result.responseState = BaseResp.ResponseState.REQUEST_SUCCESS
+                }
+                Constants.HTTP_AUTH_INVALID -> {
+                    result.responseState = BaseResp.ResponseState.REQUEST_FAILED
+                    ToastUtil.showMsg("认证过期，请重新登录！")
+                    ARouter.getInstance().build(Constants.PATH_LOGIN).navigation()
+                }
+                else -> {
+                    result.responseState = BaseResp.ResponseState.REQUEST_FAILED
+                    ToastUtil.showMsg("code:" + result.errorCode.toString() + " / msg:" + result.errorMsg)
+                }
             }
-            AUTH_INVALID -> {
-                ToastUtil.showMsg("认证过期，请重新登录！")
-                ARouter.getInstance().build(Constants.PATH_LOGIN).navigation()
+
+        } catch (e: Exception) {
+            when (e) {
+                is UnknownHostException,
+                is HttpException,
+                is ConnectException,
+                -> {
+                    //网络error
+                    ToastUtil.showMsg("网络错误！")
+                }
+                else -> {
+                    ToastUtil.showMsg("未知错误！")
+                }
             }
-            else -> {
-                ToastUtil.showMsg("code:" + result.errorCode.toString() + " / msg:" + result.errorMsg)
-            }
+            result.responseState = BaseResp.ResponseState.REQUEST_ERROR
+        } finally {
+            liveData.value = result
         }
     }
 }

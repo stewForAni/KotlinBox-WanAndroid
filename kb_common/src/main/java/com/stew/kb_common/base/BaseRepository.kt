@@ -22,7 +22,6 @@ open class BaseRepository {
     ) {
 
         var result = BaseResp<T>()
-
         result.responseState = BaseResp.ResponseState.REQUEST_START
         liveData.value = result
 
