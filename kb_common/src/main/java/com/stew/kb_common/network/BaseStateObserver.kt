@@ -18,9 +18,12 @@ open class BaseStateObserver<T>(var t: Boolean?) : Observer<BaseResp<T>> {
             }
             BaseResp.ResponseState.REQUEST_SUCCESS -> {
                 Log.d("BaseStateObserver", "Observer: success")
-                if (t.data != null) {
+                if(t.data==null){
+                    getRespSuccess()
+                }else{
                     getRespDataSuccess(t.data!!)
                 }
+
             }
             BaseResp.ResponseState.REQUEST_FAILED -> {
                 Log.d("BaseStateObserver", "Observer: failed")
@@ -35,5 +38,6 @@ open class BaseStateObserver<T>(var t: Boolean?) : Observer<BaseResp<T>> {
 
     open fun getRespDataStart() {}
     open fun getRespDataSuccess(it: T) {}
+    open fun getRespSuccess() {}
     open fun getRespDataEnd() {}
 }

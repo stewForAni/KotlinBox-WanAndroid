@@ -81,7 +81,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
                 dismissLoadingDialog()
             }
 
-            override fun getRespDataSuccess(it: String) {
+            override fun getRespSuccess() {
                 dismissLoadingDialog()
                 if (list[collectPosition].collect) {
                     ToastUtil.showMsg("取消收藏！")

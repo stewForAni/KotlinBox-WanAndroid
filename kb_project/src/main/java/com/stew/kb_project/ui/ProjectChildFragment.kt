@@ -94,7 +94,8 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
                 super.getRespDataEnd()
                 LoadingViewUtil.dismissLoadingDialog()
             }
-            override fun getRespDataSuccess(it: String) {
+
+            override fun getRespSuccess() {
                 LoadingViewUtil.dismissLoadingDialog()
                 if (list[collectPosition].collect) {
                     ToastUtil.showMsg("取消收藏！")

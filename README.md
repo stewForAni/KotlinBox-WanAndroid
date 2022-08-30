@@ -76,8 +76,13 @@ open class BaseRepository {
 ---
 
 ### 🍇 版本说明（持续更新...）
+待完成：页面状态统一UI（Loading-UI，Error-UI）
+
+V1.1 - 2022-08-30<br>
+bug fix ... 
+
 V1.0 - 2022-08-25<br>
-项目初次上传，持续更新
+项目上传，持续更新
 
 ---
 
