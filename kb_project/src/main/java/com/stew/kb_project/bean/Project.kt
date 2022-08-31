@@ -7,7 +7,8 @@ package com.stew.kb_project.bean
 typealias p = Project.ProjectDetail
 
 data class Project(
-    val datas: List<ProjectDetail>
+    val datas: List<ProjectDetail>,
+    var over: Boolean
 ) {
     data class ProjectDetail(
         val id: Int,

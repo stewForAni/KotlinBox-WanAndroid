@@ -43,18 +43,24 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
                 Log.d(TAG, "observe bannerList: " + it.size)
                 mBind.topView.refreshData(it)
             }
+
+            override fun getRespDataEnd() {
+                resetUI()
+            }
         })
 
         homeViewModel.article.observe(this, object : BaseStateObserver<Article>(null) {
             override fun getRespDataSuccess(it: Article) {
-                isLoadMore = false
-                list.addAll(it.datas)
 
-                if (it.datas.size < 10) {
-                    homeRVAdapter.isLastPage = true
+                resetUI()
+
+                if (it.over) { homeRVAdapter.isLastPage = true }
+
+                if (currentPage == 0) {
+                    list.clear()
                 }
 
-                Log.d(TAG, "observe articleList: " + list.size)
+                list.addAll(it.datas)
 
                 if (currentPage == 0) {
                     homeRVAdapter.setData(null)
@@ -64,20 +70,21 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
                     homeRVAdapter.setData(list)
                 }
 
-                if (mBind.srlHome.isRefreshing) {
-                    mBind.srlHome.isRefreshing = false
-                }
+                Log.d(TAG, "observe articleList: " + list.size)
+
+            }
+
+            override fun getRespDataEnd() {
+                resetUI()
             }
         })
 
         homeViewModel.collectData.observe(this, object : BaseStateObserver<String>(null) {
             override fun getRespDataStart() {
-                super.getRespDataStart()
                 showLoadingDialog()
             }
 
             override fun getRespDataEnd() {
-                super.getRespDataEnd()
                 dismissLoadingDialog()
             }
 
@@ -149,17 +156,24 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
         mBind.srlHome.setColorSchemeResources(R.color.theme_color)
         mBind.srlHome.setOnRefreshListener {
-            isLoadMore = false
             homeRVAdapter.isLastPage = false
-            list.clear()
             currentPage = 0
-
-            homeViewModel.getBanner()
-            homeViewModel.getArticle(currentPage)
+            getHomeData()
         }
 
+        getHomeData()
+    }
+
+    private fun getHomeData() {
         homeViewModel.getBanner()
         homeViewModel.getArticle(currentPage)
+    }
+
+    private fun resetUI() {
+        isLoadMore = false
+        if (mBind.srlHome.isRefreshing) {
+            mBind.srlHome.isRefreshing = false
+        }
     }
 
 }

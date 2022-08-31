@@ -36,10 +36,9 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
     override fun observe() {
         meViewModel.collectList.observe(this, object : BaseStateObserver<MyCollect>(null) {
             override fun getRespDataSuccess(it: MyCollect) {
-                isLoadMore = false
-                list.addAll(it.datas)
 
-                if (it.datas.size < 10) {
+                list.addAll(it.datas)
+                if (it.over) {
                     collectRVAdapter.isLastPage = true
                 }
 
@@ -53,7 +52,10 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
                     collectRVAdapter.setData(list)
                 }
 
-                resetRefresh()
+            }
+
+            override fun getRespDataEnd() {
+                resetUI()
             }
         })
     }
@@ -89,7 +91,6 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
 
         mBind.srlCollect.setColorSchemeResources(R.color.theme_color)
         mBind.srlCollect.setOnRefreshListener {
-            isLoadMore = false
             collectRVAdapter.isLastPage = false
             list.clear()
             currentPage = 0
@@ -103,7 +104,8 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
         meViewModel.getCollectList(currentPage)
     }
 
-    private fun resetRefresh() {
+    private fun resetUI() {
+        isLoadMore = false
         if (mBind.srlCollect.isRefreshing) {
             mBind.srlCollect.isRefreshing = false
         }

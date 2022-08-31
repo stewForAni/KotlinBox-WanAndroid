@@ -44,4 +44,5 @@ class MySwipeRefreshLayout(context: Context, attr: AttributeSet) :
         }
         return super.onInterceptTouchEvent(event)
     }
+
 }

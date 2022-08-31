@@ -7,7 +7,8 @@ package com.stew.kb_me.bean
 typealias c = MyCollect.MyCollectDetail
 
 data class MyCollect(
-    val datas: List<MyCollectDetail>
+    val datas: List<MyCollectDetail>,
+    val over:Boolean
 ) {
     data class MyCollectDetail(
         val author: String,

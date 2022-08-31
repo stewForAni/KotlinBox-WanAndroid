@@ -63,7 +63,7 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
                 isLoadMore = false
                 list.addAll(it.datas)
 
-                if (it.datas.size < 10) {
+                if (it.over) {
                     proRVAdapter.isLastPage = true
                 }
 
@@ -86,12 +86,10 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
 
         projectViewModel.collectData.observe(this, object : BaseStateObserver<String>(null) {
             override fun getRespDataStart() {
-                super.getRespDataStart()
                 LoadingViewUtil.showLoadingDialog(requireContext(), true)
             }
 
             override fun getRespDataEnd() {
-                super.getRespDataEnd()
                 LoadingViewUtil.dismissLoadingDialog()
             }
 
