@@ -8,7 +8,8 @@ typealias c = MyCollect.MyCollectDetail
 
 data class MyCollect(
     val datas: List<MyCollectDetail>,
-    val over:Boolean
+    val over:Boolean,
+    val curPage: Int
 ) {
     data class MyCollectDetail(
         val author: String,

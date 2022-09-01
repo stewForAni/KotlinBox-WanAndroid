@@ -8,7 +8,8 @@ typealias p = Project.ProjectDetail
 
 data class Project(
     val datas: List<ProjectDetail>,
-    var over: Boolean
+    var over: Boolean,
+    val curPage: Int
 ) {
     data class ProjectDetail(
         val id: Int,

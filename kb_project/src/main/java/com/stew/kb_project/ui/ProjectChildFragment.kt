@@ -60,16 +60,22 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
         projectViewModel.proList.observe(this, object : BaseStateObserver<Project>(null) {
 
             override fun getRespDataSuccess(it: Project) {
-                isLoadMore = false
-                list.addAll(it.datas)
+
+                resetUI()
+
+                currentPage = it.curPage
+
+                if (currentPage == 1) {
+                    list.clear()
+                }
 
                 if (it.over) {
                     proRVAdapter.isLastPage = true
                 }
 
-                Log.d(TAG, "observe articleList: " + list.size)
+                list.addAll(it.datas)
 
-                if (currentPage == 0) {
+                if (currentPage == 1) {
                     proRVAdapter.setData(null)
                     proRVAdapter.setData(list)
                     lm.scrollToPosition(0)
@@ -77,9 +83,12 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
                     proRVAdapter.setData(list)
                 }
 
-                if (mBind.srlPro.isRefreshing) {
-                    mBind.srlPro.isRefreshing = false
-                }
+                Log.d(TAG, "observe articleList: " + list.size)
+
+            }
+
+            override fun getRespDataEnd() {
+                resetUI()
             }
         })
 
@@ -147,7 +156,6 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
                 ) {
                     Log.d(TAG, "onScrollStateChanged: last-----")
                     isLoadMore = true
-                    currentPage++
                     lazyLoad()
                 }
             }
@@ -156,11 +164,8 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
 
         mBind.srlPro.setColorSchemeResources(R.color.theme_color)
         mBind.srlPro.setOnRefreshListener {
-            isLoadMore = false
             proRVAdapter.isLastPage = false
-            list.clear()
-            currentPage = 0
-            lazyLoad()
+            projectViewModel.getProList(1, currentID)
         }
 
     }
@@ -168,6 +173,13 @@ class ProjectChildFragment : BaseVMFragment<FragmentProjectChildBinding>() {
 
     override fun lazyLoad() {
         projectViewModel.getProList(currentPage + 1, currentID)
+    }
+
+    private fun resetUI() {
+        isLoadMore = false//加载更多完成，重置false
+        if (mBind.srlPro.isRefreshing) {
+            mBind.srlPro.isRefreshing = false
+        }
     }
 
     //----------------------------------------------------------------

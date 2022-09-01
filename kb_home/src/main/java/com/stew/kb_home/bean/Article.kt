@@ -8,7 +8,8 @@ typealias a = Article.ArticleDetail
 
 data class Article(
     val datas: List<ArticleDetail>,
-    val over: Boolean
+    val over: Boolean,
+    val curPage: Int
 ) {
     data class ArticleDetail(
         val author: String,

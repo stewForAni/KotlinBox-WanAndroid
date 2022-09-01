@@ -41,6 +41,9 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         homeViewModel.bannerList.observe(this, object : BaseStateObserver<List<Banner>>(null) {
             override fun getRespDataSuccess(it: List<Banner>) {
                 Log.d(TAG, "observe bannerList: " + it.size)
+                if (it.isEmpty()) {
+                    return
+                }
                 mBind.topView.refreshData(it)
             }
 
@@ -54,14 +57,22 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
                 resetUI()
 
-                if (it.over) { homeRVAdapter.isLastPage = true }
+                currentPage = it.curPage - 1
 
+                //下拉刷新
                 if (currentPage == 0) {
                     list.clear()
                 }
 
+                //最后一页
+                if (it.over) {
+                    homeRVAdapter.isLastPage = true
+                }
+
+                //list添加数据
                 list.addAll(it.datas)
 
+                //处理数据
                 if (currentPage == 0) {
                     homeRVAdapter.setData(null)
                     homeRVAdapter.setData(list)
@@ -147,8 +158,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
                 ) {
                     Log.d(TAG, "onScrollStateChanged: last-----")
                     isLoadMore = true
-                    currentPage++
-                    homeViewModel.getArticle(currentPage)
+                    homeViewModel.getArticle(currentPage + 1)
                 }
             }
         })
@@ -157,7 +167,6 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         mBind.srlHome.setColorSchemeResources(R.color.theme_color)
         mBind.srlHome.setOnRefreshListener {
             homeRVAdapter.isLastPage = false
-            currentPage = 0
             getHomeData()
         }
 
@@ -166,11 +175,11 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
     private fun getHomeData() {
         homeViewModel.getBanner()
-        homeViewModel.getArticle(currentPage)
+        homeViewModel.getArticle(0)
     }
 
     private fun resetUI() {
-        isLoadMore = false
+        isLoadMore = false//加载更多完成，重置false
         if (mBind.srlHome.isRefreshing) {
             mBind.srlHome.isRefreshing = false
         }

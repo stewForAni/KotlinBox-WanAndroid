@@ -37,12 +37,19 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
         meViewModel.collectList.observe(this, object : BaseStateObserver<MyCollect>(null) {
             override fun getRespDataSuccess(it: MyCollect) {
 
-                list.addAll(it.datas)
+                resetUI()
+
+                currentPage = it.curPage - 1
+
+                if (currentPage == 0) {
+                    list.clear()
+                }
+
                 if (it.over) {
                     collectRVAdapter.isLastPage = true
                 }
 
-                Log.d(TAG, "observe collectList: " + list.size)
+                list.addAll(it.datas)
 
                 if (currentPage == 0) {
                     collectRVAdapter.setData(null)
@@ -51,7 +58,7 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
                 } else {
                     collectRVAdapter.setData(list)
                 }
-
+                Log.d(TAG, "observe collectList: " + list.size)
             }
 
             override fun getRespDataEnd() {
@@ -83,8 +90,7 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
                 ) {
                     Log.d(TAG, "onScrollStateChanged: last-----")
                     isLoadMore = true
-                    currentPage++
-                    getCollectList()
+                    getCollectList(currentPage + 1)
                 }
             }
         })
@@ -92,16 +98,14 @@ class MyCollectFragment : BaseVMFragment<FragmentCollectBinding>() {
         mBind.srlCollect.setColorSchemeResources(R.color.theme_color)
         mBind.srlCollect.setOnRefreshListener {
             collectRVAdapter.isLastPage = false
-            list.clear()
-            currentPage = 0
-            getCollectList()
+            getCollectList(0)
         }
 
-        getCollectList()
+        getCollectList(0)
     }
 
-    fun getCollectList() {
-        meViewModel.getCollectList(currentPage)
+    fun getCollectList(index: Int) {
+        meViewModel.getCollectList(index)
     }
 
     private fun resetUI() {
