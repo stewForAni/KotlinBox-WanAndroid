@@ -92,7 +92,7 @@ class HomeRVAdapter(var listener: HomeItemClickListener) :
     }
 
     override fun getItemCount(): Int {
-        return if (diff.currentList.size == 0) 0 else diff.currentList.size + 1
+        return if (diff.currentList.size == 0) 1 else diff.currentList.size + 1
     }
 
     fun setData(list: List<a>?) {
