@@ -7,12 +7,10 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.stew.kb_common.base.BaseVMFragment
-import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_common.network.BaseStateObserver
 
 import com.stew.kb_navigation.R
 import com.stew.kb_navigation.adapter.SysRVAdapter
-import com.stew.kb_navigation.bean.Navi
 import com.stew.kb_navigation.bean.Sys
 import com.stew.kb_navigation.databinding.FragmentSysBinding
 

@@ -1,14 +1,11 @@
 package com.stew.kb_navigation.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+
 import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_common.network.RespStateData
 import com.stew.kb_navigation.bean.Navi
 import com.stew.kb_navigation.bean.Sys
 import com.stew.kb_navigation.repo.NaviRepo
-import kotlinx.coroutines.launch
 
 /**
  * Created by stew on 8/7/22.

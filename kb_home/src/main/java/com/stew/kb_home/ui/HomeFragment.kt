@@ -7,7 +7,6 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
 import com.stew.kb_common.network.BaseStateObserver
 import com.stew.kb_common.util.Constants
-import com.stew.kb_common.util.LoadingViewUtil
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.R
 import com.stew.kb_home.adapter.BannerAdapter

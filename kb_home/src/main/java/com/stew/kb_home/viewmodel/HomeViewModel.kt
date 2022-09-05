@@ -1,9 +1,6 @@
 package com.stew.kb_home.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.stew.kb_common.base.BaseViewModel
-import com.stew.kb_common.network.BaseResp
 import com.stew.kb_common.network.RespStateData
 import com.stew.kb_home.bean.Article
 import com.stew.kb_home.bean.Banner
