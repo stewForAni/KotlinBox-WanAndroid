@@ -13,10 +13,10 @@
 ### 🍓 项目介绍
 
 项目采用组件化，架构如下：
-| - | - | app module | - | - |
+| - | - | app<br>module | - | - |
 | :--: | :--: | :--: | :--: | :--: |
-| 用户<br>kb_user | 首页<br>kb_home | 项目<br>kb_project | 导航<br>kb_navigation | 个人<br>kb_me |
-| - | - | 公共<br>kb_common | - | - |
+| 用户<br>kb_user<br>module | 首页<br>kb_home<br>module | 项目<br>kb_project<br>module | 导航<br>kb_navigation<br>module | 个人<br>kb_me<br>module |
+| - | - | 公共<br>kb_common<br>module | - | - |
 
 `BaseViewModel.kt`
 ```kotlin
