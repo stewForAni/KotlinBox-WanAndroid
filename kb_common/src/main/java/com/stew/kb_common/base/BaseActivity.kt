@@ -1,12 +1,15 @@
 package com.stew.kb_common.base
 
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.stew.kb_common.util.LoadingViewUtil
-import com.stew.kb_common.util.StatusBarUtil
 
 /**
  * Created by stew on 4/20/22.
@@ -27,6 +30,18 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         //StatusBarUtil.fitSystemBar(this)
         mBind = DataBindingUtil.setContentView(this, getLayoutID())
         init()
+
+        //test
+        setGrayTheme()
+
+    }
+
+    private fun setGrayTheme() {
+        val paint = Paint()
+        val cm = ColorMatrix()
+        cm.setSaturation(0F)
+        paint.colorFilter = ColorMatrixColorFilter(cm)
+        window.decorView.setLayerType(View.LAYER_TYPE_HARDWARE,paint)
     }
 
     override fun onStart() {
