@@ -32,7 +32,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         init()
 
         //test
-        setGrayTheme()
+        //setGrayTheme()
 
     }
 
