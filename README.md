@@ -1,16 +1,16 @@
-### 🥑 WanAndroid基础款（MVVM+Kotlin+Jetpack+组件化）
+### WanAndroid基础款（MVVM+Kotlin+Jetpack+组件化）
 
 | 首页 | 项目 | 导航 |
 | :--: | :--: | :--: |
 | <img src="/github_imgs/w1.jpeg" width="256"/> | <img src="/github_imgs/w2.jpeg" width="256"/> | <img src="/github_imgs/w3.jpeg" width="256"/> |
 
-| 登录 | 个人 | 收藏 |
+| 收藏 | 个人 | 登录 |
 | :--: | :--: | :--: |
 | <img src="/github_imgs/w4.jpeg" width="256"/> | <img src="/github_imgs/w5.jpeg" width="256"/> | <img src="/github_imgs/w6.jpeg" width="256"/> |
 
 ---
 
-### 🍓 项目介绍
+### 项目介绍
 
 项目采用组件化，架构如下：
 | - | - | app<br>module | - | - |
@@ -87,7 +87,7 @@ open class BaseRepository {
 ```
 ---
 
-### 🥝 感谢
+### 感谢
 * [Retrofit](https://github.com/square/retrofit)
 * [OkHttp](https://github.com/square/okhttp)
 * [kotlinx-coroutines](https://github.com/Kotlin/kotlinx.coroutines)
@@ -100,7 +100,7 @@ open class BaseRepository {
 * [mmkv](https://github.com/Tencent/MMKV/)
 ---
 
-### 🍇 版本说明（持续更新...）
+### 版本说明（持续更新...）
 待完成：页面状态统一UI（Loading-UI，Error-UI）
 
 V1.1 - 2022-08-30<br>
@@ -111,7 +111,7 @@ V1.0 - 2022-08-25<br>
 
 ---
 
-### 🍋 License
+### License
 ```
 Copyright [2022] [stew]
 
