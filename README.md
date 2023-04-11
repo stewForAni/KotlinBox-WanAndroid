@@ -4,7 +4,7 @@
 | :--: | :--: | :--: |
 | <img src="/github_imgs/w1.jpeg" width="256"/> | <img src="/github_imgs/w2.jpeg" width="256"/> | <img src="/github_imgs/w3.jpeg" width="256"/> |
 
-| 收藏 | 个人 | 登录 |
+| 登录 | 个人 | 收藏 |
 | :--: | :--: | :--: |
 | <img src="/github_imgs/w4.jpeg" width="256"/> | <img src="/github_imgs/w5.jpeg" width="256"/> | <img src="/github_imgs/w6.jpeg" width="256"/> |
 
