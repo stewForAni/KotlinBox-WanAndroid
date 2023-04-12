@@ -1,4 +1,4 @@
-### WanAndroid基础款（MVVM+Kotlin+Jetpack+Componentization）
+### WanAndroid Basic（MVVM+Kotlin+Jetpack+Componentization）
 
 | Home | Project | Navigation |
 | :--: | :--: | :--: |
