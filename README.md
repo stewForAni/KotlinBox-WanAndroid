@@ -1,22 +1,22 @@
-### WanAndroid基础款（MVVM+Kotlin+Jetpack+组件化）
+### WanAndroid基础款（MVVM+Kotlin+Jetpack+Componentization）
 
-| 首页 | 项目 | 导航 |
+| Home | Project | Navigation |
 | :--: | :--: | :--: |
 | <img src="/github_imgs/w1.jpeg" width="256"/> | <img src="/github_imgs/w2.jpeg" width="256"/> | <img src="/github_imgs/w3.jpeg" width="256"/> |
 
-| 登录 | 个人 | 收藏 |
+| Login | Me | Collect |
 | :--: | :--: | :--: |
 | <img src="/github_imgs/w4.jpeg" width="256"/> | <img src="/github_imgs/w5.jpeg" width="256"/> | <img src="/github_imgs/w6.jpeg" width="256"/> |
 
 ---
 
-### 项目介绍
+### Introduction
 
-项目采用组件化，架构如下：
+The project adopts componentization, and the structure is as follows：
 | - | - | app<br>module | - | - |
 | :--: | :--: | :--: | :--: | :--: |
-| 用户<br>kb_user<br>module | 首页<br>kb_home<br>module | 项目<br>kb_project<br>module | 导航<br>kb_navigation<br>module | 个人<br>kb_me<br>module |
-| - | - | 公共<br>kb_common<br>module | - | - |
+| User<br>kb_user<br>module | Home<br>kb_home<br>module | Project<br>kb_project<br>module | Navigation<br>kb_navigation<br>module | Me<br>kb_me<br>module |
+| - | - | Common<br>kb_common<br>module | - | - |
 
 `BaseViewModel.kt`
 ```kotlin
@@ -87,7 +87,7 @@ open class BaseRepository {
 ```
 ---
 
-### 感谢
+### Thanks
 * [Retrofit](https://github.com/square/retrofit)
 * [OkHttp](https://github.com/square/okhttp)
 * [kotlinx-coroutines](https://github.com/Kotlin/kotlinx.coroutines)
@@ -100,14 +100,13 @@ open class BaseRepository {
 * [mmkv](https://github.com/Tencent/MMKV/)
 ---
 
-### 版本说明（持续更新...）
-待完成：页面状态统一UI（Loading-UI，Error-UI）
+### Release Notes(Updating...)
 
 V1.1 - 2022-08-30<br>
 bug fix ... 
 
 V1.0 - 2022-08-25<br>
-项目上传，持续更新
+first commit
 
 ---
 
