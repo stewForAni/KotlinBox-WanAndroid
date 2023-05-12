@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+*.xml
+app/release
+proguardMapping.txt
