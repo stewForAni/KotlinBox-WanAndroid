@@ -18,6 +18,7 @@ import com.stew.kb_common.util.LoadingViewUtil
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     val TAG: String = this.javaClass.simpleName
+
     lateinit var mBind: T
 
     abstract fun getLayoutID(): Int

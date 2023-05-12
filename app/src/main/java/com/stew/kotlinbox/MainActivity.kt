@@ -1,7 +1,5 @@
 package com.stew.kotlinbox
 
-import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.stew.kb_common.base.BaseActivity
@@ -95,14 +93,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
+
     override fun onResume() {
         super.onResume()
         val name = KVUtil.getString(Constants.USER_NAME)
         if (name != null) {
             findViewById<TextView>(R.id.tx_info).text = name
         }
-
     }
-
 
 }

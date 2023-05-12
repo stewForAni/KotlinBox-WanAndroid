@@ -1,6 +1,7 @@
 package com.stew.kotlinbox
 
 import android.app.Application
+import android.os.Debug
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.di.homeModule

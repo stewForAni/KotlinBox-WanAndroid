@@ -7,19 +7,17 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="Embedded JDK" />
+        <option name="gradleJvm" value="1.8" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/home" />
             <option value="$PROJECT_DIR$/kb_common" />
             <option value="$PROJECT_DIR$/kb_home" />
             <option value="$PROJECT_DIR$/kb_me" />
             <option value="$PROJECT_DIR$/kb_navigation" />
             <option value="$PROJECT_DIR$/kb_project" />
             <option value="$PROJECT_DIR$/kb_user" />
-            <option value="$PROJECT_DIR$/login" />
           </set>
         </option>
       </GradleProjectSettings>
