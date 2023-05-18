@@ -56,15 +56,21 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
 
-    // Koin for Kotlin
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "org.koin:koin-core-ext:$koin_version"
+//    // Koin for Kotlin
+//    implementation "org.koin:koin-core:$koin_version"
+//    implementation "org.koin:koin-core-ext:$koin_version"
+//
+//    // Koin for AndroidX
+//    implementation "org.koin:koin-androidx-scope:$koin_version"
+//    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+//    implementation "org.koin:koin-androidx-fragment:$koin_version"
+//    implementation "org.koin:koin-androidx-ext:$koin_version"
 
-    // Koin for AndroidX
-    implementation "org.koin:koin-androidx-scope:$koin_version"
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-    implementation "org.koin:koin-androidx-fragment:$koin_version"
-    implementation "org.koin:koin-androidx-ext:$koin_version"
+
+    //koin
+    def koin_version = "2.2.2"
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
 
     //banner
     implementation 'com.github.zhpanvip:bannerviewpager:3.5.1'
@@ -82,8 +88,8 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     //ARouter
-    implementation "com.alibaba:arouter-api:1.5.0"
-    kapt "com.alibaba:arouter-compiler:1.2.2"
+    implementation "com.alibaba:arouter-api:1.5.2"
+    kapt "com.alibaba:arouter-compiler:1.5.2"
 
     //mmkv
     implementation 'com.tencent:mmkv:1.2.10'

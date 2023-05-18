@@ -4,7 +4,8 @@ import com.stew.kb_common.network.RetrofitManager
 import com.stew.kb_navigation.api.NaviApi
 import com.stew.kb_navigation.repo.NaviRepo
 import com.stew.kb_navigation.viewmodel.NaviViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.android.viewmodel.dsl.viewModel
+
 import org.koin.dsl.module
 
 /**

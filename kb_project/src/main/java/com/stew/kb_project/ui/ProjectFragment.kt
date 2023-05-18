@@ -1,17 +1,15 @@
 package com.stew.kb_project.ui
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.stew.kb_common.base.BaseVMFragment
-import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_common.network.BaseStateObserver
 import com.stew.kb_project.R
 import com.stew.kb_project.adapter.ProVPAdapter
 import com.stew.kb_project.bean.ProjectType
 import com.stew.kb_project.databinding.FragmentProjectBinding
 import com.stew.kb_project.viewmodel.ProjectViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by stew on 7/27/22.

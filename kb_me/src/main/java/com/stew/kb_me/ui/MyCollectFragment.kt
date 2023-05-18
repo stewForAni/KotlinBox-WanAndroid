@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
-import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_common.network.BaseStateObserver
 import com.stew.kb_common.util.Constants
 import com.stew.kb_me.R
@@ -14,7 +13,7 @@ import com.stew.kb_me.bean.MyCollect
 import com.stew.kb_me.bean.c
 import com.stew.kb_me.databinding.FragmentCollectBinding
 import com.stew.kb_me.viewmodel.MeViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by stew on 8/9/22.

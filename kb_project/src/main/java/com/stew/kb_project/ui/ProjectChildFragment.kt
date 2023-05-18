@@ -2,12 +2,10 @@ package com.stew.kb_project.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseVMFragment
-import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_common.network.BaseStateObserver
 import com.stew.kb_common.util.Constants
 import com.stew.kb_common.util.LoadingViewUtil
@@ -16,10 +14,9 @@ import com.stew.kb_project.R
 import com.stew.kb_project.adapter.ProItemClickListener
 import com.stew.kb_project.adapter.ProRVAdapter
 import com.stew.kb_project.bean.Project
-import com.stew.kb_project.bean.p
 import com.stew.kb_project.databinding.FragmentProjectChildBinding
 import com.stew.kb_project.viewmodel.ProjectViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by stew on 8/5/22.

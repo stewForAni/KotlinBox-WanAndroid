@@ -12,7 +12,7 @@ import com.stew.kb_user.di.userModule
 import com.tencent.mmkv.MMKV
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.GlobalContext.startKoin
+import org.koin.core.context.startKoin
 
 /**
  * Created by stew on 7/27/22.

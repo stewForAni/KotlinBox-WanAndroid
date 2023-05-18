@@ -10,7 +10,7 @@ import com.stew.kb_user.R
 import com.stew.kb_user.bean.LoginBean
 import com.stew.kb_user.databinding.ActivityLoginBinding
 import com.stew.kb_user.viewmodel.LoginViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by stew on 8/21/22.
