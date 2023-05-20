@@ -54,6 +54,7 @@ apply from: '../dependencies.gradle'
 
 
 
+
 android {
     defaultConfig {
         applicationId "com.stew.kotlinbox"

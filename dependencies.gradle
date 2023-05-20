@@ -1,16 +1,19 @@
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
+import com.stew.deps.ProjectConfigs
+import com.stew.deps.Libs
+
 android {
 
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion ProjectConfigs.compileSdkVersion
+    buildToolsVersion ProjectConfigs.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 2
-        versionName "1.1"
+        minSdkVersion ProjectConfigs.minSdkVersion
+        targetSdkVersion ProjectConfigs.targetSdkVersion
+        versionCode ProjectConfigs.versionCode
+        versionName ProjectConfigs.versionName
         multiDexEnabled true
 
         kapt {
@@ -41,58 +44,67 @@ android {
 
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+//    //base
+//    api Libs.kotlin_stdlib
+//    api Libs.core
+//    api Libs.material
+//    api Libs.appcompat
+//    api Libs.constraintlayout
+//    //for viewModelScope.launch
+//    api Libs.navigation_fg
+//    api Libs.navigation_ui
+//    // 协程Android支持库
+//    api Libs.kotlinx_coroutines_core
+//    api Libs.kotlinx_coroutines_android
+//    //koin with mavenCentral
+//    api Libs.koin_android
+//    api Libs.koin_android_viewmodel
+//    //banner
+//    api Libs.bannerviewpager
+//    //coil
+//    api Libs.coil
+//    //roundedimageview
+//    api Libs.roundedimageview
+//    //flex
+//    api Libs.flexbox
+//    //swiperefreshlayout
+//    api Libs.swiperefreshlayout
+//    //ARouter
+//    api Libs.arouter_api
+//    kapt Libs.arouter_compiler
+//    //mmkv
+//    api Libs.mmkv
 
+
+
+    //base
+    implementation Libs.kotlin_stdlib
+    implementation Libs.core
+    implementation Libs.material
+    implementation Libs.appcompat
+    implementation Libs.constraintlayout
     //for viewModelScope.launch
-    def nav_version = "2.3.5"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
+    implementation Libs.navigation_fg
+    implementation Libs.navigation_ui
     // 协程Android支持库
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
-
-//    // Koin for Kotlin
-//    implementation "org.koin:koin-core:$koin_version"
-//    implementation "org.koin:koin-core-ext:$koin_version"
-//
-//    // Koin for AndroidX
-//    implementation "org.koin:koin-androidx-scope:$koin_version"
-//    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-//    implementation "org.koin:koin-androidx-fragment:$koin_version"
-//    implementation "org.koin:koin-androidx-ext:$koin_version"
-
-
-    //koin
-    def koin_version = "2.2.2"
-    implementation "io.insert-koin:koin-android:$koin_version"
-    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
-
+    implementation Libs.kotlinx_coroutines_core
+    implementation Libs.kotlinx_coroutines_android
+    //koin with mavenCentral
+    implementation Libs.koin_android
+    implementation Libs.koin_android_viewmodel
     //banner
-    implementation 'com.github.zhpanvip:bannerviewpager:3.5.1'
-
+    implementation Libs.bannerviewpager
     //coil
-    implementation("io.coil-kt:coil:1.2.1")
-
+    implementation Libs.coil
     //roundedimageview
-    implementation 'com.makeramen:roundedimageview:2.3.0'
-
+    implementation Libs.roundedimageview
     //flex
-    implementation 'com.google.android.flexbox:flexbox:3.0.0'
-
+    implementation Libs.flexbox
     //swiperefreshlayout
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-
+    implementation Libs.swiperefreshlayout
     //ARouter
-    implementation "com.alibaba:arouter-api:1.5.2"
-    kapt "com.alibaba:arouter-compiler:1.5.2"
-
+    implementation Libs.arouter_api
+    kapt Libs.arouter_compiler
     //mmkv
-    implementation 'com.tencent:mmkv:1.2.10'
-
-
+    implementation Libs.mmkv
 }
