@@ -1,0 +1,27 @@
+plugins {
+    id 'kotlin'
+    id 'maven-publish'
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation gradleApi()
+    implementation 'com.android.tools.build:gradle:4.2.2'
+    implementation 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.32'
+    implementation 'org.ow2.asm:asm:7.2'
+    implementation 'org.ow2.asm:asm-commons:7.2'
+}
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.stew.appplugin'
+            artifactId = 'functime'
+            version = '1.0.0'
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "../app_plugin_repo"
+        }
+    }
+}

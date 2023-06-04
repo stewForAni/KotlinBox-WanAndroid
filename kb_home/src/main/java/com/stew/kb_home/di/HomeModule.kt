@@ -4,7 +4,7 @@ import com.stew.kb_common.network.RetrofitManager
 import com.stew.kb_home.api.HomeApi
 import com.stew.kb_home.repo.HomeRepo
 import com.stew.kb_home.viewmodel.HomeViewModel
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**

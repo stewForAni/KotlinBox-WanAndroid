@@ -9,19 +9,19 @@ import androidx.lifecycle.Observer
  */
 open class BaseStateObserver<T>(var t: Boolean?) : Observer<BaseResp<T>> {
 
-    override fun onChanged(t: BaseResp<T>) {
+    override fun onChanged(value: BaseResp<T>) {
 
-        when (t.responseState) {
+        when (value.responseState) {
             BaseResp.ResponseState.REQUEST_START -> {
                 Log.d("BaseStateObserver", "Observer: start")
                 getRespDataStart()
             }
             BaseResp.ResponseState.REQUEST_SUCCESS -> {
                 Log.d("BaseStateObserver", "Observer: success")
-                if(t.data==null){
+                if(value.data==null){
                     getRespSuccess()
                 }else{
-                    getRespDataSuccess(t.data!!)
+                    getRespDataSuccess(value.data!!)
                 }
 
             }
@@ -33,6 +33,8 @@ open class BaseStateObserver<T>(var t: Boolean?) : Observer<BaseResp<T>> {
                 Log.d("BaseStateObserver", "Observer: error")
                 getRespDataEnd()
             }
+
+            else -> {}
         }
     }
 

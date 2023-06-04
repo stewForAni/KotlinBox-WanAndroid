@@ -1,5 +1,6 @@
 package com.stew.kotlinbox
 
+import android.os.Bundle
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.stew.kb_common.base.BaseActivity
@@ -17,6 +18,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     lateinit var fragmentList: MutableList<Fragment>
     var oldFragmentIndex: Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun getLayoutID(): Int {
         return R.layout.activity_main
@@ -81,16 +86,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
 
         ft.show(targetFragment).commitAllowingStateLoss()
-    }
-
-    private var exitTime: Long = 0
-    override fun onBackPressed() {
-        if (System.currentTimeMillis() - exitTime > 2000) {
-            ToastUtil.showMsg("再按一次退出")
-            exitTime = System.currentTimeMillis()
-        } else {
-            super.onBackPressed()
-        }
     }
 
 

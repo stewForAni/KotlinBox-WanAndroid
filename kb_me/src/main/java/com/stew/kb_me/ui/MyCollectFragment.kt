@@ -13,7 +13,7 @@ import com.stew.kb_me.bean.MyCollect
 import com.stew.kb_me.bean.c
 import com.stew.kb_me.databinding.FragmentCollectBinding
 import com.stew.kb_me.viewmodel.MeViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by stew on 8/9/22.

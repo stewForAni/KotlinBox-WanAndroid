@@ -16,7 +16,7 @@ import com.stew.kb_home.bean.Article
 import com.stew.kb_home.bean.Banner
 import com.stew.kb_home.databinding.FragmentHomeBinding
 import com.stew.kb_home.viewmodel.HomeViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by stew on 7/27/22.

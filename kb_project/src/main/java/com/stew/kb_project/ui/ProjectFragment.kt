@@ -9,7 +9,7 @@ import com.stew.kb_project.adapter.ProVPAdapter
 import com.stew.kb_project.bean.ProjectType
 import com.stew.kb_project.databinding.FragmentProjectBinding
 import com.stew.kb_project.viewmodel.ProjectViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by stew on 7/27/22.

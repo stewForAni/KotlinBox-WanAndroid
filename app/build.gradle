@@ -1,8 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: '../dependencies.gradle'
 
-
-
 //apply plugin: 'AndResGuard'
 //andResGuard {
 //    // mappingFile = file("./resource_mapping.txt")
@@ -60,23 +58,20 @@ android {
         applicationId "com.stew.kotlinbox"
     }
 
-    signingConfigs {
-        release {
-            storeFile file('/Users/stew/kotlinboxsign/kotlinbox')
-            storePassword 'kotlinbox'
-            keyAlias = 'kotlinbox'
-            keyPassword 'kotlinbox'
-        }
-    }
-
     buildTypes {
+        debug{
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
-            signingConfig signingConfigs.release
-            minifyEnabled true
-            shrinkResources true
+            //signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 

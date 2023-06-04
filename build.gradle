@@ -4,14 +4,18 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+//        maven { url 'app_plugin_repo' }
     }
 
     dependencies {
         classpath ProjectConfigs.AGP
         classpath ProjectConfigs.KGP
+        classpath "com.alibaba:arouter-register:1.0.2"
+
+//        classpath 'com.stew.appplugin:functime:1.0.0'
         //classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.18'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle.kts files
+        //NOTE: Do not place your application dependencies here; they belong
+        //in the individual module build.gradle.kts files
     }
 }
 

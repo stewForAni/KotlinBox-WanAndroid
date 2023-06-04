@@ -1,8 +1,8 @@
 package com.stew.deps
 
 object Versions {
-    const val AGP = "4.1.2"
-    const val KGP = "1.4.32"
+    const val AGP = "7.4.2"
+    const val KGP = "1.7.20"
 }
 
 object ProjectConfigs {
@@ -10,10 +10,10 @@ object ProjectConfigs {
     const val AGP = "com.android.tools.build:gradle:${Versions.AGP}"
     const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KGP}"
 
-    const val compileSdkVersion = 30
-    const val buildToolsVersion = "30.0.3"
+    const val compileSdkVersion = 33
+    const val buildToolsVersion = "33.0.2"
     const val minSdkVersion = 21
-    const val targetSdkVersion = 30
+    const val targetSdkVersion = 33
     const val versionCode = 2
     const val versionName = "1.1"
 
@@ -37,8 +37,9 @@ object Libs {
     const val kotlinx_coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
 
     //koin with mavenCentral
-    const val koin_android = "io.insert-koin:koin-android:2.2.2"
-    const val koin_android_viewmodel = "io.insert-koin:koin-android-viewmodel:2.2.2"
+    const val koin_android = "io.insert-koin:koin-android:3.4.1"
+//    const val koin_android = "io.insert-koin:koin-android:2.2.2"
+//    const val koin_android_viewmodel = "io.insert-koin:koin-android-viewmodel:2.2.2"
 
     //banner
     const val bannerviewpager = "com.github.zhpanvip:bannerviewpager:3.5.1"

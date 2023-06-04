@@ -65,11 +65,6 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
                 Log.d(TAG, "onPageFinished: ")
             }
 
-            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                Log.d(TAG, "shouldOverrideUrlLoading: =====1")
-                return true
-            }
-
             override fun shouldOverrideUrlLoading(
                 view: WebView?,
                 request: WebResourceRequest?

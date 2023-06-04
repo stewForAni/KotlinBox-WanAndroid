@@ -1,6 +1,8 @@
 package com.stew.kotlinbox
 
 import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kotlinbox.databinding.ActivitySplashBinding
 
@@ -9,12 +11,16 @@ import com.stew.kotlinbox.databinding.ActivitySplashBinding
  * mail: stewforani@gmail.com
  */
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun getLayoutID(): Int {
         return R.layout.activity_splash
     }
 
     override fun init() {
-//        Thread.sleep(1000)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

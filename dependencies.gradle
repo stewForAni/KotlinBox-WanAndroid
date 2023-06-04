@@ -1,5 +1,6 @@
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+//apply plugin: 'functime'
 
 import com.stew.deps.ProjectConfigs
 import com.stew.deps.Libs
@@ -24,6 +25,15 @@ android {
 
         ndk {
             abiFilters 'arm64-v8a'
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('/Users/stew/kotlinboxsign/kotlinbox')
+            storePassword 'kotlinbox'
+            keyAlias = 'kotlinbox'
+            keyPassword 'kotlinbox'
         }
     }
 
@@ -91,7 +101,7 @@ dependencies {
     implementation Libs.kotlinx_coroutines_android
     //koin with mavenCentral
     implementation Libs.koin_android
-    implementation Libs.koin_android_viewmodel
+    //implementation Libs.koin_android_viewmodel
     //banner
     implementation Libs.bannerviewpager
     //coil

@@ -3,14 +3,13 @@ package com.stew.kb_navigation.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.stew.kb_common.base.BaseFragment
 import com.stew.kb_navigation.R
 import com.stew.kb_navigation.adapter.NaviVPAdapter
 import com.stew.kb_navigation.databinding.FragmentMainBinding
 import com.stew.kb_navigation.viewmodel.NaviViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by stew on 8/8/22.
