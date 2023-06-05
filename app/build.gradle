@@ -81,5 +81,6 @@ dependencies {
     implementation project(path: ':kb_project')
     implementation project(path: ':kb_navigation')
     implementation project(path: ':kb_me')
+    implementation project(path: ':kb_web')
     implementation project(path: ':kb_user')
 }

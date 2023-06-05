@@ -3,6 +3,7 @@ package com.stew.kotlinbox
 import android.os.Bundle
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
 import com.stew.kb_common.util.KVUtil

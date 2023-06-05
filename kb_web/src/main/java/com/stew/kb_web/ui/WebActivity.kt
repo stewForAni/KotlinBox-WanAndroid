@@ -1,6 +1,5 @@
-package com.stew.kb_common.ui
+package com.stew.kb_web.ui
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -20,8 +19,8 @@ import com.stew.kb_common.util.Constants
  * Created by stew on 8/18/22.
  * mail: stewforani@gmail.com
  */
+
 @Route(path = Constants.PATH_WEB)
-@SuppressLint("SetJavaScriptEnabled")
 class WebActivity : BaseActivity<ActivityWebBinding>() {
 
     lateinit var web: WebView
@@ -38,9 +37,6 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
         val t = intent.getStringExtra(Constants.WEB_TITLE)
         val l = intent.getStringExtra(Constants.WEB_LINK).toString()
 
-        Log.d(TAG, "t: $t")
-        Log.d(TAG, "l: $l")
-
         mBind.imgBack.setOnClickListener { finish() }
         mBind.txWebTitle.text = t
 
@@ -51,7 +47,6 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
 
         web.settings.javaScriptEnabled = true
         web.settings.loadWithOverviewMode = true
-        web.settings.javaScriptEnabled = true
         web.settings.domStorageEnabled = true
 
         web.webViewClient = object : WebViewClient() {

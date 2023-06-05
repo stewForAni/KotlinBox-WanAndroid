@@ -1,4 +1,4 @@
-package com.stew.kotlinbox
+package com.stew.kb_web
 
 import org.junit.Test
 

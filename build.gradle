@@ -1,18 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-import com.stew.deps.ProjectConfigs
+
 buildscript {
     repositories {
         google()
         mavenCentral()
-//        maven { url 'app_plugin_repo' }
     }
 
     dependencies {
-        classpath ProjectConfigs.AGP
-        classpath ProjectConfigs.KGP
-        classpath "com.alibaba:arouter-register:1.0.2"
-
-//        classpath 'com.stew.appplugin:functime:1.0.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.21'
+        classpath 'com.android.tools.build:gradle:7.4.2'
         //classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.18'
         //NOTE: Do not place your application dependencies here; they belong
         //in the individual module build.gradle.kts files

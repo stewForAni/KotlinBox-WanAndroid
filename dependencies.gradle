@@ -1,20 +1,16 @@
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'functime'
-
-import com.stew.deps.ProjectConfigs
-import com.stew.deps.Libs
 
 android {
 
-    compileSdkVersion ProjectConfigs.compileSdkVersion
-    buildToolsVersion ProjectConfigs.buildToolsVersion
+    compileSdkVersion 33
+    buildToolsVersion "33.0.2"
 
     defaultConfig {
-        minSdkVersion ProjectConfigs.minSdkVersion
-        targetSdkVersion ProjectConfigs.targetSdkVersion
-        versionCode ProjectConfigs.versionCode
-        versionName ProjectConfigs.versionName
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 2
+        versionName "1.1.0"
         multiDexEnabled true
 
         kapt {
@@ -28,14 +24,14 @@ android {
         }
     }
 
-    signingConfigs {
-        release {
-            storeFile file('/Users/stew/kotlinboxsign/kotlinbox')
-            storePassword 'kotlinbox'
-            keyAlias = 'kotlinbox'
-            keyPassword 'kotlinbox'
-        }
-    }
+//    signingConfigs {
+//        release {
+//            storeFile file('/Users/stew/kotlinboxsign/kotlinbox')
+//            storePassword 'kotlinbox'
+//            keyAlias = 'kotlinbox'
+//            keyPassword 'kotlinbox'
+//        }
+//    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -54,67 +50,76 @@ android {
 
 
 dependencies {
-//    //base
-//    api Libs.kotlin_stdlib
-//    api Libs.core
-//    api Libs.material
-//    api Libs.appcompat
-//    api Libs.constraintlayout
-//    //for viewModelScope.launch
-//    api Libs.navigation_fg
-//    api Libs.navigation_ui
-//    // 协程Android支持库
-//    api Libs.kotlinx_coroutines_core
-//    api Libs.kotlinx_coroutines_android
-//    //koin with mavenCentral
-//    api Libs.koin_android
-//    api Libs.koin_android_viewmodel
-//    //banner
-//    api Libs.bannerviewpager
-//    //coil
-//    api Libs.coil
-//    //roundedimageview
-//    api Libs.roundedimageview
-//    //flex
-//    api Libs.flexbox
-//    //swiperefreshlayout
-//    api Libs.swiperefreshlayout
-//    //ARouter
-//    api Libs.arouter_api
-//    kapt Libs.arouter_compiler
-//    //mmkv
-//    api Libs.mmkv
-
-
 
     //base
-    implementation Libs.kotlin_stdlib
-    implementation Libs.core
-    implementation Libs.material
-    implementation Libs.appcompat
-    implementation Libs.constraintlayout
-    //for viewModelScope.launch
-    implementation Libs.navigation_fg
-    implementation Libs.navigation_ui
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.21"
+    implementation "androidx.core:core-ktx:1.2.0"
+    implementation "com.google.android.material:material:1.2.1"
+    implementation "androidx.appcompat:appcompat:1.3.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+
+    //navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+
     // 协程Android支持库
-    implementation Libs.kotlinx_coroutines_core
-    implementation Libs.kotlinx_coroutines_android
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
+
     //koin with mavenCentral
-    implementation Libs.koin_android
-    //implementation Libs.koin_android_viewmodel
+    implementation "io.insert-koin:koin-android:3.4.1"
+
     //banner
-    implementation Libs.bannerviewpager
+    implementation "com.github.zhpanvip:bannerviewpager:3.5.1"
+
     //coil
-    implementation Libs.coil
+    implementation "io.coil-kt:coil:1.2.1"
+
     //roundedimageview
-    implementation Libs.roundedimageview
+    implementation "com.makeramen:roundedimageview:2.3.0"
+
     //flex
-    implementation Libs.flexbox
+    implementation "com.google.android.flexbox:flexbox:3.0.0"
+
     //swiperefreshlayout
-    implementation Libs.swiperefreshlayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
     //ARouter
-    implementation Libs.arouter_api
-    kapt Libs.arouter_compiler
+    implementation "com.alibaba:arouter-api:1.5.2"
+    kapt "com.alibaba:arouter-compiler:1.5.2"
+
     //mmkv
-    implementation Libs.mmkv
+    implementation "com.tencent:mmkv:1.2.10"
+
+
+
+//    //base
+//    implementation Libs.kotlin_stdlib
+//    implementation Libs.core
+//    implementation Libs.material
+//    implementation Libs.appcompat
+//    implementation Libs.constraintlayout
+//    //for viewModelScope.launch
+//    implementation Libs.navigation_fg
+//    implementation Libs.navigation_ui
+//    // 协程Android支持库
+//    implementation Libs.kotlinx_coroutines_core
+//    implementation Libs.kotlinx_coroutines_android
+//    //koin with mavenCentral
+//    implementation Libs.koin_android
+//    //banner
+//    implementation Libs.bannerviewpager
+//    //coil
+//    implementation Libs.coil
+//    //roundedimageview
+//    implementation Libs.roundedimageview
+//    //flex
+//    implementation Libs.flexbox
+//    //swiperefreshlayout
+//    implementation Libs.swiperefreshlayout
+//    //ARouter
+//    implementation Libs.arouter_api
+//    kapt Libs.arouter_compiler
+//    //mmkv
+//    implementation Libs.mmkv
 }

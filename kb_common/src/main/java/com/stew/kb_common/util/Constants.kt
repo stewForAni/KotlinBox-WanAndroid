@@ -6,11 +6,14 @@ package com.stew.kb_common.util
  */
 class Constants {
     companion object {
+
+        const val MIN_CLICK_DELAY_TIME: Int = 1000
+
+        //arouter
         const val WEB_TITLE: String = "web_title"
         const val WEB_LINK: String = "web_link"
-        const val MIN_CLICK_DELAY_TIME: Int = 1000
-        const val PATH_WEB: String = "/kb_common/webActivity"
-        const val PATH_LOGIN: String = "/kb_user/loginActivity"
+        const val PATH_WEB: String = "/kb_web/ui/WebActivity"
+        const val PATH_LOGIN: String = "/kb_user/ui/LoginActivity"
 
         //kv
         const val USER_NAME: String = "user_name"

@@ -21,6 +21,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     override fun init() {
+//        val oldTime = System.currentTimeMillis()
+//        Log.d("TAG", oldTime.toString())
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

@@ -7,4 +7,4 @@ include ':kb_common'
 include ':kb_common'
 include ':app'
 rootProject.name = "KotlinBox"
-include ':app_plugin'
+include ':kb_web'
