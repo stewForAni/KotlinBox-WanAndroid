@@ -34,27 +34,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             mBind.dl.open()
         }
 
-        mBind.bnv.setOnNavigationItemSelectedListener {
+        mBind.bnv.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.f1 -> {
                     switchFragment(0)
                     mBind.fName = "首页"
-                    return@setOnNavigationItemSelectedListener true
+                    return@setOnItemSelectedListener true
                 }
                 R.id.f2 -> {
                     switchFragment(1)
                     mBind.fName = "项目"
-                    return@setOnNavigationItemSelectedListener true
+                    return@setOnItemSelectedListener true
                 }
                 R.id.f3 -> {
                     switchFragment(2)
                     mBind.fName = "导航"
-                    return@setOnNavigationItemSelectedListener true
+                    return@setOnItemSelectedListener true
                 }
                 R.id.f4 -> {
                     switchFragment(3)
                     mBind.fName = "收藏"
-                    return@setOnNavigationItemSelectedListener true
+                    return@setOnItemSelectedListener true
                 }
             }
             false
