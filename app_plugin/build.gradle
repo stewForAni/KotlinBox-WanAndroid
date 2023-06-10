@@ -1,0 +1,40 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId "io.github.stewforani"
+            artifactId "methodtime"
+            version "1.0.0"
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "../app_plugin_repo"
+        }
+    }
+}
+gradlePlugin {
+    plugins {
+        MethodTimePlugin {
+            id = 'MethodTimePlugin'
+            implementationClass = 'com.stew.app_plugin.AppPlugin'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.android.tools.build:gradle:7.4.2'
+    implementation 'org.ow2.asm:asm:9.2'
+    implementation 'org.ow2.asm:asm-commons:9.2'
+}
