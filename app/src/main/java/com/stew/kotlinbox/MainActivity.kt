@@ -1,6 +1,7 @@
 package com.stew.kotlinbox
 
 import android.os.Bundle
+import android.os.Trace
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter

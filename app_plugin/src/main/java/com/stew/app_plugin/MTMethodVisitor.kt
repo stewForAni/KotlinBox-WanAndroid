@@ -27,7 +27,6 @@ class MTMethodVisitor(
         startTime = newLocal(Type.LONG_TYPE)
         mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false)
         mv.visitVarInsn(LSTORE, startTime)
-
     }
 
     override fun onMethodExit(opcode: Int) {

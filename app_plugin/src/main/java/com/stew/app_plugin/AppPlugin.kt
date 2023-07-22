@@ -15,5 +15,4 @@ class AppPlugin :Plugin<Project>{
             it.instrumentation.setAsmFramesComputationMode(FramesComputationMode.COMPUTE_FRAMES_FOR_INSTRUMENTED_METHODS)
         }
     }
-
 }
