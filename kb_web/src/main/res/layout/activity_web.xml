@@ -12,18 +12,11 @@
 
         <LinearLayout
             android:id="@+id/rl"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/theme_color"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            style="@style/style_common_top_layout">
 
             <ImageView
                 android:id="@+id/img_back"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="20dp"
+                style="@style/style_common_top_layout_icon"
                 android:src="@drawable/icon_back" />
 
             <TextView
@@ -55,5 +48,6 @@
                 android:layout_height="4dp" />
 
         </FrameLayout>
+
     </LinearLayout>
 </layout>

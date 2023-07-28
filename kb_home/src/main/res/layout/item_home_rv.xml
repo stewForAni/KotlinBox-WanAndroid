@@ -29,8 +29,8 @@
                 style="@style/style_home_rv_item2"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/shape_tag1"
-                android:text="新"
-                android:textColor="@color/red"
+                android:text="New"
+                android:textColor="@color/white"
                 android:visibility="gone" />
 
             <TextView
@@ -39,7 +39,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/shape_tag2"
                 android:text="公众号"
-                android:textColor="@color/green"
+                android:textColor="@color/white"
                 android:visibility="gone" />
 
             <TextView

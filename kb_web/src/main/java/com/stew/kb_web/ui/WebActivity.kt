@@ -10,10 +10,10 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.stew.kb_common.R
 import com.stew.kb_common.base.BaseActivity
-import com.stew.kb_common.databinding.ActivityWebBinding
 import com.stew.kb_common.util.Constants
+import com.stew.kb_web.R
+import com.stew.kb_web.databinding.ActivityWebBinding
 
 /**
  * Created by stew on 8/18/22.

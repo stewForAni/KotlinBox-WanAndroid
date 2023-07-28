@@ -5,7 +5,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url 'app_plugin_repo' }
+        //maven { url 'app_plugin_repo' }
     }
 
     dependencies {
