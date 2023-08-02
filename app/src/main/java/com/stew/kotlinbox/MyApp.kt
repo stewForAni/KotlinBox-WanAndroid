@@ -27,7 +27,7 @@ class MyApp : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        HookClassLoader.hook(this)
+        //HookClassLoader.hook(this)
     }
 
     override fun onCreate() {

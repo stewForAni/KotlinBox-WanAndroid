@@ -6,6 +6,8 @@ import com.stew.kb_common.network.BaseResp
 import com.stew.kb_common.network.RespStateData
 import com.stew.kb_common.util.Constants
 import com.stew.kb_common.util.ToastUtil
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.UnknownHostException
@@ -21,16 +23,17 @@ open class BaseRepository {
         liveData: RespStateData<T>,
     ) {
 
+        Log.d("TestSus", "br1")
         var result = BaseResp<T>()
         result.responseState = BaseResp.ResponseState.REQUEST_START
         liveData.value = result
 
         try {
-
+            Log.d("TestSus", "br2")
             //---------------------//
             result = block.invoke()
             //---------------------//
-
+            Log.d("TestSus", "br3")
             Log.d("BaseRepository", result.errorCode.toString() + "/" + result.errorMsg)
             when (result.errorCode) {
                 Constants.HTTP_SUCCESS -> {
@@ -38,7 +41,7 @@ open class BaseRepository {
                 }
                 Constants.HTTP_AUTH_INVALID -> {
                     result.responseState = BaseResp.ResponseState.REQUEST_FAILED
-                    ToastUtil.showMsg("认证过期，请重新登录！")
+                    ToastUtil.showMsg("请先登录")
                     ARouter.getInstance().build(Constants.PATH_LOGIN).navigation()
                 }
                 else -> {
@@ -63,6 +66,7 @@ open class BaseRepository {
             }
             result.responseState = BaseResp.ResponseState.REQUEST_ERROR
         } finally {
+            Log.d("TestSus", "br4")
             liveData.value = result
         }
     }

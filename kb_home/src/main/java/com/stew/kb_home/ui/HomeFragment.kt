@@ -174,7 +174,8 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
     private fun getHomeData() {
         homeViewModel.getBanner()
-        homeViewModel.getArticle(0)
+        //homeViewModel.getBannerByFlow()
+        //homeViewModel.getArticle(0)
     }
 
     private fun resetUI() {
