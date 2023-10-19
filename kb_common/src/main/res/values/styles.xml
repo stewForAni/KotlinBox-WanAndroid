@@ -9,15 +9,24 @@
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
-        <item name="android:padding">16dp</item>
+        <item name="android:padding">14dp</item>
     </style>
 
     <style name="style_common_top_layout">
         <item name="android:background">@color/theme_color</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="style_common_top_layout_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_centerVertical">true</item>
     </style>
 
 

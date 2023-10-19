@@ -12,6 +12,10 @@ class Constants {
         //arouter
         const val WEB_TITLE: String = "web_title"
         const val WEB_LINK: String = "web_link"
+
+        const val PATH_EXP: String = "/kotlinbox/ExpActivity"
+        const val PATH_NH: String = "/kotlinbox/exp/NativeHookActivity"
+
         const val PATH_WEB: String = "/kb_web/ui/WebActivity"
         const val PATH_LOGIN: String = "/kb_user/ui/LoginActivity"
 

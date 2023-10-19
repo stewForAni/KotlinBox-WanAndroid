@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Debug
 import com.alibaba.android.arouter.launcher.ARouter
+import com.bytedance.android.bytehook.ByteHook
 import com.stew.kb_common.util.AppLogUtil
 import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.di.homeModule
@@ -37,6 +38,12 @@ class MyApp : Application() {
         initARouter()
         initMMKV()
         AppLogUtil.init(this)
+
+        //先init，再加载so，因为so文件中的方法需要btyehook先初始化
+        ByteHook.init()
+        System.loadLibrary("hookmalloc")
+        System.loadLibrary("testmalloc")
+
     }
 
     private fun initMMKV() {

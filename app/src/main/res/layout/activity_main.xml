@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/rl"
                 style="@style/style_common_top_layout"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -32,14 +32,17 @@
                     android:src="@drawable/icon_menu" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{f_name}"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    style="@style/style_common_top_layout_title"
+                    android:layout_toEndOf="@id/img_draw"
+                    android:text="@{f_name}" />
 
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/img_exp"
+                    style="@style/style_common_top_layout_icon"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/icon_experiment" />
+
+            </RelativeLayout>
 
             <FrameLayout
                 android:id="@+id/f_content"
