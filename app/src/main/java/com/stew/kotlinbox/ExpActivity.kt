@@ -29,6 +29,12 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
                 .navigation()
         }
 
+        mBind.txPi.setOnClickListener {
+            ARouter.getInstance()
+                .build(Constants.PATH_PI)
+                .navigation()
+        }
+
     }
 
 }

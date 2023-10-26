@@ -30,16 +30,25 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
-                android:padding="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/tx_nh"
-                    android:background="@drawable/shape_10dp_white"
                     style="@style/style_exp_common_text"
+                    android:background="@drawable/shape_10dp_white"
                     android:text="Native Hook" />
+
+                <TextView
+                    android:id="@+id/tx_pi"
+                    style="@style/style_exp_common_text"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_10dp_white"
+                    android:text="Process Info" />
 
             </LinearLayout>
 
