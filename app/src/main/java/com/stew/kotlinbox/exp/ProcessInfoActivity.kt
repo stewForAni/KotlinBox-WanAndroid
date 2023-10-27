@@ -1,14 +1,20 @@
 package com.stew.kotlinbox.exp
 
 import android.os.Process
+import android.util.Log
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
 import com.stew.kotlinbox.R
 import com.stew.kotlinbox.databinding.ActivityPiBinding
+import okio.Utf8
 import java.io.BufferedReader
 import java.io.File
+import java.io.FileFilter
+import java.io.FileInputStream
 import java.io.FileReader
+import java.io.IOException
+import java.nio.charset.StandardCharsets
 
 
 /**
@@ -18,6 +24,9 @@ import java.io.FileReader
 @Route(path = Constants.PATH_PI)
 class ProcessInfoActivity : BaseActivity<ActivityPiBinding>() {
 
+    private var cpu_name = ""
+    private var cpu_freq = ""
+
     override fun getLayoutID(): Int {
         return R.layout.activity_pi
     }
@@ -26,13 +35,30 @@ class ProcessInfoActivity : BaseActivity<ActivityPiBinding>() {
         mBind.imgBack.setOnClickListener { finish() }
 
         mBind.txPid.text = buildString {
-        append("pid: ")
-        append(Process.myPid().toString())
-    }
+            append("Pid: ")
+            append(Process.myPid().toString())
+        }
+
         mBind.txRid.text = buildString {
-        append("rid: ")
-        append(getRenderThreadTid().toString())
-    }
+            append("Render id: ")
+            append(getRenderThreadTid().toString())
+        }
+
+        mBind.txCpuCount.text = buildString {
+            append("Cpu number: ")
+            append(getNumberOfCPUCores().toString())
+            append("\n")
+            append("detail: ")
+            append(cpu_name)
+        }
+
+        mBind.txBigCore.text = buildString {
+            append("Max core: ")
+            append(getMaxFreqCPU().toString())
+            append("\n")
+            append("detail: ")
+            append(cpu_freq)
+        }
 
     }
 
@@ -70,5 +96,69 @@ class ProcessInfoActivity : BaseActivity<ActivityPiBinding>() {
         }
         return -1
     }
+
+    private fun getNumberOfCPUCores(): Int? {
+        val file = File("/sys/devices/system/cpu")
+        val count = file.listFiles(FileFilter {
+            val path = it.name
+            if (path.startsWith("cpu")) {
+                for (i in 3 until path.length) {
+                    if (path[i] < '0' || path[i] > '9') {
+                        return@FileFilter false
+                    }
+                }
+                cpu_name = cpu_name + it.name + "/"
+                return@FileFilter true
+            }
+            return@FileFilter false
+        })?.size
+        return count
+    }
+
+    private fun getMaxFreqCPU(): Int {
+        var maxFreq = -1
+        try {
+            for (i in 0 until getNumberOfCPUCores()!!) {
+                val filename = "/sys/devices/system/cpu/cpu$i/cpufreq/cpuinfo_max_freq"
+                val cpuInfoMaxFreqFile = File(filename)
+
+//                Log.d(TAG, "getMaxFreqCPU: ----"+i)
+
+                if (cpuInfoMaxFreqFile.exists()) {
+                    val buffer = ByteArray(128)
+                    val stream = FileInputStream(cpuInfoMaxFreqFile)
+                    try {
+                        stream.read(buffer)
+
+                        var endIndex = 0
+                        var data = ""
+
+                        //如果看成是字符串，就查ASCII码
+                        //这里为了截取有效数据，只截取前面的数字部分
+                        while (buffer[endIndex] >= '0'.code.toByte() &&
+                            buffer[endIndex] <= '9'.code.toByte() &&
+                            endIndex < buffer.size
+                        ) {
+                            endIndex++
+                        }
+
+                        val str = String(buffer, 0, endIndex)
+
+                        cpu_freq+= "$str/"
+
+                        val freqBound = str.toInt()
+                        if (freqBound > maxFreq) maxFreq = freqBound
+
+                    } catch (_: NumberFormatException) {
+                    } finally {
+                        stream.close()
+                    }
+                }
+            }
+        } catch (e: IOException) {
+        }
+        return maxFreq
+    }
+
 
 }

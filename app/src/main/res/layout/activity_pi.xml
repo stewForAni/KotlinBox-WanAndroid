@@ -28,23 +28,31 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:background="@color/blacke"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/tx_pid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="N/A" />
+                android:background="@drawable/shape_10dp_white"
+                style="@style/style_process_info_tx" />
 
             <TextView
                 android:id="@+id/tx_rid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="N/A" />
+                android:background="@drawable/shape_10dp_white"
+                style="@style/style_process_info_tx" />
+
+            <TextView
+                android:id="@+id/tx_cpu_count"
+                android:background="@drawable/shape_10dp_white"
+                style="@style/style_process_info_tx" />
+
+            <TextView
+                android:id="@+id/tx_big_core"
+                android:background="@drawable/shape_10dp_white"
+                style="@style/style_process_info_tx" />
         </LinearLayout>
 
     </LinearLayout>
