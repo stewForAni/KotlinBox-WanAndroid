@@ -26,6 +26,8 @@ class ProcessInfoActivity : BaseActivity<ActivityPiBinding>() {
 
     private var cpu_name = ""
     private var cpu_freq = ""
+    private var cpu_last_executed_render = ""
+    private var cpu_last_executed_main = ""
 
     override fun getLayoutID(): Int {
         return R.layout.activity_pi
@@ -42,6 +44,8 @@ class ProcessInfoActivity : BaseActivity<ActivityPiBinding>() {
         mBind.txRid.text = buildString {
             append("Render id: ")
             append(getRenderThreadTid().toString())
+            append(" / last executed: cpu")
+            append(cpu_last_executed_render)
         }
 
         mBind.txCpuCount.text = buildString {
@@ -86,8 +90,22 @@ class ProcessInfoActivity : BaseActivity<ActivityPiBinding>() {
                             continue
                         }
                         val threadName = param[1]
+
+                        if (threadName.contains("kotlinbox")) {
+                            cpu_last_executed_main = param[38]
+
+                            runOnUiThread {
+                                mBind.txPid.text = buildString {
+                                    append(mBind.txPid.text)
+                                    append(" / last executed: cpu")
+                                    append(cpu_last_executed_main)
+                                }
+                            }
+                        }
+
                         //找到name为RenderThread的线程，则返回第0个数据就是 tid
                         if (threadName == "(RenderThread)") {
+                            cpu_last_executed_render = param[38]
                             return param[0].toInt()
                         }
                     }
@@ -144,7 +162,7 @@ class ProcessInfoActivity : BaseActivity<ActivityPiBinding>() {
 
                         val str = String(buffer, 0, endIndex)
 
-                        cpu_freq+= "$str/"
+                        cpu_freq += "CPU$i:$str/ "
 
                         val freqBound = str.toInt()
                         if (freqBound > maxFreq) maxFreq = freqBound
