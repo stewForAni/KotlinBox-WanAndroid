@@ -149,7 +149,6 @@ class ProcessInfoActivity : BaseActivity<ActivityPiBinding>() {
                         stream.read(buffer)
 
                         var endIndex = 0
-                        var data = ""
 
                         //如果看成是字符串，就查ASCII码
                         //这里为了截取有效数据，只截取前面的数字部分

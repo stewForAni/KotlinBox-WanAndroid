@@ -30,9 +30,7 @@ abstract class MTTransform : AsmClassVisitorFactory<InstrumentationParameters.No
             ) {
                 super.visit(version, access, name, signature, superName, interfaces)
                 if (classFilter(cName)) {
-                    if (classFilter(cName)) {
-                        println("---classname = $cName")
-                    }
+                    println("---classname = $cName")
                 }
             }
 
@@ -44,7 +42,7 @@ abstract class MTTransform : AsmClassVisitorFactory<InstrumentationParameters.No
                 exceptions: Array<out String>?
             ): MethodVisitor {
                 val mv = super.visitMethod(access, name, descriptor, signature, exceptions)
-                if (classFilter(cName)&&methodFilter(name!!)) {
+                if (classFilter(cName) && methodFilter(name!!)) {
                     println("***method = $name")
                     return MTMethodVisitor(cName, mv, access, name, descriptor)
                 }
@@ -62,7 +60,7 @@ abstract class MTTransform : AsmClassVisitorFactory<InstrumentationParameters.No
     }
 
     fun methodFilter(mName: String): Boolean {
-        return !mName.contains("$")&&!mName.contains("<init>")
+        return !mName.contains("$") && !mName.contains("<init>")
     }
 
 }

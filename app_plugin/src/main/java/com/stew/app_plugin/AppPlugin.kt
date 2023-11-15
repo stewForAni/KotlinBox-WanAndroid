@@ -14,5 +14,6 @@ class AppPlugin :Plugin<Project>{
             it.instrumentation.transformClassesWith(MTTransform::class.java,InstrumentationScope.PROJECT) {}
             it.instrumentation.setAsmFramesComputationMode(FramesComputationMode.COMPUTE_FRAMES_FOR_INSTRUMENTED_METHODS)
         }
+
     }
 }

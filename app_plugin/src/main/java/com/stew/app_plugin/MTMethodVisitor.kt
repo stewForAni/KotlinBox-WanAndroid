@@ -21,6 +21,18 @@ class MTMethodVisitor(
     private var endTime = 0
     private var costTime = 0
 
+
+    override fun visitMethodInsn(
+        opcodeAndSource: Int,
+        owner: String?,
+        name: String?,
+        descriptor: String?,
+        isInterface: Boolean
+    ) {
+        super.visitMethodInsn(opcodeAndSource, owner, name, descriptor, isInterface)
+        println("owner:$owner / name:$name")
+    }
+
     override fun onMethodEnter() {
         super.onMethodEnter()
         //long startTime = System.currentTimeMillis();

@@ -81,6 +81,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         switchFragment(0)
         mBind.fName = "首页"
 
+        resources
     }
 
     private fun switchFragment(position: Int) {

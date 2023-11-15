@@ -26,6 +26,7 @@
         <activity android:name=".ExpActivity"/>
         <activity android:name=".exp.NativeHookActivity"/>
         <activity android:name=".exp.ProcessInfoActivity"/>
+        <activity android:name=".exp.DpActivity"/>
 
 
 

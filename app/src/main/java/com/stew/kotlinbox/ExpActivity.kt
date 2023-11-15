@@ -20,7 +20,6 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
     }
 
     override fun init() {
-
         mBind.imgBack.setOnClickListener { finish() }
 
         mBind.txNh.setOnClickListener {
@@ -32,6 +31,12 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
         mBind.txPi.setOnClickListener {
             ARouter.getInstance()
                 .build(Constants.PATH_PI)
+                .navigation()
+        }
+
+        mBind.txDp.setOnClickListener {
+            ARouter.getInstance()
+                .build(Constants.PATH_DP)
                 .navigation()
         }
 
