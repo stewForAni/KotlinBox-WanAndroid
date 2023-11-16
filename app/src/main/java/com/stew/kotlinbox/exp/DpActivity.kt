@@ -15,13 +15,13 @@ import java.lang.reflect.Proxy
  */
 @Route(path = Constants.PATH_DP)
 class DpActivity : BaseActivity<ActivityDpBinding>() {
-
-
     override fun getLayoutID(): Int {
         return R.layout.activity_dp
     }
 
     override fun init() {
+        println("MyInterface:" + MyInterface::class.java.classLoader?.toString())
+        println("Thread:" + Thread.currentThread().contextClassLoader?.toString())
         val a = MyObj()
         val p = Proxy.newProxyInstance(
             MyInterface::class.java.classLoader,
@@ -30,25 +30,29 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
         ) as MyInterface
         p.func1()
     }
-}
 
-class MyHandler(private val realObject: MyInterface) : InvocationHandler {
-    override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
-        println("----------------proxy 1----------------")
-        val a = args ?: emptyArray()
-        val result = method?.invoke(realObject, *a)
-        println("----------------proxy 2----------------")
-        return result
+    inner class MyHandler(private val realObject: MyInterface) : InvocationHandler {
+        override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
+            println("----------------proxy 1----------------")
+            mBind.t1.text = System.currentTimeMillis().toString() + "：before real fun"
+            val a = args ?: emptyArray()
+            val result = method?.invoke(realObject, *a)
+            println("----------------proxy 2----------------")
+            mBind.t3.text = System.currentTimeMillis().toString() + "：after real fun"
+            return result
+        }
+    }
+
+    interface MyInterface {
+        fun func1()
+    }
+
+    inner class MyObj : MyInterface {
+        override fun func1() {
+            println("----------------MyObj----------------")
+            mBind.t2.text = System.currentTimeMillis().toString() + "：execute real fun"
+        }
+
     }
 }
 
-interface MyInterface {
-    fun func1()
-}
-
-class MyObj : MyInterface {
-    override fun func1() {
-        println("----------------MyObj----------------")
-    }
-
-}
