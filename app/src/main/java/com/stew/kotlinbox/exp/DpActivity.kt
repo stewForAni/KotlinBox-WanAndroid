@@ -5,6 +5,8 @@ import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
 import com.stew.kotlinbox.R
 import com.stew.kotlinbox.databinding.ActivityDpBinding
+import org.koin.core.component.getScopeId
+import org.koin.core.component.getScopeName
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
@@ -20,8 +22,23 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
     }
 
     override fun init() {
-        println("MyInterface:" + MyInterface::class.java.classLoader?.toString())
-        println("Thread:" + Thread.currentThread().contextClassLoader?.toString())
+
+        mBind.imgBack.setOnClickListener { finish() }
+
+        mBind.t4.text = "no hook yet"
+
+        mBind.btn.setOnClickListener {
+            hookIActivityTaskManager()
+            println("------ hook complete ------")
+            finish()
+        }
+
+        println("MyInterface:" + MyInterface::class.java.classLoader.getScopeId())
+        println("Thread:" + Thread.currentThread().contextClassLoader.getScopeId())
+
+        mBind.t.text = "MyInterface:" + MyInterface::class.java.classLoader.getScopeId()
+        mBind.t0.text = "Thread:" + Thread.currentThread().contextClassLoader.getScopeId()
+
         val a = MyObj()
         val p = Proxy.newProxyInstance(
             MyInterface::class.java.classLoader,
@@ -29,6 +46,35 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
             MyHandler(a)
         ) as MyInterface
         p.func1()
+    }
+
+    //ActivityTaskManager.getService().startActivity(...intent...)
+    private fun hookIActivityTaskManager() {
+
+        //获取IActivityTaskManagerSingleton实例
+        val field1 = Class.forName("android.app.ActivityTaskManager")
+            .getDeclaredField("IActivityTaskManagerSingleton")
+        field1.isAccessible = true
+        val obj1 = field1.get(null)
+
+        //获取IActivityTaskManager实例
+        val field2 = Class.forName("android.util.Singleton")
+            .getDeclaredField("mInstance")
+        field2.isAccessible = true
+        val iatm = field2.get(obj1)
+
+        val proxyObj = Proxy.newProxyInstance(
+            Thread.currentThread().contextClassLoader,
+            arrayOf(Class.forName("android.app.IActivityTaskManager")),
+            object : InvocationHandler {
+                override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
+                    println("method:" + method?.name)
+                    return method?.invoke(iatm, *(args ?: emptyArray()))
+                }
+            }
+        )
+
+        field2.set(obj1, proxyObj)
     }
 
     inner class MyHandler(private val realObject: MyInterface) : InvocationHandler {
