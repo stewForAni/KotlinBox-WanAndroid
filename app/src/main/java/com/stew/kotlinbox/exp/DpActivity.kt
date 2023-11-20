@@ -1,5 +1,7 @@
 package com.stew.kotlinbox.exp
 
+import android.content.ComponentName
+import android.content.Intent
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
@@ -25,14 +27,6 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
 
         mBind.imgBack.setOnClickListener { finish() }
 
-        mBind.t4.text = "no hook yet"
-
-        mBind.btn.setOnClickListener {
-            hookIActivityTaskManager()
-            println("------ hook complete ------")
-            finish()
-        }
-
         println("MyInterface:" + MyInterface::class.java.classLoader.getScopeId())
         println("Thread:" + Thread.currentThread().contextClassLoader.getScopeId())
 
@@ -46,6 +40,19 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
             MyHandler(a)
         ) as MyInterface
         p.func1()
+
+
+        //------------------------------------------------------------------------------------
+
+        //PluginActvity 替换成 ProxyActivity
+        hookIActivityTaskManager()
+        //ProxyActivity 还原成 PluginActvity
+        hookActivityThreadH()
+        mBind.t4.text = "hook iatm and activityThread-H"
+        mBind.btn.setOnClickListener {
+            finish()
+        }
+
     }
 
     //ActivityTaskManager.getService().startActivity(...intent...)
@@ -65,17 +72,41 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
 
         val proxyObj = Proxy.newProxyInstance(
             Thread.currentThread().contextClassLoader,
-            arrayOf(Class.forName("android.app.IActivityTaskManager")),
-            object : InvocationHandler {
-                override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
-                    println("method:" + method?.name)
-                    return method?.invoke(iatm, *(args ?: emptyArray()))
+            arrayOf(Class.forName("android.app.IActivityTaskManager"))
+        ) { proxy, method, args ->
+            println("method:" + method?.name)
+            if (method.name.equals("startActivity")) {
+                for (i in args.indices) {
+                    if (args[i] is Intent) {
+                        val pluginIntent = args[i] as Intent //plugin activity intent
+                        val newIntent = Intent()
+                        newIntent.component = ComponentName("com.stew.kotlinbox.exp",ProxyActivity::javaClass.name)
+                        newIntent.putExtra("",pluginIntent)
+                        args[i] = newIntent
+                        break
+                    }
                 }
+
             }
-        )
+            method?.invoke(iatm, *(args ?: emptyArray()))
+        }
 
         field2.set(obj1, proxyObj)
     }
+
+    private fun hookActivityThreadH() {
+
+    }
+
+
+
+
+
+
+
+    //------------------------------------------------------------------------------------
+
+
 
     inner class MyHandler(private val realObject: MyInterface) : InvocationHandler {
         override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
