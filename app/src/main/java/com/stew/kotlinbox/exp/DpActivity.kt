@@ -2,6 +2,8 @@ package com.stew.kotlinbox.exp
 
 import android.content.ComponentName
 import android.content.Intent
+import android.os.Handler.Callback
+import android.os.Message
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
@@ -9,9 +11,12 @@ import com.stew.kotlinbox.R
 import com.stew.kotlinbox.databinding.ActivityDpBinding
 import org.koin.core.component.getScopeId
 import org.koin.core.component.getScopeName
+import java.io.File
+import java.lang.reflect.Field
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
+import java.util.logging.Handler
 
 /**
  * Created by stew on 2023/11/15.
@@ -44,10 +49,11 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
 
         //------------------------------------------------------------------------------------
 
-        //PluginActvity 替换成 ProxyActivity
+        //PluginActvity 替换成 ProxyActivity（binder传递消息到AMS之前）
         hookIActivityTaskManager()
-        //ProxyActivity 还原成 PluginActvity
+        //ProxyActivity 还原成 PluginActvity（handler处理消息之前，关键点：intent初始化于LaunchActivityItem中）
         hookActivityThreadH()
+
         mBind.t4.text = "hook iatm and activityThread-H"
         mBind.btn.setOnClickListener {
             finish()
@@ -80,8 +86,9 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
                     if (args[i] is Intent) {
                         val pluginIntent = args[i] as Intent //plugin activity intent
                         val newIntent = Intent()
-                        newIntent.component = ComponentName("com.stew.kotlinbox.exp",ProxyActivity::javaClass.name)
-                        newIntent.putExtra("",pluginIntent)
+                        newIntent.component =
+                            ComponentName("com.stew.kotlinbox.exp", ProxyActivity::javaClass.name)
+                        newIntent.putExtra("DPTEST", pluginIntent)
                         args[i] = newIntent
                         break
                     }
@@ -95,17 +102,49 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
     }
 
     private fun hookActivityThreadH() {
+        val atField =
+            Class.forName("android.app.ActivityThread").getDeclaredField("sCurrentActivityThread")
+        atField.isAccessible = true
+        val at = atField.get(null)
+
+        val hField = Class.forName("android.app.ActivityThread").getDeclaredField("mH")
+        hField.isAccessible = true
+        val handler: Handler = hField.get(at) as Handler
+
+        val callbackField = Class.forName("android.os.Handler").getDeclaredField("mCallback")
+        callbackField.isAccessible = true
+
+        val myCallBack = Callback {
+            when (it.what) {
+                159 -> {
+                    val mActivityCallbacksField: Field =
+                        it.obj.javaClass.getDeclaredField("mActivityCallbacks")
+                    mActivityCallbacksField.isAccessible = true
+                    val mActivityCallbacks: Array<Any> =
+                        mActivityCallbacksField.get(it.obj) as Array<Any>
+                    for (i in mActivityCallbacks.indices) {
+                        if (mActivityCallbacks[i].javaClass.name.equals("android.app.servertransaction.LaunchActivityItem")) {
+                            val launchItem = mActivityCallbacks[i]
+                            val intentFiled = launchItem.javaClass.getDeclaredField("mIntent")
+                            intentFiled.isAccessible = true
+                            val intent: Intent = intentFiled.get(launchItem) as Intent
+                            val pluginIntent: Intent? = intent.getParcelableExtra("DPTEST")
+                            if (pluginIntent != null) {
+                                intentFiled.set(launchItem, pluginIntent)
+                            }
+                        }
+                    }
+                }
+            }
+            return@Callback false
+        }
+
+        callbackField.set(handler, myCallBack)
 
     }
 
 
-
-
-
-
-
     //------------------------------------------------------------------------------------
-
 
 
     inner class MyHandler(private val realObject: MyInterface) : InvocationHandler {
