@@ -27,17 +27,17 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
 
     override fun init() {
 
-//        mBind.imgBack.setOnClickListener { finish() }
-//        mBind.t.text = "MyInterface:" + MyInterface::class.java.classLoader.getScopeId()
-//        mBind.t0.text = "Thread:" + Thread.currentThread().contextClassLoader.getScopeId()
-//
-//        val a = MyObj()
-//        val p = Proxy.newProxyInstance(
-//            MyInterface::class.java.classLoader,
-//            arrayOf(MyInterface::class.java),
-//            MyHandler(a)
-//        ) as MyInterface
-//        p.func1()
+        mBind.imgBack.setOnClickListener { finish() }
+        mBind.t.text = "MyInterface:" + MyInterface::class.java.classLoader.getScopeId()
+        mBind.t0.text = "Thread:" + Thread.currentThread().contextClassLoader.getScopeId()
+
+        val a = MyObj()
+        val p = Proxy.newProxyInstance(
+            MyInterface::class.java.classLoader,
+            arrayOf(MyInterface::class.java),
+            MyHandler(a)
+        ) as MyInterface
+        p.func1()
 
 
         //------------------------------------------------------------------------------------
@@ -73,29 +73,37 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
         val proxyObj = Proxy.newProxyInstance(
             Thread.currentThread().contextClassLoader,
             arrayOf(Class.forName("android.app.IActivityTaskManager"))
-        ) { proxy, method, args ->
+        ) { _, method, args ->
+
             if (method.name.equals("startActivity")) {
                 for (i in args.indices) {
                     if (args[i] is Intent) {
                         val pluginIntent = args[i] as Intent //plugin activity intent
-                        println("----------------current activity：" + pluginIntent.component?.packageName + "/" + pluginIntent.component?.className)
+                        println("----current activity：" + pluginIntent.component?.className)
                         val newIntent = Intent()
-                        newIntent.component =
-                            ComponentName("com.stew.kotlinbox.exp", ProxyActivity::javaClass.name)
+                        //这里需要注意是包名，不是包路径
+                        newIntent.component = ComponentName("com.stew.kotlinbox", ProxyActivity::class.java.name)
                         newIntent.putExtra("DPTEST", pluginIntent)
                         args[i] = newIntent
                         break
                     }
                 }
             }
-            return@newProxyInstance method?.invoke(iatm, *(args ?: emptyArray()))
+
+            val a = args ?: emptyArray()
+            val r = method?.invoke(iatm, *(a))
+            if (method.name.equals("startActivity")) {
+                println("----$method.name / $r")
+            }
+            return@newProxyInstance r
         }
 
         field2.set(obj1, proxyObj)
     }
 
     private fun hookActivityThreadH() {
-        val atField = Class.forName("android.app.ActivityThread").getDeclaredField("sCurrentActivityThread")
+        val atField =
+            Class.forName("android.app.ActivityThread").getDeclaredField("sCurrentActivityThread")
         atField.isAccessible = true
         val at = atField.get(null)
 
@@ -141,25 +149,25 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
     //------------------------------------------------------------------------------------
 
 
-//    inner class MyHandler(private val realObject: MyInterface) : InvocationHandler {
-//        override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
-//            mBind.t1.text = System.currentTimeMillis().toString() + "：before real fun"
-//            val a = args ?: emptyArray()
-//            val result = method?.invoke(realObject, *a)
-//            mBind.t3.text = System.currentTimeMillis().toString() + "：after real fun"
-//            return result
-//        }
-//    }
-//
-//    interface MyInterface {
-//        fun func1()
-//    }
-//
-//    inner class MyObj : MyInterface {
-//        override fun func1() {
-//            mBind.t2.text = System.currentTimeMillis().toString() + "：execute real fun"
-//        }
-//
-//    }
+    inner class MyHandler(private val realObject: MyInterface) : InvocationHandler {
+        override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
+            mBind.t1.text = System.currentTimeMillis().toString() + "：before real fun"
+            val a = args ?: emptyArray()
+            val result = method?.invoke(realObject, *a)
+            mBind.t3.text = System.currentTimeMillis().toString() + "：after real fun"
+            return result
+        }
+    }
+
+    interface MyInterface {
+        fun func1()
+    }
+
+    inner class MyObj : MyInterface {
+        override fun func1() {
+            mBind.t2.text = System.currentTimeMillis().toString() + "：execute real fun"
+        }
+
+    }
 }
 
