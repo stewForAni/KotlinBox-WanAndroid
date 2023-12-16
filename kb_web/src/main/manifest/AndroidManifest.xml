@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stew.kb_web">
     <application>
-        <activity android:name="com.stew.kb_web.ui.WebActivity"/>
+        <activity android:name="com.stew.kb_web.ui.WebActivity"
+            android:process=":myweb"/>
     </application>
 </manifest>

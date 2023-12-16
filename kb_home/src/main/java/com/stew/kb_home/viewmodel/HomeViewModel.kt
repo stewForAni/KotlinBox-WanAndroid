@@ -10,6 +10,7 @@ import com.stew.kb_home.repo.HomeRepo
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.zip
 
 /**
  * Created by stew on 7/30/22.
@@ -26,22 +27,35 @@ class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
         repo.getBanner(bannerList)
         Log.d("TestSus", "vm2")
     }
+
     fun getArticle(currentPage: Int) = launch { repo.getArticle(currentPage, article) }
     fun collect(id: Int) = launch { repo.collect(id, collectData) }
     fun unCollect(id: Int) = launch { repo.unCollect(id, collectData) }
 
 
     //flow test
-    fun getBannerByFlow() = launch {
-        repo.getBannerByFlow().onStart {
-            Log.d("HomeViewModel", "getBannerByFlow start")
-        }.onCompletion {
-            Log.d("HomeViewModel", "getBannerByFlow end")
-        }.collectLatest {
+    fun getDataByFlow() = launch {
 
-            it.responseState = BaseResp.ResponseState.REQUEST_SUCCESS
-            bannerList.value = it
-            Log.d("HomeViewModel", "getBannerByFlow success")
+        val startTime = System.currentTimeMillis()
+
+//        repo.getBannerByFlow().onStart {
+//            Log.d("HomeViewModel", "getBannerByFlow start")
+//        }.onCompletion {
+//            Log.d("HomeViewModel", "getBannerByFlow end")
+//        }.collectLatest {
+//            it.responseState = BaseResp.ResponseState.REQUEST_SUCCESS
+//            bannerList.value = it
+//            Log.d("HomeViewModel", "getBannerByFlow success")
+//        }
+
+        repo.getBannerByFlow().zip(repo.getArticleByFlow(0)) { Bbanner, Barticle ->
+            Bbanner.responseState = BaseResp.ResponseState.REQUEST_SUCCESS
+            bannerList.value = Bbanner
+            Barticle.responseState = BaseResp.ResponseState.REQUEST_SUCCESS
+            article.value = Barticle
+        }.collect{
+            Log.d("FlowTest", "Time: "+(System.currentTimeMillis()-startTime))
         }
+
     }
 }

@@ -1,15 +1,14 @@
 package com.stew.kb_home.repo
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.stew.kb_common.base.BaseRepository
-import com.stew.kb_common.base.BaseViewModel
 import com.stew.kb_common.network.BaseResp
 import com.stew.kb_common.network.RespStateData
 import com.stew.kb_home.api.HomeApi
 import com.stew.kb_home.bean.Article
 import com.stew.kb_home.bean.Banner
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -40,11 +39,17 @@ class HomeRepo(private val api: HomeApi) : BaseRepository() {
 
     //flow test
     fun getBannerByFlow():Flow<BaseResp<List<Banner>>>{
-        Log.d("HomeViewModel", "repo1")
         return flow {
-            Log.d("HomeViewModel", "repo2")
+//            delay(5000)
             val resp = api.getBanner()
-            Log.d("HomeViewModel", "repo3")
+            emit(resp)
+        }.flowOn(Dispatchers.IO)
+    }
+
+    fun getArticleByFlow(currentPage: Int):Flow<BaseResp<Article>>{
+        return flow {
+            //delay(5000)
+            val resp = api.getArticleList(currentPage,10)
             emit(resp)
         }.flowOn(Dispatchers.IO)
     }

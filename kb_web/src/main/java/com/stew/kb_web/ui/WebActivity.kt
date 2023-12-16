@@ -9,11 +9,15 @@ import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
 import com.stew.kb_web.R
 import com.stew.kb_web.databinding.ActivityWebBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.lang.NullPointerException
 
 /**
  * Created by stew on 8/18/22.
@@ -40,7 +44,14 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
         mBind.imgBack.setOnClickListener { finish() }
         mBind.txWebTitle.text = t
 
-
+        //模拟崩溃
+        //-------------------------------------------------
+//        lifecycleScope.launch {
+//            delay(5000)
+//            val a = mutableListOf<Int>()
+//            a[100]
+//        }
+        //-------------------------------------------------
 
         web = WebView(applicationContext)
         mBind.webContainer.addView(web)

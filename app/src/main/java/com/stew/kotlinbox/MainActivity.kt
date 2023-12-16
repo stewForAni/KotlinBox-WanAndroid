@@ -78,7 +78,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             MyCollectFragment()
         )
 
-        //switchFragment(0)
+        switchFragment(0)
         mBind.fName = "首页"
 
         resources
