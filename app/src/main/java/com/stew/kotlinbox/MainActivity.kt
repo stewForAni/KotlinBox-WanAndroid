@@ -1,18 +1,11 @@
 package com.stew.kotlinbox
 
-import android.content.Intent
-import android.os.Bundle
-import android.os.Debug
-import android.os.Trace
-import android.util.Log
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
 import com.stew.kb_common.util.KVUtil
-import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_home.ui.HomeFragment
 import com.stew.kb_me.ui.MyCollectFragment
 import com.stew.kb_navigation.ui.MainFragment
@@ -44,10 +37,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mBind.bnv.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.f1 -> {
-//                    Log.d("mem_info_test", Runtime.getRuntime().totalMemory().toString())
-//                    Log.d("mem_info_test", Runtime.getRuntime().freeMemory().toString())
-//                    Log.d("mem_info_test", Debug.getNativeHeapSize().toString())
-//                    Log.d("mem_info_test", Debug.getNativeHeapFreeSize().toString())
                     switchFragment(0)
                     mBind.fName = "首页"
                     return@setOnItemSelectedListener true
@@ -80,8 +69,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         switchFragment(0)
         mBind.fName = "首页"
-
-        resources
     }
 
     private fun switchFragment(position: Int) {
