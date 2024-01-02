@@ -10,7 +10,7 @@
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_stew_kb_1common_exp_TestMallocUtil_TestMalloc(JNIEnv *env, jobject thiz) {
+Java_com_stew_kb_1exp_util_TestMallocUtil_TestMalloc(JNIEnv *env, jobject thiz) {
 LOGD("------ TestMalloc ------");
 malloc(88*1024*1024);
 }

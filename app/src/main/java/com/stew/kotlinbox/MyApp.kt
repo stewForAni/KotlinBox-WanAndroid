@@ -38,12 +38,6 @@ class MyApp : Application() {
         initARouter()
         initMMKV()
         AppLogUtil.init(this)
-
-        //先init，再加载so，因为so文件中的方法需要btyehook先初始化
-        ByteHook.init()
-        System.loadLibrary("hookmalloc")
-        System.loadLibrary("testmalloc")
-
     }
 
     private fun initMMKV() {

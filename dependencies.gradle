@@ -113,7 +113,6 @@ dependencies {
     //mmkv
     implementation "com.tencent:mmkv:1.2.10"
 
-
     //bhook
     implementation "com.bytedance:bytehook:1.0.9"
 

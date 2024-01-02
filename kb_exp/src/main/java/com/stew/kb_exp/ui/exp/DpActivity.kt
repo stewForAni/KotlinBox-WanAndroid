@@ -1,4 +1,4 @@
-package com.stew.kotlinbox.exp
+package com.stew.kb_exp.ui.exp
 
 import android.content.ComponentName
 import android.content.Intent
@@ -7,8 +7,8 @@ import android.os.Handler.Callback
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
-import com.stew.kotlinbox.R
-import com.stew.kotlinbox.databinding.ActivityDpBinding
+import com.stew.kb_exp.R
+import com.stew.kb_exp.databinding.ActivityDpBinding
 import org.koin.core.component.getScopeId
 import java.lang.reflect.Field
 import java.lang.reflect.InvocationHandler

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blacke"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            style="@style/style_common_top_layout">
+
+            <ImageView
+                android:id="@+id/img_back"
+                style="@style/style_common_top_layout_icon"
+                android:src="@drawable/icon_back" />
+
+            <TextView
+                style="@style/style_common_top_layout_title"
+                android:layout_toEndOf="@id/img_back"
+                android:text="Dynamic load so" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

@@ -1,17 +1,16 @@
-package com.stew.kotlinbox.exp
+package com.stew.kb_home.ui
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.stew.kotlinbox.R
+import com.stew.kb_home.R
 
 /**
- * Created by stew on 2023/11/20.
+ * Created by stew on 2024/1/2.
  * mail: stewforani@gmail.com
  */
-public class ProxyActivity : Activity(){
+class HomeTestActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_proxy)
+        setContentView(R.layout.activity_hometest)
     }
 }

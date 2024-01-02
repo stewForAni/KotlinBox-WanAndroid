@@ -2,4 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stew.kb_home">
 
+    <application>
+        <!--        如果是application 当前module还要添加相应的启动XXXXActivity-->
+        <!--        <activity android:name="XXXXActivity">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
+    </application>
+
 </manifest>

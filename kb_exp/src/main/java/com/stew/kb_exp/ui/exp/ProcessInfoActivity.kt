@@ -1,20 +1,17 @@
-package com.stew.kotlinbox.exp
+package com.stew.kb_exp.ui.exp
 
 import android.os.Process
-import android.util.Log
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
-import com.stew.kotlinbox.R
-import com.stew.kotlinbox.databinding.ActivityPiBinding
-import okio.Utf8
+import com.stew.kb_exp.R
+import com.stew.kb_exp.databinding.ActivityPiBinding
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileFilter
 import java.io.FileInputStream
 import java.io.FileReader
 import java.io.IOException
-import java.nio.charset.StandardCharsets
 
 
 /**

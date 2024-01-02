@@ -1,6 +1,4 @@
-package com.stew.kb_common.exp
-
-import com.bytedance.android.bytehook.ByteHook
+package com.stew.kb_exp.util
 
 /**
  * Created by stew on 2023/10/19.

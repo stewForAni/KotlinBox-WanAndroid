@@ -1,23 +1,12 @@
-package com.stew.kotlinbox
+package com.stew.kb_exp.ui
 
 import android.util.Log
-import android.widget.TextView
-import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.bytedance.android.bytehook.ByteHook
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
-import com.stew.kotlinbox.databinding.ActivityExpBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.buffer
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.conflate
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import com.stew.kb_exp.R
+import com.stew.kb_exp.databinding.ActivityExpBinding
 
 /**
  * Created by stew on 2023/10/18.
@@ -51,11 +40,19 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
                 .navigation()
         }
 
+        mBind.txDs.setOnClickListener {
+            ARouter.getInstance()
+                .build(Constants.PATH_DS)
+                .navigation()
+        }
+
         testSth()
 
     }
 
     private fun testSth() {
+
+        Log.d("ExpActivity", "getFilesDir: $filesDir")
 
 //        Log.d("mem_info_test", Runtime.getRuntime().totalMemory().toString())
 //        Log.d("mem_info_test", Runtime.getRuntime().freeMemory().toString())
@@ -75,22 +72,21 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
 //            }
 //        }
 
-        val flow = flow<Int> {
-            (1..5).forEach {
-                emit(it)
-            }
-        }
-        lifecycleScope.launch {
-            flow.collect {
-                Log.d(TAG, "testFlow 第一个收集器: 我是冷流：$it")
-            }
-        }
-        lifecycleScope.launch {
-            flow.collect {
-                Log.d(TAG, "testFlow:第二个收集器 我是冷流：$it")
-            }
-        }
-
+//        val flow = flow<Int> {
+//            (1..5).forEach {
+//                emit(it)
+//            }
+//        }
+//        lifecycleScope.launch {
+//            flow.collect {
+//                Log.d(TAG, "testFlow 第一个收集器: 我是冷流：$it")
+//            }
+//        }
+//        lifecycleScope.launch {
+//            flow.collect {
+//                Log.d(TAG, "testFlow:第二个收集器 我是冷流：$it")
+//            }
+//        }
 
     }
 

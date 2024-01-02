@@ -25,7 +25,7 @@ void *malloc_proxy(size_t s) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_stew_kb_1common_exp_TestMallocUtil_StartMalloc(JNIEnv *env, jobject thiz) {
+Java_com_stew_kb_1exp_util_TestMallocUtil_StartMalloc(JNIEnv *env, jobject thiz) {
     LOGD("------ StartMalloc ------");
     if (ifHook) {
         return;

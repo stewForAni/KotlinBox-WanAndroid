@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.stew.kb_me">
+    package="com.stew.kb_exp">
     <application>
         <!--        如果是application 当前module还要添加相应的启动XXXXActivity-->
         <!--        <activity android:name="XXXXActivity">-->

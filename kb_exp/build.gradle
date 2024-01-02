@@ -18,6 +18,28 @@ android {
             }
         }
     }
+
+    defaultConfig {
+        externalNativeBuild {
+            cmake {
+                cppFlags ''
+                abiFilters 'arm64-v8a'
+                //armeabi-v7a
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.22.1'
+        }
+    }
+
+    packagingOptions {
+        exclude 'lib/arm64-v8a/libhookmalloc.so'
+        exclude 'lib/arm64-v8a/libtestmalloc.so'
+    }
 }
 
 dependencies {
