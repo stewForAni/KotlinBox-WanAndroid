@@ -27,6 +27,28 @@
 
         </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/style_exp_common_text"
+                android:background="@drawable/shape_10dp_white"
+                android:layout_height="150dp"
+                android:lineHeight="40sp"
+                android:text="This test is only working with that \n the path [getExternalFilesDir] \n has so file" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/tx_so"
+                style="@style/style_exp_common_text"
+                android:background="@drawable/shape_10dp_white"
+                android:text="Load so" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </layout>

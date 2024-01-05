@@ -116,6 +116,8 @@ dependencies {
     //bhook
     implementation "com.bytedance:bytehook:1.0.9"
 
+    //nio
+    implementation 'commons-io:commons-io:2.14.0'
 
 
 

@@ -20,9 +20,8 @@ class NativeHookActivity : BaseActivity<ActivityNhBinding>() {
     }
 
     override fun init() {
-
-
-        //先init，再加载so，因为so文件中的方法需要  btyehook先行初始化
+//        注意：此处so文件也被动态加载so测试所使用（DsActivity）
+//        先init，再加载so，因为so文件中的方法需要  btyehook先行初始化
 //        ByteHook.init()
 //        System.loadLibrary("hookmalloc")
 //        System.loadLibrary("testmalloc")

@@ -52,8 +52,6 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
 
     private fun testSth() {
 
-        Log.d("ExpActivity", "getFilesDir: $filesDir")
-
 //        Log.d("mem_info_test", Runtime.getRuntime().totalMemory().toString())
 //        Log.d("mem_info_test", Runtime.getRuntime().freeMemory().toString())
 //        Log.d("mem_info_test", Debug.getNativeHeapSize().toString())
