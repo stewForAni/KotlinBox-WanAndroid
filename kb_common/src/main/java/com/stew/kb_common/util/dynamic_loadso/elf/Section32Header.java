@@ -13,23 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.stew.kb_common.util.ds.elf;
+package com.stew.kb_common.util.dynamic_loadso.elf;
 
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class Program64Header extends Elf.ProgramHeader {
-    public Program64Header(final ElfParser parser, final Elf.Header header, final long index)
+public class Section32Header extends Elf.SectionHeader {
+    public Section32Header(final ElfParser parser, final Elf.Header header, final int index)
             throws IOException {
-        final ByteBuffer buffer = ByteBuffer.allocate(8);
+        final ByteBuffer buffer = ByteBuffer.allocate(4);
         buffer.order(header.bigEndian ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN);
 
-        final long baseOffset = header.phoff + (index * header.phentsize);
-        type = parser.readWord(buffer, baseOffset);
-        offset = parser.readLong(buffer, baseOffset + 0x8);
-        vaddr = parser.readLong(buffer, baseOffset + 0x10);
-        memsz = parser.readLong(buffer, baseOffset + 0x28);
+        info = parser.readWord(buffer, header.shoff + (index * header.shentsize) + 0x1C);
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.stew.kb_common.util.ds;
+package com.stew.kb_common.util.dynamic_loadso;
 
 import android.os.Build;
 import android.util.Log;
@@ -30,6 +30,7 @@ import java.util.List;
 
 
 public class LoadLibraryUtils {
+
    private static final String TAG = "LoadLibrary";
 
    public static void installNativeLibraryPath(ClassLoader classLoader, File folder)

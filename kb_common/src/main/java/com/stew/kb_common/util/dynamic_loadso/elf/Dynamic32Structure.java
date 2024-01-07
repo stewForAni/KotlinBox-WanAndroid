@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.stew.kb_common.util.ds.elf;
-
+package com.stew.kb_common.util.dynamic_loadso.elf;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class Dynamic64Structure extends Elf.DynamicStructure {
-    public Dynamic64Structure(final ElfParser parser, final Elf.Header header,
+public class Dynamic32Structure extends Elf.DynamicStructure {
+    public Dynamic32Structure(final ElfParser parser, final Elf.Header header,
                               long baseOffset, final int index) throws IOException {
-        final ByteBuffer buffer = ByteBuffer.allocate(8);
+        final ByteBuffer buffer = ByteBuffer.allocate(4);
         buffer.order(header.bigEndian ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN);
 
-        baseOffset = baseOffset + (index * 16);
-        tag = parser.readLong(buffer, baseOffset);
-        val = parser.readLong(buffer, baseOffset + 0x8);
+        baseOffset = baseOffset + (index * 8);
+        tag = parser.readWord(buffer, baseOffset);
+        val = parser.readWord(buffer, baseOffset + 0x4);
     }
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.stew.kb_common.util.ds.elf;
+package com.stew.kb_common.util.dynamic_loadso.elf;
 
 
 

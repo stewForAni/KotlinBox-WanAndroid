@@ -1,4 +1,4 @@
-package com.stew.kb_common.util.ds;
+package com.stew.kb_common.util.dynamic_loadso;
 
 import android.content.Context;
 
