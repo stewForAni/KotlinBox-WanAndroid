@@ -30,5 +30,8 @@ class Constants {
         const val HTTP_SUCCESS = 0
         const val HTTP_AUTH_INVALID = -1001
 
+        //dynamic load so
+        var isSoLoad = false
+
     }
 }

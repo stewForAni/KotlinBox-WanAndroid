@@ -5,8 +5,10 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
+import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_exp.R
 import com.stew.kb_exp.databinding.ActivityExpBinding
+import java.io.File
 
 /**
  * Created by stew on 2023/10/18.
@@ -23,9 +25,13 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
         mBind.imgBack.setOnClickListener { finish() }
 
         mBind.txNh.setOnClickListener {
-            ARouter.getInstance()
-                .build(Constants.PATH_NH)
-                .navigation()
+            if (File(filesDir.absoluteFile.toString() + "/kb_so").exists()) {
+                ARouter.getInstance()
+                    .build(Constants.PATH_NH)
+                    .navigation()
+            } else {
+                ToastUtil.showMsg("so not download，pls execute dynamic load so first!")
+            }
         }
 
         mBind.txPi.setOnClickListener {

@@ -79,6 +79,7 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
                 if (!l.equals(request?.url)) {
                     Log.d(TAG, "shouldOverrideUrlLoading: =====3")
                     startActivity(
+                        //如果没有自带浏览器，会崩溃，这里可以做一下规避处理
                         Intent(Intent.ACTION_VIEW, Uri.parse(request?.url.toString()))
                     )
                     return true
