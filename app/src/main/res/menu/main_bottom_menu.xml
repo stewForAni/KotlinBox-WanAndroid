@@ -3,19 +3,19 @@
     <item
         android:id="@+id/f1"
         android:icon="@drawable/icon_1"
-        android:title="首页" />
+        android:title="@string/tab_home" />
     <item
         android:id="@+id/f2"
         android:icon="@drawable/icon_2"
-        android:title="项目" />
+        android:title="@string/tab_project" />
     <item
         android:id="@+id/f3"
         android:icon="@drawable/icon_3"
-        android:title="导航" />
+        android:title="@string/tab_navi" />
     <item
         android:id="@+id/f4"
         android:icon="@drawable/icon_4"
-        android:title="收藏" />
+        android:title="@string/tab_collect" />
 
 <!--    https://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.d9df05512&cid=40627-->
 </menu>

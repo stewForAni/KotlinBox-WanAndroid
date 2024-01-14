@@ -36,9 +36,7 @@ object KVUtil {
 
     fun remove(key: String) = kv.remove(key)
 
-
     //------------------------------------------------------------------------
-
 
     fun <T : Parcelable> putParcelable(key: String, t: T): Boolean {
         return kv.encode(key, t)

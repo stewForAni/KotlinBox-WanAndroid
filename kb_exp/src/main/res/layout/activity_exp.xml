@@ -64,6 +64,13 @@
                     android:background="@drawable/shape_10dp_white"
                     android:text="Dynamic load so" />
 
+                <TextView
+                    android:id="@+id/tx_dm"
+                    style="@style/style_exp_common_text"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_10dp_white"
+                    android:text="Dark Mode" />
+
             </LinearLayout>
 
         </ScrollView>

@@ -37,10 +37,10 @@
                     android:text="@{f_name}" />
 
                 <ImageView
-                    android:id="@+id/img_exp"
+                    android:id="@+id/img_box"
                     style="@style/style_common_top_layout_icon"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/icon_experiment" />
+                    android:src="@drawable/icon_box" />
 
             </RelativeLayout>
 

@@ -25,6 +25,7 @@ class Constants {
         //kv
         const val USER_NAME: String = "user_name"
         const val USER_COOKIE: String = "user_cookie"
+        const val USER_DARK_MODE: String = "user_dark_mode"
 
         //http
         const val HTTP_SUCCESS = 0

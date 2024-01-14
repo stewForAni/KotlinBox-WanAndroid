@@ -12,6 +12,7 @@ import com.stew.kb_user.databinding.ActivityLoginBinding
 import com.stew.kb_user.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 /**
  * Created by stew on 8/21/22.
  * mail: stewforani@gmail.com
@@ -26,9 +27,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     override fun init() {
-        loginViewModel.loginData.observe(this, object :BaseStateObserver<LoginBean>(null){
+        loginViewModel.loginData.observe(this, object : BaseStateObserver<LoginBean>(null) {
             override fun getRespDataSuccess(it: LoginBean) {
-                KVUtil.put(Constants.USER_NAME,it.username)
+                KVUtil.put(Constants.USER_NAME, it.username)
                 ToastUtil.showMsg("登陆成功！")
                 finish()
             }

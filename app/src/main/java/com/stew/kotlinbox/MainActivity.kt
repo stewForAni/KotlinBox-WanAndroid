@@ -1,10 +1,21 @@
 package com.stew.kotlinbox
 
+import android.annotation.SuppressLint
+import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseActivity
+import com.stew.kb_common.util.AppCommonUitl
 import com.stew.kb_common.util.Constants
+import com.stew.kb_common.util.Extension.dp2px
 import com.stew.kb_common.util.KVUtil
 import com.stew.kb_home.ui.HomeFragment
 import com.stew.kb_me.ui.MyCollectFragment
@@ -15,60 +26,119 @@ import com.stew.kotlinbox.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    lateinit var fragmentList: MutableList<Fragment>
+    private lateinit var fragmentList: MutableList<Fragment>
     var oldFragmentIndex: Int = 0
+    private var pw: PopupWindow? = null
+
+    var f1: Fragment? = null
+    var f2: Fragment? = null
+    var f3: Fragment? = null
+    var f4: Fragment? = null
 
     override fun getLayoutID(): Int {
         return R.layout.activity_main
     }
 
+    @SuppressLint("MissingSuperCall")
+    override fun onSaveInstanceState(outState: Bundle) {
+        //super.onSaveInstanceState(outState)
+    }
+
     override fun init() {
+
+        Log.d(TAG, "getSystemDarkMode: " + AppCommonUitl.getSystemDarkMode())
 
         mBind.imgDraw.setOnClickListener {
             mBind.dl.open()
         }
 
-        mBind.imgExp.setOnClickListener {
-            ARouter.getInstance()
-                .build(Constants.PATH_EXP)
-                .navigation()
+        mBind.imgBox.setOnClickListener {
+            showPop()
         }
 
         mBind.bnv.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.f1 -> {
                     switchFragment(0)
-                    mBind.fName = "首页"
+                    mBind.fName = resources.getString(R.string.tab_home)
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.f2 -> {
                     switchFragment(1)
-                    mBind.fName = "项目"
+                    mBind.fName = resources.getString(R.string.tab_project)
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.f3 -> {
                     switchFragment(2)
-                    mBind.fName = "导航"
+                    mBind.fName = resources.getString(R.string.tab_navi)
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.f4 -> {
                     switchFragment(3)
-                    mBind.fName = "收藏"
+                    mBind.fName = resources.getString(R.string.tab_collect)
                     return@setOnItemSelectedListener true
                 }
             }
             false
         }
 
-        fragmentList = mutableListOf(
-            HomeFragment(),
-            ProjectFragment(),
-            MainFragment(),
-            MyCollectFragment()
-        )
+        initFragment()
+        fragmentList = mutableListOf(f1!!, f2!!, f3!!, f4!!)
 
         switchFragment(0)
-        mBind.fName = "首页"
+        mBind.fName = resources.getString(R.string.tab_home)
+    }
+
+    private fun initFragment() {
+        if (f1 == null) {
+            f1 = HomeFragment()
+        }
+        if (f2 == null) {
+            f2 = ProjectFragment()
+        }
+        if (f3 == null) {
+            f3 = MainFragment()
+        }
+        if (f4 == null) {
+            f4 = MyCollectFragment()
+        }
+    }
+
+    private fun showPop() {
+        if (pw == null) {
+            val v = LayoutInflater.from(this).inflate(R.layout.layout_main_pop, null, false)
+            pw = PopupWindow(
+                v, 160.dp2px(),
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true
+            )
+            pw!!.isOutsideTouchable = true
+            v.findViewById<LinearLayout>(R.id.ll_exp).setOnClickListener {
+                pw!!.dismiss()
+                ARouter.getInstance()
+                    .build(Constants.PATH_EXP)
+                    .navigation()
+            }
+            v.findViewById<LinearLayout>(R.id.ll_dm).setOnClickListener {
+                pw!!.dismiss()
+                switchDarkMode()
+            }
+        }
+        val x = resources.displayMetrics.widthPixels - pw!!.width - 20
+        pw!!.showAtLocation(mBind.imgBox, Gravity.NO_GRAVITY, x, 80.dp2px())
+    }
+
+    private fun switchDarkMode() {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            KVUtil.put(Constants.USER_DARK_MODE, AppCompatDelegate.MODE_NIGHT_NO)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            KVUtil.put(Constants.USER_DARK_MODE, AppCompatDelegate.MODE_NIGHT_YES)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
     private fun switchFragment(position: Int) {

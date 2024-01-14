@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">KotlinBox</string>
+    <string name="tab_home">Home</string>
+    <string name="tab_project">Project</string>
+    <string name="tab_navi">Navigation</string>
+    <string name="tab_collect">Collect</string>
+    <string name="tx_pop_exp">Experiment</string>
+    <string name="tx_dark_mode">DarkMode</string>
+    <string name="tx_switch_theme">SwitchTheme</string>
 </resources>

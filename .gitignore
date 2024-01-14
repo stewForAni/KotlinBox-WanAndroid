@@ -17,3 +17,4 @@ local.properties
 app/release
 proguardMapping.txt
 app_plugin_repo
+app_plugin

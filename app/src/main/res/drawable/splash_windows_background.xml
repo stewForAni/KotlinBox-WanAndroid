@@ -7,7 +7,7 @@
     </item>
     <item android:gravity="center">
         <bitmap
-            android:src="@drawable/icon_splash_window"
+            android:src="@drawable/ic_launcher"
             android:tileMode="disabled" />
     </item>
 </layer-list>
