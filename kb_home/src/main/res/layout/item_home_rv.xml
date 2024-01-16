@@ -7,13 +7,14 @@
     android:layout_marginTop="4dp"
     android:layout_marginRight="10dp"
     android:layout_marginBottom="6dp"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="2dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@color/home_rv_item"
         android:padding="16dp">
 
         <LinearLayout
@@ -68,7 +69,7 @@
             android:gravity="center_vertical"
             android:maxLines="2"
             android:text="@string/n_a"
-            android:textColor="@color/theme_color"
+            android:textColor="@color/home_rv_item_title"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"

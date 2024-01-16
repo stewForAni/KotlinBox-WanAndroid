@@ -1,6 +1,8 @@
 package com.stew.kotlinbox
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -44,9 +46,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         //super.onSaveInstanceState(outState)
     }
 
-    override fun init() {
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Log.d(TAG, "onConfigurationChanged: ")
+    }
 
-        Log.d(TAG, "getSystemDarkMode: " + AppCommonUitl.getSystemDarkMode())
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        Log.d(TAG, "onNewIntent: $intent")
+    }
+
+    override fun init() {
 
         mBind.imgDraw.setOnClickListener {
             mBind.dl.open()
@@ -122,6 +132,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     .build(Constants.PATH_EXP)
                     .navigation()
             }
+
             v.findViewById<LinearLayout>(R.id.ll_dm).setOnClickListener {
                 pw!!.dismiss()
                 switchDarkMode()
@@ -133,11 +144,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun switchDarkMode() {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            KVUtil.put(Constants.USER_DARK_MODE, AppCompatDelegate.MODE_NIGHT_NO)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            AppCommonUitl.setAppDarkMode(AppCompatDelegate.MODE_NIGHT_NO)
         } else {
-            KVUtil.put(Constants.USER_DARK_MODE, AppCompatDelegate.MODE_NIGHT_YES)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            AppCommonUitl.setAppDarkMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }
 

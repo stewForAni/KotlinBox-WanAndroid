@@ -1,6 +1,9 @@
 package com.stew.kb_exp.ui
 
+import android.content.res.Configuration
+import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseActivity
@@ -19,6 +22,11 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
 
     override fun getLayoutID(): Int {
         return R.layout.activity_exp
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Log.d(TAG, "onConfigurationChanged: ")
     }
 
     override fun init() {
@@ -49,6 +57,18 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
         mBind.txDs.setOnClickListener {
             ARouter.getInstance()
                 .build(Constants.PATH_DS)
+                .navigation()
+        }
+
+        mBind.txDm.setOnClickListener {
+            ARouter.getInstance()
+                .build(Constants.PATH_DM)
+                .navigation()
+        }
+
+        mBind.txApp.setOnClickListener {
+            ARouter.getInstance()
+                .build(Constants.PATH_APP)
                 .navigation()
         }
 

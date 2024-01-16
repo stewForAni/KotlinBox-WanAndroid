@@ -3,10 +3,15 @@
     package="com.stew.kb_exp">
     <application>
         <activity android:name="com.stew.kb_exp.ui.ExpActivity"/>
+
         <activity android:name="com.stew.kb_exp.ui.exp.NativeHookActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.ProcessInfoActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.ProxyActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.DpActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.DsActivity"/>
+        <activity android:name="com.stew.kb_exp.ui.exp.RestartAppActivity"/>
+
+        <activity android:name="com.stew.kb_exp.ui.exp.DmActivity"/>
+
     </application>
 </manifest>

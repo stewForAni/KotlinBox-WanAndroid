@@ -27,7 +27,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: ")
+        Log.d(TAG, "onCreate: $this")
         //StatusBarUtil.fitSystemBar(this)
         mBind = DataBindingUtil.setContentView(this, getLayoutID())
         init()

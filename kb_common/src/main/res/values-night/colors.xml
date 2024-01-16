@@ -19,11 +19,10 @@
     <color name="green">#32b464</color>
     <color name="blue">#6e98d1</color>
 
-    <!--    light mode   -->
-    <color name="theme_color">@color/blue</color>
-    <color name="main_tab_bg">#FFFFFF</color>
-    <color name="home_rv_bg">#FFFFFF</color>
-    <color name="home_rv_item">#FFFFFF</color>
+    <!--    dark mode   -->
+    <color name="theme_color">#111111</color>
+    <color name="main_tab_bg">#111111</color>
+    <color name="home_rv_bg">#444444</color>
+    <color name="home_rv_item">#222222</color>
     <color name="home_rv_item_title">@color/blue</color>
-
 </resources>

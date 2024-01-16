@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blacke"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            style="@style/style_common_top_layout">
+
+            <ImageView
+                android:id="@+id/img_back"
+                style="@style/style_common_top_layout_icon"
+                android:src="@drawable/icon_back" />
+
+            <TextView
+                style="@style/style_common_top_layout_title"
+                android:layout_toEndOf="@id/img_back"
+                android:text="DarkMode" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tx_light"
+                style="@style/style_exp_common_text"
+                android:background="@drawable/shape_10dp_white"
+                android:text="Light Mode" />
+
+            <TextView
+                android:id="@+id/tx_dark"
+                style="@style/style_exp_common_text"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_10dp_white"
+                android:text="Dark Mode" />
+
+            <TextView
+                android:id="@+id/tx_system"
+                style="@style/style_exp_common_text"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_10dp_white"
+                android:text="Follow System" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

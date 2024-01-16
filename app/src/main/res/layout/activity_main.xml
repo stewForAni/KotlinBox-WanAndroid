@@ -55,7 +55,7 @@
                 android:id="@+id/bnv"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="@color/white"
+                android:background="@color/main_tab_bg"
                 android:orientation="horizontal"
                 app:itemIconTint="@drawable/selector_bottom_navigation"
                 app:itemTextAppearanceActive="@style/style_bnv_tx"

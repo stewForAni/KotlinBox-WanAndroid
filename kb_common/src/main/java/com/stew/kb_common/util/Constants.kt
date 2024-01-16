@@ -18,6 +18,8 @@ class Constants {
         const val PATH_PI: String = "/kotlinbox/exp/ProcessInfoActivity"
         const val PATH_DP: String = "/kotlinbox/exp/DpActivity"
         const val PATH_DS: String = "/kotlinbox/exp/DsActivity"
+        const val PATH_DM: String = "/kotlinbox/exp/DmActivity"
+        const val PATH_APP: String = "/kotlinbox/exp/RestartAppActivity"
 
         const val PATH_WEB: String = "/kb_web/ui/WebActivity"
         const val PATH_LOGIN: String = "/kb_user/ui/LoginActivity"

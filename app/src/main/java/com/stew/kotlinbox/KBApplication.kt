@@ -31,31 +31,31 @@ class KBApplication : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
+        Log.d(TAG, "attachBaseContext: $this")
         //HookClassLoader.hook(this)
     }
 
     override fun onCreate() {
         super.onCreate()
-        initUserDarkMode()
+        Log.d(TAG, "onCreate: $this")
         ToastUtil.init(this)
         initKoin()
         initARouter()
         initMMKV()
         AppLogUtil.init(this)
         AppCommonUitl.init(this)
+        initUserDarkMode()
     }
 
     private fun initUserDarkMode() {
-        val userDarkMode = KVUtil.getInt(Constants.USER_DARK_MODE, -99)
-        if (userDarkMode != -99) {
-            val currentDM = KVUtil.getInt(Constants.USER_DARK_MODE, AppCompatDelegate.MODE_NIGHT_NO)
-            Log.d(TAG, "currentDM: $currentDM")
-            AppCompatDelegate.setDefaultNightMode(currentDM)
-        } else {
-            //init user dark mode = light
-            KVUtil.put(Constants.USER_DARK_MODE, AppCompatDelegate.MODE_NIGHT_NO)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        val userDarkMode = KVUtil.getInt(Constants.USER_DARK_MODE, 999)
+        Log.d(TAG, "userDarkMode: $userDarkMode")
+        when(userDarkMode){
+            999 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            1000 -> AppCommonUitl.setFollowSystemTheme()
+            else -> AppCompatDelegate.setDefaultNightMode(userDarkMode)
         }
+
     }
 
     private fun initMMKV() {
