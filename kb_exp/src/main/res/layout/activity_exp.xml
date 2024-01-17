@@ -29,7 +29,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/exp_bg">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,8 +39,15 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/tx_ds"
+                    style="@style/style_exp_common_text"
+                    android:background="@drawable/shape_10dp_white"
+                    android:text="Dynamic load so" />
+
+                <TextView
                     android:id="@+id/tx_nh"
                     style="@style/style_exp_common_text"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/shape_10dp_white"
                     android:text="Native Hook" />
 
@@ -56,13 +64,6 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shape_10dp_white"
                     android:text="Dynamic proxy" />
-
-                <TextView
-                    android:id="@+id/tx_ds"
-                    style="@style/style_exp_common_text"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/shape_10dp_white"
-                    android:text="Dynamic load so" />
 
                 <TextView
                     android:id="@+id/tx_app"

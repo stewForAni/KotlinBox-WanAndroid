@@ -28,7 +28,7 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:background="@color/blacke"
+            android:background="@color/exp_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

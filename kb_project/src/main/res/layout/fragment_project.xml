@@ -15,19 +15,18 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="@color/white"
+            android:background="@color/pro_tab_bg"
             app:layout_constraintTop_toTopOf="parent"
-            app:tabIndicatorColor="@color/theme_color"
+            app:tabIndicatorColor="@color/pro_tab_indicator"
             app:tabIndicatorFullWidth="false"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/theme_color"
+            app:tabSelectedTextColor="@color/pro_tab_text_selected"
             app:tabTextAppearance="@style/style_pro_tab"
-            app:tabTextColor="@color/blacka" />
+            app:tabTextColor="@color/pro_tab_text" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/blacke" />
+            android:layout_height="match_parent"/>
     </LinearLayout>
 </layout>

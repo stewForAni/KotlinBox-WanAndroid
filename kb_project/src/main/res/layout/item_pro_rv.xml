@@ -12,7 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@color/pro_rv_item"
         android:padding="10dp">
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -34,7 +35,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/n_a"
-            android:textColor="@color/theme_color"
+            android:textColor="@color/pro_rv_item_title"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintHorizontal_weight="1"

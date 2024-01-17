@@ -46,21 +46,21 @@
             <EditText
                 android:id="@+id/edit1"
                 style="@style/edit_login"
-                android:background="@drawable/shape_10dp_white"
+                android:background="@drawable/shape_10dp_white2"
                 android:gravity="center"
                 android:hint="请输入账号" />
 
             <EditText
                 android:id="@+id/edit2"
                 style="@style/edit_login"
-                android:background="@drawable/shape_10dp_white"
+                android:background="@drawable/shape_10dp_white2"
                 android:gravity="center"
                 android:hint="请输入密码" />
 
             <TextView
                 android:id="@+id/tx_login"
                 style="@style/edit_login"
-                android:background="@drawable/shape_10dp_blue2"
+                android:background="@drawable/shape_10dp_blue"
                 android:gravity="center"
                 android:text="点击登录"
                 android:textColor="@color/white"

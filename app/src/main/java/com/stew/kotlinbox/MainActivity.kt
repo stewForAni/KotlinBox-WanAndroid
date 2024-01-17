@@ -173,7 +173,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         super.onResume()
         val name = KVUtil.getString(Constants.USER_NAME)
         if (name != null) {
-            findViewById<TextView>(R.id.tx_info).text = name
+            findViewById<TextView>(R.id.tx_info).text = "NickName: $name"
         }
     }
 

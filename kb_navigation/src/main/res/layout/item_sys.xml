@@ -13,7 +13,7 @@
         android:background="@drawable/shape_10dp_white"
         android:gravity="center"
         android:text="@string/n_a"
-        android:textColor="@color/black6"
+        android:textColor="@color/navi_rv_item_title"
         android:textSize="12sp"
         android:textStyle="bold" />
 
