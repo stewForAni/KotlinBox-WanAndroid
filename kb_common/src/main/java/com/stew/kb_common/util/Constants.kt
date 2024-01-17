@@ -35,6 +35,7 @@ class Constants {
 
         //dynamic load so
         var isSoLoad = false
+        var isStartDP = false
 
     }
 }
