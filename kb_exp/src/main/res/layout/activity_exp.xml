@@ -79,6 +79,13 @@
                     android:background="@drawable/shape_10dp_white"
                     android:text="Dark Mode" />
 
+                <TextView
+                    android:id="@+id/tx_pick_image"
+                    style="@style/style_exp_common_text"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_10dp_white"
+                    android:text="Pick Image" />
+
             </LinearLayout>
 
         </ScrollView>

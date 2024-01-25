@@ -12,6 +12,7 @@ import com.stew.kb_common.util.ToastUtil
 import com.stew.kb_exp.R
 import com.stew.kb_exp.databinding.ActivityExpBinding
 import java.io.File
+import java.lang.ref.WeakReference
 
 /**
  * Created by stew on 2023/10/18.
@@ -72,6 +73,12 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
                 .navigation()
         }
 
+        mBind.txPickImage.setOnClickListener {
+            ARouter.getInstance()
+                .build(Constants.PATH_PICK_IMAGE)
+                .navigation()
+        }
+
         testSth()
 
     }
@@ -111,6 +118,7 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
 //                Log.d(TAG, "testFlow:第二个收集器 我是冷流：$it")
 //            }
 //        }
+
 
     }
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            style="@style/style_common_top_layout">
+
+            <ImageView
+                android:id="@+id/img_back"
+                style="@style/style_common_top_layout_icon"
+                android:src="@drawable/icon_back" />
+
+            <TextView
+                style="@style/style_common_top_layout_title"
+                android:layout_toEndOf="@id/img_back"
+                android:text="Pick Image" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/exp_bg"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/green" />
+
+            <TextView
+                android:id="@+id/tx_open"
+                style="@style/style_exp_common_text"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_10dp_white"
+                android:text="open image" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

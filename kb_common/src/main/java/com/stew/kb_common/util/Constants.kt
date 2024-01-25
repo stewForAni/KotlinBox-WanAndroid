@@ -20,6 +20,7 @@ class Constants {
         const val PATH_DS: String = "/kotlinbox/exp/DsActivity"
         const val PATH_DM: String = "/kotlinbox/exp/DmActivity"
         const val PATH_APP: String = "/kotlinbox/exp/RestartAppActivity"
+        const val PATH_PICK_IMAGE: String = "/kotlinbox/exp/PickImageActivity"
 
         const val PATH_WEB: String = "/kb_web/ui/WebActivity"
         const val PATH_LOGIN: String = "/kb_user/ui/LoginActivity"

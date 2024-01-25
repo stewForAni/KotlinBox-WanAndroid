@@ -10,8 +10,8 @@
         <activity android:name="com.stew.kb_exp.ui.exp.DpActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.DsActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.RestartAppActivity"/>
-
         <activity android:name="com.stew.kb_exp.ui.exp.DmActivity"/>
+        <activity android:name=".ui.exp.PickImageActivity"/>
 
     </application>
 </manifest>
