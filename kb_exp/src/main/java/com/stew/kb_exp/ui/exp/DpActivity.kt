@@ -74,11 +74,13 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
         field1.isAccessible = true
         val obj1 = field1.get(null)
 
+
         //获取IActivityTaskManager实例
         val field2 = Class.forName("android.util.Singleton")
             .getDeclaredField("mInstance")
         field2.isAccessible = true
         val iatm = field2.get(obj1)
+
 
         val proxyObj = Proxy.newProxyInstance(
             Thread.currentThread().contextClassLoader,

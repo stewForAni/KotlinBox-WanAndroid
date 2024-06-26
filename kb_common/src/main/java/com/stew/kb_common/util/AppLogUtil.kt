@@ -24,7 +24,7 @@ object AppLogUtil {
         logThread.execute(runnable)
     }
 
-    fun init(context: Application?) {
+    fun init(context: Application) {
         mContext = context
     }
 

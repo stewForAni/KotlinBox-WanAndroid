@@ -119,7 +119,8 @@ dependencies {
     //nio
     implementation 'commons-io:commons-io:2.14.0'
 
-
+    //async third party
+    implementation 'io.github.gdutxiaoxu:anchortask:1.1.0'
 
 //    //base
 //    implementation Libs.kotlin_stdlib

@@ -1,6 +1,7 @@
 package com.stew.kotlinbox
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.util.Log
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kotlinbox.databinding.ActivitySplashBinding

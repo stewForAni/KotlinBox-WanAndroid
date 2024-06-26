@@ -13,6 +13,7 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.launcher.ARouter
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.AppCommonUitl
@@ -24,6 +25,12 @@ import com.stew.kb_me.ui.MyCollectFragment
 import com.stew.kb_navigation.ui.MainFragment
 import com.stew.kb_project.ui.ProjectFragment
 import com.stew.kotlinbox.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -175,6 +182,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         if (name != null) {
             findViewById<TextView>(R.id.tx_info).text = "NickName: $name"
         }
+
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            flow {
+//                emit(1)
+//                try {
+//                    val data = withTimeout(5000) {
+//                        kotlinx.coroutines.delay(10000)
+//                    }
+//                    emit(111)
+//                } catch (e: TimeoutCancellationException) {
+//                    emit("TimeoutCancellationException")
+//                } catch (e: Exception) {
+//                    emit("Exception")
+//                }
+//
+//                throw NullPointerException()
+//                emit(3)
+//            }.catch {
+//                Log.d("flowtest", "catch $it")
+//                emit(2)
+//            }.collect {
+//                Log.d("flowtest", "collect $it : " + Thread.currentThread().name)
+//            }
+//        }
     }
 
 }

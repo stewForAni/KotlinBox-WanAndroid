@@ -22,8 +22,7 @@
 
 <!--        android:configChanges="uiMode"-->
         <activity android:name=".MainActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:launchMode="singleTask" />
 
     </application>
 

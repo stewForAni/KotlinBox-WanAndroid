@@ -1,6 +1,8 @@
 package com.stew.kb_home.ui
 
 import android.util.Log
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
@@ -16,6 +18,10 @@ import com.stew.kb_home.bean.Article
 import com.stew.kb_home.bean.Banner
 import com.stew.kb_home.databinding.FragmentHomeBinding
 import com.stew.kb_home.viewmodel.HomeViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -25,6 +31,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
 
     private val homeViewModel: HomeViewModel by viewModel()
+
+
+
     lateinit var homeRVAdapter: HomeRVAdapter
     lateinit var lm: LinearLayoutManager
     var isLoadMore = false
@@ -36,7 +45,6 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
     }
 
     override fun observe() {
-
         homeViewModel.bannerList.observe(this, object : BaseStateObserver<List<Banner>>(null) {
             override fun getRespDataSuccess(it: List<Banner>) {
                 Log.d(TAG, "observe bannerList: " + it.size)
@@ -173,9 +181,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
     }
 
     private fun getHomeData() {
-
         homeViewModel.getDataByFlow()
-
         //homeViewModel.getBanner()
         //homeViewModel.getArticle(0)
     }

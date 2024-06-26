@@ -3,7 +3,7 @@
     package="com.stew.kb_home">
 
     <application>
-        <!--        如果是application 当前module还要添加相应的启动XXXXActivity-->
+        <!--        如果是application 当前module还要添加相应的启动XXXXActivity（应该是首页activity ？？？？）-->
         <!--        <activity android:name="XXXXActivity">-->
         <!--            <intent-filter>-->
         <!--                <action android:name="android.intent.action.MAIN" />-->

@@ -59,7 +59,7 @@
     <color name="navi_rv_item">@color/black2</color>
     <color name="navi_rv_item_title">@color/blacke</color>
 
-    <!--    navi-->
+    <!--    me-->
     <color name="me_rv_bg">@color/black3</color>
     <color name="me_rv_item">@color/black2</color>
     <color name="me_rv_item_title">@color/theme_blue</color>
