@@ -19,6 +19,7 @@ import com.stew.kb_project.di.ProjectModule
 import com.stew.kb_user.di.userModule
 import com.stew.kotlinbox.asyncthird.ATConstants
 import com.stew.kotlinbox.asyncthird.ApplicationAnchorTaskCreator
+import com.stew.kb_exp.util.PluginLoadUtil
 import com.tencent.mmkv.MMKV
 import com.xj.anchortask.library.AnchorProject
 import com.xj.anchortask.library.OnProjectExecuteListener
@@ -39,7 +40,6 @@ class KBApplication : Application() {
     companion object{
         var instance: KBApplication? = null
     }
-
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
@@ -63,6 +63,11 @@ class KBApplication : Application() {
 
         //test async third party
         //initAsyncThirdParty()
+        //initPluginApk()
+    }
+
+    private fun initPluginApk() {
+        PluginLoadUtil.loadPluginRes(this,"/storage/emulated/0/plugintest.apk")
     }
 
     private fun initAsyncThirdParty() {
