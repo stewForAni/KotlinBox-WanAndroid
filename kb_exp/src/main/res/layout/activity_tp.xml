@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/exp_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            style="@style/style_common_top_layout">
+
+            <ImageView
+                android:id="@+id/img_back"
+                style="@style/style_common_top_layout_icon"
+                android:src="@drawable/icon_back" />
+
+            <TextView
+                style="@style/style_common_top_layout_title"
+                android:layout_toEndOf="@id/img_back"
+                android:text="Plugin Apk" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/btn1"
+                style="@style/style_exp_common_text"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/shape_10dp_white"
+                android:text="1. PluginTool init" />
+
+            <TextView
+                android:id="@+id/btn2"
+                style="@style/style_exp_common_text"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/shape_10dp_white"
+                android:text="2. Hook AMS" />
+
+
+            <TextView
+                android:id="@+id/btn3"
+                style="@style/style_exp_common_text"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/shape_10dp_white"
+                android:text="3. Click To Plugin Activity" />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

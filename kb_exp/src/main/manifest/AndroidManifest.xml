@@ -3,15 +3,18 @@
     package="com.stew.kb_exp">
     <application>
         <activity android:name="com.stew.kb_exp.ui.ExpActivity"/>
-
         <activity android:name="com.stew.kb_exp.ui.exp.NativeHookActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.ProcessInfoActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.ProxyActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.DpActivity"/>
+        <activity android:name=".ui.exp.TestPluginApkActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.DsActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.RestartAppActivity"/>
         <activity android:name="com.stew.kb_exp.ui.exp.DmActivity"/>
         <activity android:name=".ui.exp.PickImageActivity"/>
+
+<!--        //这里报错没关系，可以用的，如果不想用，就需要欺骗AMS hook以下-->
+<!--        <activity android:name="com.stew.pluginapp.ui.PluginTestActivity"/>-->
 
     </application>
 </manifest>

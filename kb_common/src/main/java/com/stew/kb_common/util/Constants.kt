@@ -17,6 +17,7 @@ class Constants {
         const val PATH_NH: String = "/kotlinbox/exp/NativeHookActivity"
         const val PATH_PI: String = "/kotlinbox/exp/ProcessInfoActivity"
         const val PATH_DP: String = "/kotlinbox/exp/DpActivity"
+        const val PATH_TP: String = "/kotlinbox/exp/TestPluginApkActivity"
         const val PATH_DS: String = "/kotlinbox/exp/DsActivity"
         const val PATH_DM: String = "/kotlinbox/exp/DmActivity"
         const val PATH_APP: String = "/kotlinbox/exp/RestartAppActivity"

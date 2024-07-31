@@ -66,6 +66,13 @@
                     android:text="Dynamic proxy" />
 
                 <TextView
+                    android:id="@+id/tx_tp"
+                    style="@style/style_exp_common_text"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_10dp_white"
+                    android:text="Plugin Apk" />
+
+                <TextView
                     android:id="@+id/tx_app"
                     style="@style/style_exp_common_text"
                     android:layout_marginTop="10dp"

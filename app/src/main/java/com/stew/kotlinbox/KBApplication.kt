@@ -60,14 +60,8 @@ class KBApplication : Application() {
         initUserDarkMode()
         registerActivityLifecycle()
         Log.d(TAG, "Third party cost time : ${System.currentTimeMillis() - oldTime}")
-
         //test async third party
         //initAsyncThirdParty()
-        //initPluginApk()
-    }
-
-    private fun initPluginApk() {
-        PluginLoadUtil.loadPluginRes(this,"/storage/emulated/0/plugintest.apk")
     }
 
     private fun initAsyncThirdParty() {

@@ -1,13 +1,17 @@
 package com.stew.kb_exp.ui.exp
 
 import android.content.Intent
+import android.util.Log
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.stew.kb_common.base.BaseActivity
 import com.stew.kb_common.util.Constants
 import com.stew.kb_exp.R
 import com.stew.kb_exp.databinding.ActivityDpBinding
+import com.stew.kb_exp.util.AssetsUtil
 import com.stew.kb_exp.util.PluginLoadUtil
+import org.apache.commons.io.FileUtils
 import org.koin.core.component.getScopeId
+import java.io.File
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 
@@ -20,10 +24,6 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
 
     override fun getLayoutID(): Int {
         return R.layout.activity_dp
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     override fun init() {
@@ -43,7 +43,7 @@ class DpActivity : BaseActivity<ActivityDpBinding>() {
 
         //------------------------------------------------------------------------------------
 
-        if(!Constants.isStartDP){
+        if (!Constants.isStartDP) {
             //PluginActvity 替换成 ProxyActivity（binder传递消息到AMS之前）
             //请注意，这个方法会影响整个app的跳转逻辑，因为
             PluginLoadUtil.hookIActivityTaskManager()

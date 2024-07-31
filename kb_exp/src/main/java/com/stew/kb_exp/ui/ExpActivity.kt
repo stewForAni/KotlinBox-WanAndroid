@@ -56,6 +56,12 @@ class ExpActivity : BaseActivity<ActivityExpBinding>() {
                 .navigation()
         }
 
+        mBind.txTp.setOnClickListener {
+            ARouter.getInstance()
+                .build(Constants.PATH_TP)
+                .navigation()
+        }
+
         mBind.txDs.setOnClickListener {
             ARouter.getInstance()
                 .build(Constants.PATH_DS)
