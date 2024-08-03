@@ -43,6 +43,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     @SuppressLint("MissingSuperCall")
     override fun onSaveInstanceState(outState: Bundle) {
         //super.onSaveInstanceState(outState)
+        //解决fragment重叠问题
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -56,6 +57,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun init() {
+
+        Log.d(TAG, "init---: $application")
+        Log.d(TAG, "init---: ${this.applicationContext}")
 
         mBind.imgDraw.setOnClickListener {
             mBind.dl.open()

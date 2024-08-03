@@ -1,5 +1,6 @@
 package com.stew.kb_common.base
 
+import android.content.Intent
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.stew.kb_common.util.LoadingViewUtil
+import dalvik.system.DexClassLoader
 
 /**
  * Created by stew on 4/20/22.
@@ -90,4 +92,5 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         Log.d(TAG, TAG + "dismissLoadingDialog: ")
         LoadingViewUtil.dismissLoadingDialog()
     }
+
 }

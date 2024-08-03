@@ -26,70 +26,97 @@ import java.lang.reflect.Proxy
  */
 object PluginLoadUtil {
 
-    const val TAG = "PluginLoadUtil"
+    const val TAG = "kotlin-box-host"
     var isLoadApk = false
+    lateinit var desPath: String
+    lateinit var pd: DexClassLoader
+    lateinit var pr: Resources
 
-    lateinit var pluginDexClassLoader: DexClassLoader
-    lateinit var pluginResources: Resources
-
-    fun init(context: Context) {
+    fun init(context: Context, path: String) {
 
         if (isLoadApk) {
             ToastUtil.showMsg("already load apk")
             return
         }
-        isLoadApk = true
-
-        val desPath = context.filesDir.absolutePath + File.separator + "plugintest.apk"
-        val desFile = File(desPath)
 
         Log.d(TAG, "init: 1")
+        isLoadApk = true
+        desPath = path
+
+        val desFile = File(desPath)
         if (!desFile.exists()) {
             Log.d(TAG, "init: 2")
-            AssetsUtil.copyAssetsToDes(context, "plugintest.apk", desPath)
+            AssetsUtil.copyAssetsToDes(context, "app-debug.apk", desPath)
         }
 
         if (desFile.exists()) {
             Log.d(TAG, "init: 3")
-            createPluginDex(context, desFile.absolutePath)
-            createPluginRes(context, desFile.absolutePath)
-            replaceLoadedApkClassLoader(context, pluginDexClassLoader)
+            replaceLoadedApkClassLoader(
+                context,
+                createPluginDexAndRes(context, desFile.absolutePath)
+            )
+            setPdPrToPlugin()
         }
+
+
+        if (!Constants.isStartDP) {
+            Log.d(TAG, "init: 4")
+            //开启动态代理，App退出后关闭
+            Constants.isStartDP = true
+            //PluginActvity 替换成 ProxyActivity（binder传递消息到AMS之前）
+            //请注意，这个方法会影响整个app的跳转逻辑
+            PluginLoadUtil.hookIActivityTaskManager()
+            //ProxyActivity 还原成 PluginActvity（handler处理消息之前，关键点：intent初始化于LaunchActivityItem中）
+            PluginLoadUtil.hookActivityThreadH()
+        }
+
     }
 
-    private fun createPluginDex(context: Context, dexPath: String) {
-        Log.d(TAG, "getPluginDex: ")
-        pluginDexClassLoader = DexClassLoader(
-            dexPath,
-            context.getDir("dexOpt", Context.MODE_PRIVATE).absolutePath,
-            null,
-            context.classLoader
-        )
-    }
+    private fun createPluginDexAndRes(context: Context, dexPath: String): DexClassLoader {
+        Log.d(TAG, "create pd & res: ")
 
-    private fun createPluginRes(context: Context, resPath: String) {
-        Log.d(TAG, "getPluginRes: ")
         try {
+            //自定义DexClassLoader----------------------------
+            pd = DexClassLoader(
+                dexPath,
+                context.getDir("dexOpt", Context.MODE_PRIVATE).absolutePath,
+                null,
+                context.classLoader
+            )
+
+            //自定义AssetManager----------------------------
             val assetManager = AssetManager::class.java.newInstance()
             val addAssetPathMethod =
                 AssetManager::class.java.getDeclaredMethod("addAssetPath", String::class.java)
             addAssetPathMethod.isAccessible = true
-            addAssetPathMethod.invoke(assetManager, resPath)
-            pluginResources = Resources(
+            addAssetPathMethod.invoke(assetManager, dexPath)
+
+            //通过AssetManager自定义Resources----------------------------
+            pr = Resources(
                 assetManager,
                 context.resources.displayMetrics,
                 context.resources.configuration
             )
+
         } catch (e: Exception) {
-            null
+            e.printStackTrace()
         }
+
+        return pd
     }
+
+    private fun setPdPrToPlugin() {
+        val c = pd.loadClass("com.stew.pluginapp.utils.PluginManager")
+        val insField = c.getDeclaredField("INSTANCE")
+        val ins = insField.get(null)
+        val m =
+            c.getDeclaredMethod("setPdAndRes", DexClassLoader::class.java, Resources::class.java)
+        m.invoke(ins, pd, pr)
+    }
+
 
     //ActivityTaskManager.getService().startActivity(...intent...)
     fun hookIActivityTaskManager() {
-
-        //开启动态代理，App退出后关闭
-        Constants.isStartDP = true
 
         //获取IActivityTaskManagerSingleton实例
         val field1 = Class.forName("android.app.ActivityTaskManager")
@@ -128,8 +155,7 @@ object PluginLoadUtil {
                 }
             }
             val a = args ?: emptyArray()
-            val r = method?.invoke(iatm, *(a))
-            return@newProxyInstance r
+            return@newProxyInstance method?.invoke(iatm, *(a))
 
         }
 
@@ -199,18 +225,20 @@ object PluginLoadUtil {
 
     /**
      * 替换 LoadedApk 中的 类加载器 ClassLoader
-     *
      *  @param context
      *  @param loader 动态加载dex的ClassLoader
      */
-    fun replaceLoadedApkClassLoader(context: Context, loader: DexClassLoader) {
+    private fun replaceLoadedApkClassLoader(
+        context: Context,
+        pd: DexClassLoader?
+    ) {
         // I. 获取 ActivityThread 实例对象
         // 获取 ActivityThread 字节码类 , 这里可以使用自定义的类加载器加载
         // 原因是 基于 双亲委派机制 , 自定义的 DexClassLoader 无法加载 , 但是其父类可以加载
         // 即使父类不可加载 , 父类的父类也可以加载
         var activityThreadClass: Class<*>? = null
         try {
-            activityThreadClass = loader.loadClass("android.app.ActivityThread")
+            activityThreadClass = context.classLoader.loadClass("android.app.ActivityThread")
         } catch (e: ClassNotFoundException) {
             e.printStackTrace()
         }
@@ -272,7 +300,7 @@ object PluginLoadUtil {
         // 加载 android.app.LoadedApk 类
         var loadedApkClass: Class<*>? = null
         try {
-            loadedApkClass = loader.loadClass("android.app.LoadedApk")
+            loadedApkClass = context.classLoader.loadClass("android.app.LoadedApk")
         } catch (e: ClassNotFoundException) {
             e.printStackTrace()
         }
@@ -289,7 +317,7 @@ object PluginLoadUtil {
 
         // 替换 mClassLoader 成员
         try {
-            mClassLoaderField?.set(loadedApkObject, loader)
+            mClassLoaderField?.set(loadedApkObject, pd)
         } catch (e: IllegalAccessException) {
             e.printStackTrace()
         }

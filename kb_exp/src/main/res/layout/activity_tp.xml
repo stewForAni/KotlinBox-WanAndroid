@@ -38,22 +38,14 @@
                 style="@style/style_exp_common_text"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/shape_10dp_white"
-                android:text="1. PluginTool init" />
-
-            <TextView
-                android:id="@+id/btn2"
-                style="@style/style_exp_common_text"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shape_10dp_white"
-                android:text="2. Hook AMS" />
-
+                android:text="1. Plugin init + AMS hook" />
 
             <TextView
                 android:id="@+id/btn3"
                 style="@style/style_exp_common_text"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/shape_10dp_white"
-                android:text="3. Click To Plugin Activity" />
+                android:text="2. Click To Plugin Activity" />
 
         </LinearLayout>
     </LinearLayout>
